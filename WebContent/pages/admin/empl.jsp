@@ -20,7 +20,7 @@
 <title>adminpage</title>
 <jsp:include page="header.jsp" />
 
-<meta http-equiv="refresh" content="http://localhost:8081/TimeAssistant/pages/admin/employees" />
+<meta http-equiv="refresh" content="/TimeAssistant/pages/admin/employees" />
 
 </head>
 <body>
@@ -57,10 +57,10 @@
 
 				</tr>
 </c:forEach>
+			<td><a href="/TimeAssistant/pages/admin/editemp.jsp"> <fmt:message key="button.addUser"/></a></td>
 			</tbody>
 		</TABLE>
 		</form>
 		</div>
-		this is the test
 </body>
 </html>

@@ -53,8 +53,8 @@ public class UpdateEmployee extends HttpServlet {
             employee.setImage(imageName);
             employee.setPosition(position);
 	        
-	        new  EmployeeService().update(employee);
-	        request.getRequestDispatcher("pages/admin/employees").forward(request, response);
+	      //  new  EmployeeService().update(employee);
+	       response.sendRedirect("employees");
 	}
 
 }

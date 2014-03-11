@@ -15,21 +15,29 @@
 </head>
 <body>
 <div class="container">
+<form action="AddUser" >
 <table border = 1>
  <tr>
- <td>email </td>
+ <td>   <fmt:message key="employee.email"/> </td>
+ <td><input type="text" name="email"> </td>
+ </tr>
+  <tr>
+ <td>   <fmt:message key="employee.password"/> </td>
  <td><input type="text" name="email"> </td>
  </tr>
  <tr>
- <td>FirstName: </td>
+ <td>   <fmt:message key="employee.firstName"/> </td>
  <td><input type="text" name="firstName"> </td>
  </tr>
- <td>LastName: </td>
+ <tr>
+ <td>   <fmt:message key="employee.lastName"/> </td>
  <td><input type="text" name="lastName"> </td>
  </tr>
- <td>Posittion: </td>
- <td><input type="text" name="posittion"> </td>
+ <tr>
+ <td>   <fmt:message key="employee.position"/> </td>
+ <td><input type="text" name="position"> </td>
  </tr>
+ <tr>
  <td>Role </td>
  <td><select> 
 
@@ -37,8 +45,15 @@
   <option value="manager">2 - manager</option>
   <option value="admin">3 - admin</option></select> </td>
  </tr>
- 
+  <tr>
+  <td> </td>
+  <td>
+  <button name="submit" type="submit" value="Submit">
+                                <fmt:message key="button.addUser"/>
+                            </button></td>
+  </tr>
  </table> 
+ </form>
 </div>
 </body>
 </html>
