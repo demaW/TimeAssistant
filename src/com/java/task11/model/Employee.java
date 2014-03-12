@@ -32,7 +32,7 @@ public class Employee {
     @Column(name = "image", length = 70)
     private String image;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
 

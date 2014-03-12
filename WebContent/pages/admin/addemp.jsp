@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-<form action="AddUser" >
+<form action="/TimeAssistant/pages/admin/adduser"  method="post">
 <table border = 1>
  <tr>
  <td>   <fmt:message key="employee.email"/> </td>
@@ -23,7 +23,7 @@
  </tr>
   <tr>
  <td>   <fmt:message key="employee.password"/> </td>
- <td><input type="text" name="email"> </td>
+ <td><input type="text" name="password"> </td>
  </tr>
  <tr>
  <td>   <fmt:message key="employee.firstName"/> </td>
@@ -38,12 +38,12 @@
  <td><input type="text" name="position"> </td>
  </tr>
  <tr>
- <td>Role </td>
- <td><select> 
+ <td> <fmt:message key="employee.role"/></td>
+ <td><select name="role"> 
 
-  <option value="user">1 - user</option>
-  <option value="manager">2 - manager</option>
-  <option value="admin">3 - admin</option></select> </td>
+  <option value="user">user</option>
+  <option value="manager">manager</option>
+  <option value="admin">admin</option></select> </td>
  </tr>
   <tr>
   <td> </td>

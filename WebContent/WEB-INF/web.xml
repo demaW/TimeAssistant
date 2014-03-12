@@ -33,4 +33,12 @@
     <servlet-name>UpdateEmployee</servlet-name>
     <url-pattern>/pages/admin/updateemployee</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddUser</servlet-name>
+    <servlet-class>com.java.task11.webapp.admin.AddUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddUser</servlet-name>
+    <url-pattern>/pages/admin/adduser</url-pattern>
+  </servlet-mapping>
 </web-app>

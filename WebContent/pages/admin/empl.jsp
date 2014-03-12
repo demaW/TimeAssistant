@@ -37,6 +37,7 @@
 					<th><fmt:message key="employee.role"/></th>
 					<th><fmt:message key="employee.position"/></th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,11 +54,12 @@
 					<td><input type="text" name="password" value="${employee.password}"></td>
 					<td><input type="text" name="role" value="${employee.role.roleName}"></td>
 					<td><input type="text" name="position" value="${employee.position}"></td>
-					<td><button type="submit" value="update"> <fmt:message key="button.update"/></button>
+					<td><button type="button" name="update" value="update"> <fmt:message key="button.update"/></button></td>
+					<td><button type="button" name="delete" value="delete"> <fmt:message key="button.delete"/></button></td>
 
 				</tr>
 </c:forEach>
-			<td><a href="/TimeAssistant/pages/admin/editemp.jsp"> <fmt:message key="button.addUser"/></a></td>
+			<td><a href="/TimeAssistant/pages/admin/addemp.jsp"> <fmt:message key="button.addUser"/></a></td>
 			</tbody>
 		</TABLE>
 		</form>
