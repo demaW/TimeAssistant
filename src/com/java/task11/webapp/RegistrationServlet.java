@@ -41,21 +41,12 @@ public class RegistrationServlet extends HttpServlet {
     private void processRegistration(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");
+        
         String email = request.getParameter("email");
+        System.out.println(email);
         String password = request.getParameter("password");
         String imageName = "default.png";
         String position = request.getParameter("position");
-
-        Part filePart = request.getPart("userImage");
-        try {
-            String contentType = filePart.getContentType();
-            if (contentType.startsWith("image")) {
-                File image = FileUploadUtils.uploadFile(this, "img\\users", filePart);
-                imageName = FileUploadUtils.getFilename(image);
-            }
-        } catch (Exception e) {
-            log.error(e);
-        }
 
         List<String> registrationErrors = validateInputs(firstName, lastName, email, password);
 
@@ -72,7 +63,9 @@ public class RegistrationServlet extends HttpServlet {
             employee.setPosition(position);
 
             employeeService.save(employee);
-            response.sendRedirect("/login");
+            
+            String contextPath = request.getContextPath();
+            response.sendRedirect(contextPath + "/login");
         }
 
     }
@@ -89,7 +82,8 @@ public class RegistrationServlet extends HttpServlet {
         if (!ValidationUtils.validEmail(email)) {
             registrationErrors.add(ValidationErrors.EMAIL);
         }
-        if (employeeService.getByEmail(email).getId() != 0) {
+        
+        if (employeeService.getByEmail(email) != null) {
             registrationErrors.add(ValidationErrors.EMAIL_ALREADY_PRESENT);
         }
         if (ValidationUtils.isNullOrEmpty(password)) {
