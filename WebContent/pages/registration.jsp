@@ -25,7 +25,7 @@
                     </h4>
                 </div>
                 <div class="login-form col-md-4 col-sm-8 col-xs-12 col-md-offset-1 col-sm-offset-1">
-                    <form action="/registration" enctype="multipart/form-data" method="post">
+                    <form action="registration" method="post">
                         <div class="form-group">
                             <c:forEach items="${registrationErrors}" var="error">
                                 <p class="error">${error}</p>
@@ -41,20 +41,10 @@
                                    id="last-name"/>
                             <label class="login-field-icon fui-user"></label>
                         </div>
+
                         <div class="form-group">
-                            <div class="input-group">
-							    <span class="input-group-btn">
-                                    <span class="btn btn-primary btn-file">
-                                    <fmt:message key="button.browse"/>
-                                    <input type="file" name="userImage" accept="image/*"/>
-                                    </span>
-								</span>
-                                <input type="text" class="form-control" readonly="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="email" placeholder="<fmt:message key="login.email"/>" name="email"
-                                   pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required id="email"/>
+                            <input class="form-control" placeholder="<fmt:message key="login.email"/>" name="email"
+                                  required id="email"/>
                             <label class="login-field-icon fui-mail"></label>
                         </div>
                         <div class="form-group">

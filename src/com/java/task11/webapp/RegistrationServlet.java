@@ -65,7 +65,7 @@ public class RegistrationServlet extends HttpServlet {
             employeeService.save(employee);
             
             String contextPath = request.getContextPath();
-            response.sendRedirect(contextPath + "/login");
+            response.sendRedirect(contextPath + "/pages/login");
         }
 
     }
