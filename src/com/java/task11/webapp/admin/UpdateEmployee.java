@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.java.task11.controller.persistance.HibernateUtil;
 import com.java.task11.controller.service.EmployeeService;
 import com.java.task11.model.Employee;
 
@@ -60,6 +64,7 @@ public class UpdateEmployee extends HttpServlet {
 
 	private void updateUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
+		
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
@@ -69,16 +74,19 @@ public class UpdateEmployee extends HttpServlet {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		EmployeeService employeeService = new EmployeeService();
-		Employee employee = employeeService.getByID(id);
-
+		Employee employeeCurrent =employeeService.getByID(id);
+		Employee employee = new Employee();
+	
+		employee.setId(id);
 		employee.setFirstName(firstName);
 		employee.setLastName(lastName);
 		employee.setEmail(email);
 		employee.setEncryptedPassword(password);
 		employee.setImage(imageName);
 		employee.setPosition(position);
-
+	 
 		employeeService.update(employee);
+		
 		response.sendRedirect("/TimeAssistant/pages/admin/employees");
 	}
 
