@@ -25,8 +25,11 @@
 </head>
 <body>
 	<div class="container">
+	<div id="tableContainer-1">
+  			
+   
 		<form action="/TimeAssistant/pages/admin/updateemployee" name="updateEmployee" method="post">
-		<TABLE cellpadding="15" border="1" style="background-color: #ffffcc;">
+		<TABLE id="tablesout" >
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -62,7 +65,10 @@
 			<a href="/TimeAssistant/pages/admin/addemp.jsp"> <fmt:message key="button.addUser"/></a>
 			</tbody>
 		</TABLE>
+		
 		</form>
 		</div>
+		</div>
+		
 </body>
 </html>

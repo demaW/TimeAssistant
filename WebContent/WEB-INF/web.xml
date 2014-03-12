@@ -41,4 +41,12 @@
     <servlet-name>AddUser</servlet-name>
     <url-pattern>/pages/admin/adduser</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>UserInfo</servlet-name>
+    <servlet-class>com.java.task11.webapp.UserInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserInfo</servlet-name>
+    <url-pattern>/pages/user</url-pattern>
+  </servlet-mapping>
 </web-app>
