@@ -54,12 +54,12 @@
 					<td><input type="text" name="password" value="${employee.password}"></td>
 					<td><input type="text" name="role" value="${employee.role.roleName}"></td>
 					<td><input type="text" name="position" value="${employee.position}"></td>
-					<td><button type="button" name="update" value="update"> <fmt:message key="button.update"/></button></td>
-					<td><button type="button" name="delete" value="delete"> <fmt:message key="button.delete"/></button></td>
+					<td><button type="submit" name="update" value="update"> <fmt:message key="button.update"/></button></td>
+					<td><button type="submit" name="delete" value="delete"> <fmt:message key="button.delete"/></button></td>
 
 				</tr>
 </c:forEach>
-			<td><a href="/TimeAssistant/pages/admin/addemp.jsp"> <fmt:message key="button.addUser"/></a></td>
+			<a href="/TimeAssistant/pages/admin/addemp.jsp"> <fmt:message key="button.addUser"/></a>
 			</tbody>
 		</TABLE>
 		</form>

@@ -1,8 +1,6 @@
 package com.java.task11.webapp.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.java.task11.controller.service.EmployeeService;
 import com.java.task11.model.Employee;
-import com.java.task11.model.Role;
 
 /**
  * Servlet implementation class OutEmployees
@@ -46,7 +43,7 @@ public class OutEmployees extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 	}
 
 }

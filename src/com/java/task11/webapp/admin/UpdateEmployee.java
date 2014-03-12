@@ -45,18 +45,19 @@ public class UpdateEmployee extends HttpServlet {
 		if (request.getParameter("update") != null) {
 			updateUser(request, response);
 		} else if (request.getParameter("delete") != null) {
-			
+			deleteUser(request, response);
 		}
 	}
+
 	private void deleteUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt( request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		EmployeeService employeeService = new EmployeeService();
 		Employee employeeC = employeeService.getByID(id);
 		employeeService.delete(employeeC);
 		response.sendRedirect("/TimeAssistant/pages/admin/employees");
 	}
-	
+
 	private void updateUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String firstName = request.getParameter("firstName");
@@ -66,7 +67,10 @@ public class UpdateEmployee extends HttpServlet {
 		String imageName = "default.png";
 		String position = request.getParameter("position");
 
-		Employee employee = new Employee();
+		int id = Integer.parseInt(request.getParameter("id"));
+		EmployeeService employeeService = new EmployeeService();
+		Employee employee = employeeService.getByID(id);
+
 		employee.setFirstName(firstName);
 		employee.setLastName(lastName);
 		employee.setEmail(email);
@@ -74,8 +78,8 @@ public class UpdateEmployee extends HttpServlet {
 		employee.setImage(imageName);
 		employee.setPosition(position);
 
-		// new EmployeeService().update(employee);
-		   response.sendRedirect("/TimeAssistant/pages/admin/employees");
+		employeeService.update(employee);
+		response.sendRedirect("/TimeAssistant/pages/admin/employees");
 	}
 
 }
