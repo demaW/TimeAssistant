@@ -25,7 +25,7 @@
 </head>
 <body>
 	<div class="container">
-	<div id="tableContainer-1">
+	<div class="table table-bordered">
   			
    
 		<form action="/TimeAssistant/pages/admin/updateemployee" name="updateEmployee" method="post">

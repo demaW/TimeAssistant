@@ -11,7 +11,7 @@
 <head>
     <title>add project</title>
     <jsp:include page="header.jsp" />
-    <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
+   
 </head>
 <body>
 
@@ -20,7 +20,7 @@
   			
    
 		<form action="#" name="updateProject" method="post">
-		<TABLE id="tablesout" >
+		<TABLE class="table table-bordered" >
 			<thead>
 				<tr>
 					<th>Id</th>
