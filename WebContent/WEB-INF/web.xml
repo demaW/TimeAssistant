@@ -41,7 +41,7 @@
     <servlet-name>AddUser</servlet-name>
     <url-pattern>/pages/admin/adduser</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>UserInfo</servlet-name>
     <servlet-class>com.java.task11.webapp.UserInfo</servlet-class>
   </servlet>

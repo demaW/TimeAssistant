@@ -27,7 +27,6 @@
     </ul>           
     <div class="navbar-form navbar-right"> Looged in as ${userName}
     </div>
-    
   </div><!-- /.navbar-collapse -->
 </nav><!-- /navbar -->
 </body>
