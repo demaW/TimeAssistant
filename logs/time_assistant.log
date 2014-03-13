@@ -1,0 +1,2 @@
+2014-03-13 11:39:23 ERROR HibernateUtil:33 - org.hibernate.MappingException: Unable to load class [ com.java.task11.model.Subtask] declared in Hibernate configuration <mapping/> entry
+2014-03-13 11:39:40 ERROR HibernateUtil:33 - java.lang.TypeNotPresentException: Type Subtask not present

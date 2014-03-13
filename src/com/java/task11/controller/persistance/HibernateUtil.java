@@ -14,7 +14,7 @@ public class HibernateUtil {
     private static Logger log = Logger.getLogger(HibernateUtil.class);
 
     static {
-        PropertyConfigurator.configure("/log4j.properties");
+        PropertyConfigurator.configure("src/log4j.properties");
     }
 
     private static SessionFactory sessionFactory = null;

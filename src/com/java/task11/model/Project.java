@@ -1,6 +1,15 @@
 package com.java.task11.model;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author nlelyak
@@ -10,61 +19,61 @@ import javax.persistence.*;
 @Table(name = "projects")
 public class Project {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
 
-    @Column(name = "project_name", length = 30)
-    private String projectName;
+	@Column(name = "project_name", length = 30)
+	private String projectName;
 
-    @Column(name = "description", length = 50)
-    private String description;
+	@Column(name = "description", length = 50)
+	private String description;
 
-    @Column(name = "notes", length = 60)
-    private String notes;
+	@Column(name = "notes", length = 60)
+	private String notes;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "task_id")
-    private Task task;
+	@OneToMany(mappedBy = "project")
+	private List<Task> task = new ArrayList<>();
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getProjectName() {
-        return projectName;
-    }
+	public String getProjectName() {
+		return projectName;
+	}
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getNotes() {
-        return notes;
-    }
+	public String getNotes() {
+		return notes;
+	}
 
-    public void setNotes(String note) {
-        this.notes = note;
-    }
+	public void setNotes(String note) {
+		this.notes = note;
+	}
 
-    public Task getTask() {
-        return task;
-    }
+	public List<Task> getTask() {
+		return task;
+	}
 
-    public void setTask(Task task) {
-        this.task = task;
-    }
+	public void setTask(List<Task> task) {
+		this.task = task;
+	}
+
 }
