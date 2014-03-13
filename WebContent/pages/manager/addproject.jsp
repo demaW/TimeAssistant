@@ -9,6 +9,7 @@
 
 <html lang="${language}">
 <head>
+<link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
     <title>add project</title>
     <jsp:include page="header.jsp" />
     
@@ -33,7 +34,7 @@
   <td> </td>
   <td>
   <button name="submit" type="submit" value="Submit">
-                                <fmt:message key="button.addUser"/>
+                                <fmt:message key="button.addProject"/>
                             </button></td>
   </tr>
  </table> 

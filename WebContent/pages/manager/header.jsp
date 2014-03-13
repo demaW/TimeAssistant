@@ -18,11 +18,11 @@
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
       <span class="sr-only">Toggle navigation</span>
     </button>
-    <a class="navbar-brand" href="/TimeAssistant/pages/manager/manager.jsp">Display all projects</a>
+    <a class="navbar-brand" href="/TimeAssistant/pages/manager/projects.jsp">Display all projects</a>
   </div>
   <div class="collapse navbar-collapse" id="navbar-collapse-01">
     <ul class="nav navbar-nav">           
-      <li class="active"><a href="/TimeAssistant/pages/manager/addproject.jsp">Add new project</a></li>
+      <li><a href="/TimeAssistant/pages/manager/addproject.jsp">Add new project</a></li>
       <li><a href="#fakelink">Teams</a></li>
        <li><a href="#fakelink">Employees</a></li>
        <li><a href="#fakelink">other Features</a></li>
