@@ -1,49 +1,31 @@
 package com.java.task11.model;
 
-import javax.persistence.*;
-
-/**
- * @author nlelyak
- * @version 1.00 2014-03-05
- */
-@Entity
-@Table(name = "team")
 public class Team {
+	private int id;
+	private Integer employeeId;
+	private Integer projectId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+	public int getId() {
+		return this.id;
+	}
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "project_id")
-    private Project project;
+	public Integer getEmployeeId() {
+		return this.employeeId;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getProjectId() {
+		return this.projectId;
+	}
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
 }

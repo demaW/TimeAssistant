@@ -1,95 +1,27 @@
 package com.java.task11.model;
 
-import javax.persistence.*;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-/**
- * @author nlelyak
- * @version 1.00 2014-03-05
- */
-@Entity
-@Table(name = "tasks")
 public class Task {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "task_id")
-	private Integer task_id;
-
-	@Column(name = "title", length = 50)
-	private String taskTitle;
-
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "project_id")
-	private Project project;
-
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "employee_id")
-	private Employee assigned;
-
-	@Column(name = "description", length = 60)
-	private String taskDescription;
-
-	@Column(name = "estimate_time")
+	private int taskId;
 	private Date estimateTime;
-
-	@Column(name = "real_time")
 	private Date realTime;
+	private String state;
+	private String description;
+	private String title;
+	private Integer employeeId;
+	private Integer projectId;
 
-	
-	@Column(name = "state")
-	@Enumerated(EnumType.STRING)
-	private TaskState state;
-
-	private enum TaskState {
-		NEW, IN_PROGRESS, DONE
+	public int getTaskId() {
+		return this.taskId;
 	}
 
-	public Integer getId() {
-		return task_id;
-	}
-
-	public void setId(Integer id) {
-		this.task_id = id;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	public String getTaskTitle() {
-		return taskTitle;
-	}
-
-	public void setTaskTitle(String taskTitle) {
-		this.taskTitle = taskTitle;
-	}
-
-	public String getTaskDescription() {
-		return taskDescription;
-	}
-
-	public void setTaskDescription(String taskDescription) {
-		this.taskDescription = taskDescription;
-	}
-
-	public Employee getAssigned() {
-		return assigned;
-	}
-
-	public void setAssigned(Employee assigned) {
-		this.assigned = assigned;
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
 	}
 
 	public Date getEstimateTime() {
-		return estimateTime;
+		return this.estimateTime;
 	}
 
 	public void setEstimateTime(Date estimateTime) {
@@ -97,19 +29,50 @@ public class Task {
 	}
 
 	public Date getRealTime() {
-		return realTime;
+		return this.realTime;
 	}
 
 	public void setRealTime(Date realTime) {
 		this.realTime = realTime;
 	}
 
-	
-	public TaskState getState() {
-		return state;
+	public String getState() {
+		return this.state;
 	}
 
-	public void setState(TaskState state) {
+	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Integer getEmployeeId() {
+		return this.employeeId;
+	}
+
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public Integer getProjectId() {
+		return this.projectId;
+	}
+
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
 	}
 }

@@ -1,59 +1,21 @@
 package com.java.task11.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-/**
- * @author nlelyak
- * @version 1.00 2014-03-05
- */
-@Entity
-@Table(name = "projects")
 public class Project {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
-
-	@Column(name = "project_name", length = 30)
+	private int id;
+	private String description;
+	private String notes;
 	private String projectName;
 
-	@Column(name = "description", length = 50)
-	private String description;
-
-	@Column(name = "notes", length = 60)
-	private String notes;
-
-	@OneToMany(mappedBy = "project")
-	private List<Task> task = new ArrayList<>();
-
-	public Integer getId() {
-		return id;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getProjectName() {
-		return projectName;
-	}
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
@@ -61,19 +23,18 @@ public class Project {
 	}
 
 	public String getNotes() {
-		return notes;
+		return this.notes;
 	}
 
-	public void setNotes(String note) {
-		this.notes = note;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
-	public List<Task> getTask() {
-		return task;
+	public String getProjectName() {
+		return this.projectName;
 	}
 
-	public void setTask(List<Task> task) {
-		this.task = task;
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
-
 }
