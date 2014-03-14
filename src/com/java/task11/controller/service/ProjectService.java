@@ -1,14 +1,12 @@
 package com.java.task11.controller.service;
 
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.Project;
 import com.java.task11.webapp.LoginServlet;
-import com.sun.org.apache.regexp.internal.recompile;
+import org.apache.log4j.Logger;
+
+import java.util.List;
 
 /**
  * @author nlelyak
@@ -16,6 +14,7 @@ import com.sun.org.apache.regexp.internal.recompile;
  */
 public class ProjectService implements IBaseService<Project> {
 	private static Logger log = Logger.getLogger(LoginServlet.class);
+
 	@Override
 	public Project getByID(Integer id) {
 		// TODO Auto-generated method stub

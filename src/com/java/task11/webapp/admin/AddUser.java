@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.Employee;
-import com.java.task11.model.Role;
+import com.java.task11.model.User;
 
 /**
  * Servlet implementation class AddUser
@@ -54,17 +53,17 @@ public class AddUser extends HttpServlet {
 			roleId = 3;
 		}
        
-        Employee employee = new Employee();
-        employee.setFirstName(firstName);
-        employee.setLastName(lastName);
-        employee.setEmail(email);
-        employee.setEncryptedPassword(password);
-        employee.setImage(imageName);
-        employee.setPosition(position);	
-        employee.setRoleId(roleId);
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setEncryptedPassword(password);
+        user.setImage(imageName);
+        user.setPosition(position);
+        user.setRoleId(roleId);
        
         EmployeeService employeeService= new EmployeeService();
-		employeeService.save(employee);
+		employeeService.save(user);
         response.sendRedirect("/TimeAssistant/pages/admin/employees");    
 	}
 

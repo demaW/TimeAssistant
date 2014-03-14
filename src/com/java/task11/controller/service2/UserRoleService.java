@@ -1,14 +1,15 @@
-package com.java.task11.controller.service;
+package com.java.task11.controller.service2;
+
+import com.java.task11.controller.dao2.DaoFactory;
+import com.java.task11.model.UserRole;
 
 import java.util.List;
-
-import com.java.task11.model.UserRole;
 
 /**
  * @author nlelyak
  * @version 1.00 2014-03-05
  */
-public class RoleService implements IBaseService<UserRole> {
+public class UserRoleService implements IBaseService<UserRole> {
 
     @Override
     public UserRole getByID(Integer id) {

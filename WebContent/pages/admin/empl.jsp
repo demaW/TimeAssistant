@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
     <title>admin page</title>
     <jsp:include page="../parts/header.jsp" />
-<meta http-equiv="refresh" content="/TimeAssistant/pages/admin/employees" />
+<meta http-equiv="refresh" content="/TimeAssistant/pages/admin/users" />
 </head>
 
 <body>
@@ -26,33 +26,33 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th><fmt:message key="employee.firstName"/></th>
-					<th><fmt:message key="employee.lastName"/></th>
-					<th><fmt:message key="employee.email"/></th>
-					<th><fmt:message key="employee.password"/></th>
-					<th><fmt:message key="employee.role"/></th>
-					<th><fmt:message key="employee.position"/></th>
+					<th><fmt:message key="user.firstName"/></th>
+					<th><fmt:message key="user.lastName"/></th>
+					<th><fmt:message key="user.email"/></th>
+					<th><fmt:message key="user.password"/></th>
+					<th><fmt:message key="user.role"/></th>
+					<th><fmt:message key="user.position"/></th>
 					<th></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 
-			<c:forEach var="employee" items="${employees}">
+			<c:forEach var="user" items="${users}">
 				<form action="/TimeAssistant/pages/admin/updateemployee" name="updateEmployee" method="post">
 				<tr>
-					<td><input type="number" name="id" value="${employee.id}"  readonly="readonly"></td>
+					<td><input type="number" name="id" value="${user.id}"  readonly="readonly"></td>
 
-					<td><input type="text" name="firstName" value="${employee.firstName}"></td>
-					<td><input type="text" name="lastName" value="${employee.lastName}"></td>
+					<td><input type="text" name="firstName" value="${user.firstName}"></td>
+					<td><input type="text" name="lastName" value="${user.lastName}"></td>
 
-					<td><input type="text" name="email" value="${employee.email}"></td>
-					<td><input type="text" name="password" value="${employee.password}"></td>
+					<td><input type="text" name="email" value="${user.email}"></td>
+					<td><input type="text" name="password" value="${user.password}"></td>
 							
-					<td><input type="text" name="role" value="${employee.roleId}"></td>
-					<td><input type="text" name="position" value="${employee.position}"></td>
+					<td><input type="text" name="role" value="${user.roleId}"></td>
+					<td><input type="text" name="position" value="${user.position}"></td>
 					<td><button type="submit" name="update" value="${employe.id}"> <fmt:message key="button.update"/></button></td>
-					<td><button type="submit" name="delete" value="${employee.id}"> <fmt:message key="button.delete"/></button></td>
+					<td><button type="submit" name="delete" value="${user.id}"> <fmt:message key="button.delete"/></button></td>
 			</tr>
 			</form>
 		

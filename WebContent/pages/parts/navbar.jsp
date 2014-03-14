@@ -25,7 +25,7 @@
 
         <% if (request.getSession().getAttribute("user") != null) { %>
         <div class="navbar-right logged-user">
-            <div class="profile-image flow-img" style="background-image:url(../img/employees/${user.image})"></div>
+            <div class="profile-image flow-img" style="background-image:url(../img/users/${user.image})"></div>
             <p>${user.firstName} ${user.lastName}</p>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${user.role} eq admin">

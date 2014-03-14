@@ -27,8 +27,8 @@
 						class="login-form col-md-4 col-sm-8 col-xs-12 col-md-offset-1 col-sm-offset-1">
 
 						<h3>Welcome</h3>
-						<c:out value="${employee.firstName}"></c:out>
-						<c:out value="${employee.lastName}"></c:out>
+						<c:out value="${user.firstName}"></c:out>
+						<c:out value="${user.lastName}"></c:out>
 					</div>
 				</div>
 			</div>

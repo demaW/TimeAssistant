@@ -1,6 +1,6 @@
 package com.java.task11.model;
 
-public class Role {
+public class UserRole {
 	private int roleId;
 	private String roleName;
 

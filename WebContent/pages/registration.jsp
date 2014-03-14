@@ -32,12 +32,12 @@
                             </c:forEach>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="<fmt:message key="employee.firstName"/>" name="first_name" required
+                            <input class="form-control" placeholder="<fmt:message key="user.firstName"/>" name="first_name" required
                                    id="first-name"/>
                             <label class="login-field-icon fui-user"></label>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="<fmt:message key="employee.lastName"/>" name="last_name" required
+                            <input class="form-control" placeholder="<fmt:message key="user.lastName"/>" name="last_name" required
                                    id="last-name"/>
                             <label class="login-field-icon fui-user"></label>
                         </div>
@@ -48,12 +48,12 @@
                             <label class="login-field-icon fui-mail"></label>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" placeholder="<fmt:message key="employee.password"/>" name="password" required
+                            <input class="form-control" type="password" placeholder="<fmt:message key="user.password"/>" name="password" required
                                    id="password"/>
                             <label class="login-field-icon fui-lock"></label>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="<fmt:message key="employee.position"/>" name="position" required
+                            <input class="form-control" type="text" placeholder="<fmt:message key="user.position"/>" name="position" required
                                    id="position"/>
                             <label class="login-field-icon fui-user"></label>
                         </div>

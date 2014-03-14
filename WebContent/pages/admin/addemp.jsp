@@ -18,27 +18,27 @@
 		<form action="/TimeAssistant/pages/admin/adduser" method="post">
 			<table border=1>
 				<tr>
-					<td><fmt:message key="employee.email" /></td>
+					<td><fmt:message key="user.email" /></td>
 					<td><input type="text" name="email"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="employee.password" /></td>
+					<td><fmt:message key="user.password" /></td>
 					<td><input type="text" name="password"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="employee.firstName" /></td>
+					<td><fmt:message key="user.firstName" /></td>
 					<td><input type="text" name="firstName"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="employee.lastName" /></td>
+					<td><fmt:message key="user.lastName" /></td>
 					<td><input type="text" name="lastName"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="employee.position" /></td>
+					<td><fmt:message key="user.position" /></td>
 					<td><input type="text" name="position"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="employee.role" /></td>
+					<td><fmt:message key="user.role" /></td>
 					<td><select name="role">
 
 							<option value="user">user</option>

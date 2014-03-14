@@ -18,11 +18,11 @@
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
       <span class="sr-only">Toggle navigation</span>
     </button>
-    <a class="navbar-brand" href="/TimeAssistant/pages/admin/employees">Display employees</a>
+    <a class="navbar-brand" href="/TimeAssistant/pages/admin/users">Display users</a>
   </div>
   <div class="collapse navbar-collapse" id="navbar-collapse-01">
     <ul class="nav navbar-nav">           
-      <li class="active"><a href="/TimeAssistant/pages/admin/addemp.jsp">Add new employee</a></li>
+      <li class="active"><a href="/TimeAssistant/pages/admin/addemp.jsp">Add new user</a></li>
       <li><a href="#fakelink">other Features</a></li>
     </ul>           
     <div class="navbar-form navbar-right"> Looged in as ${userName}

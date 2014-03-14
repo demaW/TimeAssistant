@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.RoleDAO;
-import com.java.task11.model.Role;
+import com.java.task11.model.UserRole;
 
 public class RoleDAOImpl implements RoleDAO {
 	protected static List<String> pkColumns = new ArrayList<String>();
@@ -34,7 +34,7 @@ public class RoleDAOImpl implements RoleDAO {
 		this.conn = conn;
 	}
 
-	public Role getByPrimaryKey(int roleId) throws DAOException {
+	public UserRole getByPrimaryKey(int roleId) throws DAOException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -106,8 +106,8 @@ public class RoleDAOImpl implements RoleDAO {
 		return 0;
 	}
 
-	public List<Role> selectAll() throws DAOException {
-		List<Role> ret = new ArrayList<Role>();
+	public List<UserRole> selectAll() throws DAOException {
+		List<UserRole> ret = new ArrayList<UserRole>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -127,8 +127,8 @@ public class RoleDAOImpl implements RoleDAO {
 		return ret;
 	}
 
-	public List<Role> select(String whereStatement) throws DAOException {
-		List<Role> ret = new ArrayList<Role>();
+	public List<UserRole> select(String whereStatement) throws DAOException {
+		List<UserRole> ret = new ArrayList<UserRole>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -155,7 +155,7 @@ public class RoleDAOImpl implements RoleDAO {
 		return ret;
 	}
 
-	public int update(Role obj) throws DAOException {
+	public int update(UserRole obj) throws DAOException {
 		PreparedStatement ps = null;
 		int pos = 1;
 
@@ -180,7 +180,7 @@ public class RoleDAOImpl implements RoleDAO {
 		}
 	}
 
-	public int insert(Role obj) throws DAOException {
+	public int insert(UserRole obj) throws DAOException {
 		PreparedStatement ps = null;
 		int pos = 1;
 
@@ -205,7 +205,7 @@ public class RoleDAOImpl implements RoleDAO {
 		}
 	}
 
-	public int delete(Role obj) throws DAOException {
+	public int delete(UserRole obj) throws DAOException {
 		PreparedStatement ps = null;
 
 		try {
@@ -228,22 +228,22 @@ public class RoleDAOImpl implements RoleDAO {
 		}
 	}
 
-	protected int bindPrimaryKey(PreparedStatement ps, Role obj, int pos)
+	protected int bindPrimaryKey(PreparedStatement ps, UserRole obj, int pos)
 			throws SQLException {
 		DBUtil.bind(ps, pos++, obj.getRoleId());
 
 		return pos;
 	}
 
-	protected int bindStdColumns(PreparedStatement ps, Role obj, int pos)
+	protected int bindStdColumns(PreparedStatement ps, UserRole obj, int pos)
 			throws SQLException {
 		DBUtil.bind(ps, pos++, obj.getRoleName());
 
 		return pos;
 	}
 
-	protected Role fromResultSet(ResultSet rs) throws SQLException {
-		Role obj = new Role();
+	protected UserRole fromResultSet(ResultSet rs) throws SQLException {
+		UserRole obj = new UserRole();
 
 		obj.setRoleId(DBUtil.getInt(rs, "role_id"));
 		obj.setRoleName(DBUtil.getString(rs, "role_name"));

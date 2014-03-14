@@ -15,8 +15,8 @@
 		<!--<property name="hbm2ddl.auto">create</property>-->
 		 <property name="hbm2ddl.auto">update</property>
 
-		<mapping class="com.java.task11.model.Employee" />
-		<mapping class="com.java.task11.model.Role" />
+		<mapping class="com.java.task11.model.User" />
+		<mapping class="com.java.task11.model.UserRole" />
 		<mapping class="com.java.task11.model.Team" />
 		<mapping class="com.java.task11.model.Project" />
 		<mapping class="com.java.task11.model.Task" />

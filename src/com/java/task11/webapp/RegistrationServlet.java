@@ -1,8 +1,7 @@
 package com.java.task11.webapp;
 
 import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.Employee;
-import com.java.task11.utils.FileUploadUtils;
+import com.java.task11.model.User;
 import com.java.task11.utils.ValidationErrors;
 import com.java.task11.utils.ValidationUtils;
 import org.apache.log4j.Logger;
@@ -12,8 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,15 +51,15 @@ public class RegistrationServlet extends HttpServlet {
             request.setAttribute("registrationErrors", registrationErrors);
             request.getRequestDispatcher("/pages/registration.jsp").forward(request, response);
         } else {
-            Employee employee = new Employee();
-            employee.setFirstName(firstName);
-            employee.setLastName(lastName);
-            employee.setEmail(email);
-            employee.setEncryptedPassword(password);
-            employee.setImage(imageName);
-            employee.setPosition(position);
+            User user = new User();
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setEncryptedPassword(password);
+            user.setImage(imageName);
+            user.setPosition(position);
 
-            employeeService.save(employee);
+            employeeService.save(user);
             
             String contextPath = request.getContextPath();
             response.sendRedirect(contextPath + "/pages/login");

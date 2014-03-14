@@ -1,6 +1,6 @@
 package com.java.task11.webapp;
 
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +17,8 @@ public class UserInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") != null) {
-			Employee employee = (Employee) session.getAttribute("user");
-			request.setAttribute("employee", employee);
+			User user = (User) session.getAttribute("user");
+			request.setAttribute("user", user);
 			request.getRequestDispatcher("/pages/user.jsp").forward(request,
 					response);
 		} else {

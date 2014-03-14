@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 
 /**
  * Servlet implementation class UpdateEmployee
@@ -54,8 +54,8 @@ public class UpdateEmployee extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("delete"));
 				
 		EmployeeService employeeService = new EmployeeService();
-		Employee employeeC = employeeService.getByID(id);
-		employeeService.delete(employeeC);
+		User userC = employeeService.getByID(id);
+		employeeService.delete(userC);
 		response.sendRedirect("/TimeAssistant/pages/admin/employees");
 	}
 
@@ -75,18 +75,18 @@ public class UpdateEmployee extends HttpServlet {
 		
 		
 		EmployeeService employeeService = new EmployeeService();
-		Employee employee = new Employee();
+		User user = new User();
 	
-		employee.setId(id);
-		employee.setFirstName(firstName);
-		employee.setLastName(lastName);
-		employee.setEmail(email);
-		employee.setPassword(password);
-		employee.setImage(imageName);
-		employee.setPosition(position);
-		employee.setRoleId(roleId);
+		user.setId(id);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setImage(imageName);
+		user.setPosition(position);
+		user.setRoleId(roleId);
 	 
-		employeeService.update(employee);
+		employeeService.update(user);
 		
 		response.sendRedirect("/TimeAssistant/pages/admin/employees");
 	}
