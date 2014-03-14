@@ -49,4 +49,14 @@
     <servlet-name>UserInfo</servlet-name>
     <url-pattern>/pages/user</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>OutProjects</servlet-name>
+    <servlet-class>com.java.task11.webapp.manager.OutProjects</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OutProjects</servlet-name>
+    <url-pattern>/pages/manager/projects</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
