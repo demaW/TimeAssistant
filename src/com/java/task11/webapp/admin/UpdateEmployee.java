@@ -51,7 +51,7 @@ public class UpdateEmployee extends HttpServlet {
 
 	private void deleteUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("delete"));
 				
 		EmployeeService employeeService = new EmployeeService();
 		Employee employeeC = employeeService.getByID(id);
@@ -61,7 +61,7 @@ public class UpdateEmployee extends HttpServlet {
 
 	private void updateUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("update"));
 
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -69,7 +69,8 @@ public class UpdateEmployee extends HttpServlet {
 		String password = request.getParameter("password");
 		String imageName = "default.png";
 		String position = request.getParameter("position");
-
+		int roleId = Integer.parseInt(request.getParameter("role"));
+		
 		EmployeeService employeeService = new EmployeeService();
 		Employee employee = new Employee();
 	
@@ -77,9 +78,10 @@ public class UpdateEmployee extends HttpServlet {
 		employee.setFirstName(firstName);
 		employee.setLastName(lastName);
 		employee.setEmail(email);
-		employee.setEncryptedPassword(password);
+		employee.setPassword(password);
 		employee.setImage(imageName);
 		employee.setPosition(position);
+		employee.setRoleId(roleId);
 	 
 		employeeService.update(employee);
 		

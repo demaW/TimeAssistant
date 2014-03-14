@@ -1,11 +1,14 @@
 package com.java.task11.webapp.manager;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.java.task11.model.Project;
 
 /**
  * Servlet implementation class AddProject
@@ -33,7 +36,13 @@ public class AddProject extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String projectName = request.getParameter("name");
+		String description = request.getParameter("description");
+		String notes = request.getParameter("notes");
+		
+		Project project = new Project();
+		project.setProjectName(projectName);
+		
 	}
 
 }

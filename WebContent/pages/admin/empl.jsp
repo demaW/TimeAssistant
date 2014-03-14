@@ -28,7 +28,7 @@
 	<div class="table table-bordered">
   			
    
-		<form action="/TimeAssistant/pages/admin/updateemployee" name="updateEmployee" method="post">
+	
 		<TABLE id="tablesout" >
 			<thead>
 				<tr>
@@ -46,7 +46,7 @@
 			<tbody>
 
 			<c:forEach var="employee" items="${employees}">
-			
+				<form action="/TimeAssistant/pages/admin/updateemployee" name="updateEmployee" method="post">
 				<tr>
 					<td><input type="number" name="id" value="${employee.id}"  readonly="readonly"></td>
 
@@ -58,16 +58,17 @@
 							
 					<td><input type="text" name="role" value="${employee.roleId}"></td>
 					<td><input type="text" name="position" value="${employee.position}"></td>
-					<td><button type="submit" name="update" value="update"> <fmt:message key="button.update"/></button></td>
-					<td><button type="submit" name="delete" value="delete"> <fmt:message key="button.delete"/></button></td>
-
-				</tr>
+					<td><button type="submit" name="update" value="${employee.id}"> <fmt:message key="button.update"/></button></td>
+					<td><button type="submit" name="delete" value="${employee.id}"> <fmt:message key="button.delete"/></button></td>
+			</tr>
+			</form>
+		
 </c:forEach>
 			<a href="/TimeAssistant/pages/admin/addemp.jsp"> <fmt:message key="button.addUser"/></a>
 			</tbody>
 		</TABLE>
 		
-		</form>
+		
 		</div>
 		</div>
 		
