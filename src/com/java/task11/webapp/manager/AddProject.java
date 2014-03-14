@@ -49,6 +49,9 @@ public class AddProject extends HttpServlet {
 		ProjectService projectService = new ProjectService();
 		projectService.save(project);
 		
+	
+		request.getRequestDispatcher("/pages/manager/projects").forward(request, response);
+		}
 		
 	}
 

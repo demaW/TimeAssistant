@@ -9,6 +9,7 @@
 
 <html lang="${language}">
 <head>
+<meta http-equiv="refresh" content="/TimeAssistant/pages/manger/" />
     <title>Projects</title>
     <jsp:include page="header.jsp" />
    

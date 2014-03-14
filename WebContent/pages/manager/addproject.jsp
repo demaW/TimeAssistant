@@ -17,7 +17,7 @@
 </head>
 <body>
 	<div class="container">
-		<form action="#" method="post">
+		<form action="/TimeAssistant/pages/admin/addproject" method="post">
 			<table  class="table">
 				<tr>
 					<td><fmt:message key="project.name" /></td>

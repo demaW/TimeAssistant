@@ -59,4 +59,12 @@
     <url-pattern>/pages/manager/projects</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>AddProject</servlet-name>
+    <servlet-class>com.java.task11.webapp.manager.AddProject</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProject</servlet-name>
+    <url-pattern>/pages/manager/addproject</url-pattern>
+  </servlet-mapping>
 </web-app>
