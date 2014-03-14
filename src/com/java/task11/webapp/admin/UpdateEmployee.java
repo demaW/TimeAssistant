@@ -69,7 +69,10 @@ public class UpdateEmployee extends HttpServlet {
 		String password = request.getParameter("password");
 		String imageName = "default.png";
 		String position = request.getParameter("position");
-		int roleId = Integer.parseInt(request.getParameter("role"));
+		int roleId = 1;
+		if (request.getParameter("role")!= null && !request.getParameter("role").equals("")){
+		 roleId = Integer.parseInt(request.getParameter("role"));}
+		
 		
 		EmployeeService employeeService = new EmployeeService();
 		Employee employee = new Employee();
