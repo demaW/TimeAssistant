@@ -67,12 +67,7 @@ public class EmployeeService implements IBaseService<Employee> {
 	}
 
 	public Employee getByEmail(String email) {
-		// List<Employee> employeeList = getListOfObjects();
-		// for (Employee empl : employeeList) {
-		// if (empl.getEmail().equalsIgnoreCase(email))
-		// return empl;
-		// }
-		// return null;
+		
 
 		try {
 			return DAOFactory.getInstance().getEmployeeDAO().getByEmail(email)

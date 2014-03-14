@@ -1,9 +1,8 @@
 package com.java.task11.controller.service;
 
-import com.java.task11.controller.dao.DaoFactory;
-import com.java.task11.model.Role;
-
 import java.util.List;
+
+import com.java.task11.model.Role;
 
 /**
  * @author nlelyak
