@@ -7,12 +7,12 @@
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
 	scope="session" />
 <fmt:setLocale value="${language}" />
-<fmt:setBundle basename="com.java.task11.i18n.text" />
+<fmt:setBundle basename="com.java.task11.i18n.text_en_US" />
 
 <html lang="${language}">
 <head>
-<title>User Info</title>
-<jsp:include page="parts/header.jsp" />
+    <title>User Info</title>
+    <jsp:include page="parts/header.jsp" />
 </head>
 <body>
 	<div class="container-fluid login-page">

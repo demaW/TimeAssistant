@@ -10,25 +10,18 @@
 
 <html lang="${language}">
 <head>
-<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="../../css/flat-ui.css"/>
-<link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
-<link rel="stylesheet" type="text/css" href="../../css/docs.css"/>
-<link rel="stylesheet" type="text/css" href="../../css/demo.css"/>
-<title>adminpage</title>
-<jsp:include page="header.jsp" />
-
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/flat-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
+    <title>admin page</title>
+    <jsp:include page="../parts/header.jsp" />
 <meta http-equiv="refresh" content="/TimeAssistant/pages/admin/employees" />
-
 </head>
+
 <body>
-	
 	<div class="tableContainer-1">
-  			
-   
-	
 		<TABLE class="table" align="center">
 			<thead>
 				<tr>

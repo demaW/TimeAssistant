@@ -5,11 +5,10 @@
 <link rel="stylesheet" type="text/css" href="../../css/flat-ui.css"/>
 <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
 
-
 <script src="../../js/jquery-2.0.3.min.js"></script>
 <script src="../../js/modernizr.custom.js"></script>
-<body>
 
+<body>
 <nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
@@ -19,8 +18,8 @@
   </div>
   <div class="collapse navbar-collapse" id="navbar-collapse-01">
     <ul class="nav navbar-nav">           
-      <li><a href="/TimeAssistant/pages/manager/addproject.jsp">Add new project</a></li>
-      <li><a href="#fakelink">Teams</a></li>
+       <li><a href="/TimeAssistant/pages/manager/addproject.jsp">Add new project</a></li>
+       <li><a href="#fakelink">Teams</a></li>
        <li><a href="#fakelink">Employees</a></li>
        <li><a href="#fakelink">other Features</a></li>
     </ul>           

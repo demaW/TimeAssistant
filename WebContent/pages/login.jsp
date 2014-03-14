@@ -5,7 +5,7 @@
        value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
-<fmt:setBundle basename="com.java.task11.i18n.text"/>
+<fmt:setBundle basename="com.java.task11.i18n.text_en_US"/>
 
 <html lang="${language}">
 <head>
@@ -45,11 +45,9 @@
                             <a class="login-link" href="<c:url value="/pages/registration"/>"><fmt:message key="login.singup"/></a>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
 </body>

@@ -1,70 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>TimeAssistant</display-name>
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.java.task11.webapp.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/pages/login</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>RegistrationServlet</servlet-name>
-    <servlet-class>com.java.task11.webapp.RegistrationServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegistrationServlet</servlet-name>
-    <url-pattern>/pages/registration</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>OutEmployees</servlet-name>
-    <servlet-class>com.java.task11.webapp.admin.OutEmployees</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>OutEmployees</servlet-name>
-    <url-pattern>/pages/admin/employees</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateEmployee</servlet-name>
-    <servlet-class>com.java.task11.webapp.admin.UpdateEmployee</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateEmployee</servlet-name>
-    <url-pattern>/pages/admin/updateemployee</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>AddUser</servlet-name>
-    <servlet-class>com.java.task11.webapp.admin.AddUser</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddUser</servlet-name>
-    <url-pattern>/pages/admin/adduser</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UserInfo</servlet-name>
-    <servlet-class>com.java.task11.webapp.UserInfo</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserInfo</servlet-name>
-    <url-pattern>/pages/user</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>OutProjects</servlet-name>
-    <servlet-class>com.java.task11.webapp.manager.OutProjects</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>OutProjects</servlet-name>
-    <url-pattern>/pages/manager/projects</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>AddProject</servlet-name>
-    <servlet-class>com.java.task11.webapp.manager.AddProject</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddProject</servlet-name>
-    <url-pattern>/pages/manager/addproject</url-pattern>
-  </servlet-mapping>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+    <security-constraint>
+        <display-name>Restrict direct access to certain folders</display-name>
+        <web-resource-collection>
+            <web-resource-name>Restricted folders</web-resource-name>
+            <url-pattern>/pages/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint />
+    </security-constraint>
 </web-app>
