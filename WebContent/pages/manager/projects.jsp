@@ -9,7 +9,7 @@
 
 <html lang="${language}">
 <head>
-    <title>add project</title>
+    <title>Projects</title>
     <jsp:include page="header.jsp" />
    
 </head>
@@ -38,7 +38,7 @@
 				<tr>
 					<td><input type="number" name="id" value="${project.id}"  readonly="readonly"></td>
 
-					<td><input type="text" name="name" value="${project.name}"></td>
+					<td><input type="text" name="name" value="${project.projectName}"></td>
 					<td><input type="text" name="description" value="${project.description}"></td>
 					<td><input type="text" name="notes" value="${project.notes}"></td>
 					

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.java.task11.controller.service.ProjectService;
 import com.java.task11.model.Project;
 
 /**
@@ -42,6 +43,12 @@ public class AddProject extends HttpServlet {
 		
 		Project project = new Project();
 		project.setProjectName(projectName);
+		project.setDescription(description);
+		project.setNotes(notes);
+		
+		ProjectService projectService = new ProjectService();
+		projectService.save(project);
+		
 		
 	}
 

@@ -24,12 +24,12 @@
 
 </head>
 <body>
-	<div class="container">
-	<div class="table table-bordered">
+	
+	<div class="tableContainer-1">
   			
    
 	
-		<TABLE id="tablesout" >
+		<TABLE class="table" align="center">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -58,7 +58,7 @@
 							
 					<td><input type="text" name="role" value="${employee.roleId}"></td>
 					<td><input type="text" name="position" value="${employee.position}"></td>
-					<td><button type="submit" name="update" value="${employee.id}"> <fmt:message key="button.update"/></button></td>
+					<td><button type="submit" name="update" value="${employe.id}"> <fmt:message key="button.update"/></button></td>
 					<td><button type="submit" name="delete" value="${employee.id}"> <fmt:message key="button.delete"/></button></td>
 			</tr>
 			</form>
@@ -70,7 +70,7 @@
 		
 		
 		</div>
-		</div>
+		
 		
 </body>
 </html>
