@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import com.java.task11.controller.persistance.HibernateUtil;
 import com.java.task11.controller.service.EmployeeService;
 import com.java.task11.model.Employee;
 
@@ -56,6 +52,7 @@ public class UpdateEmployee extends HttpServlet {
 	private void deleteUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
+				
 		EmployeeService employeeService = new EmployeeService();
 		Employee employeeC = employeeService.getByID(id);
 		employeeService.delete(employeeC);
@@ -64,7 +61,8 @@ public class UpdateEmployee extends HttpServlet {
 
 	private void updateUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		
+		int id = Integer.parseInt(request.getParameter("id"));
+
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
@@ -72,9 +70,7 @@ public class UpdateEmployee extends HttpServlet {
 		String imageName = "default.png";
 		String position = request.getParameter("position");
 
-		int id = Integer.parseInt(request.getParameter("id"));
 		EmployeeService employeeService = new EmployeeService();
-		Employee employeeCurrent =employeeService.getByID(id);
 		Employee employee = new Employee();
 	
 		employee.setId(id);

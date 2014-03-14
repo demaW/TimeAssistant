@@ -44,9 +44,15 @@ public class AddUser extends HttpServlet {
         String password = request.getParameter("password");
         String imageName = "default.png";
         String position = request.getParameter("position");
-        
-        Role role = new Role();
-        role.setRoleName(request.getParameter("role"));
+        String role = request.getParameter("role");
+        int roleId = 1;
+        if (role.equals("user")) {
+			roleId = 1;
+		}else if (role.equals("manager")) {
+			roleId = 2;
+		} else if (role.equals("admin")) {
+			roleId = 3;
+		}
        
         Employee employee = new Employee();
         employee.setFirstName(firstName);
@@ -55,7 +61,7 @@ public class AddUser extends HttpServlet {
         employee.setEncryptedPassword(password);
         employee.setImage(imageName);
         employee.setPosition(position);	
-        employee.setRole(role);
+        employee.setRoleId(roleId);
        
         EmployeeService employeeService= new EmployeeService();
 		employeeService.save(employee);

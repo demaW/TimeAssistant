@@ -50,12 +50,13 @@
 				<tr>
 					<td><input type="number" name="id" value="${employee.id}"  readonly="readonly"></td>
 
-					<td><input type="text" name="firstname" value="${employee.firstName}"></td>
-					<td><input type="text" name="lastname" value="${employee.lastName}"></td>
+					<td><input type="text" name="firstName" value="${employee.firstName}"></td>
+					<td><input type="text" name="lastName" value="${employee.lastName}"></td>
 
 					<td><input type="text" name="email" value="${employee.email}"></td>
 					<td><input type="text" name="password" value="${employee.password}"></td>
-					<td><input type="text" name="role" value="${employee.role.roleName}"></td>
+							
+					<td><input type="text" name="role" value="${employee.roleId}"></td>
 					<td><input type="text" name="position" value="${employee.position}"></td>
 					<td><button type="submit" name="update" value="update"> <fmt:message key="button.update"/></button></td>
 					<td><button type="submit" name="delete" value="delete"> <fmt:message key="button.delete"/></button></td>

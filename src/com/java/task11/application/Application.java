@@ -20,13 +20,15 @@ public class Application {
         employee.setLastName("Columb");
         employee.setEmail("columb@gmail.com");
         employee.setEncryptedPassword("columb");
+        employee.setRoleId(1);
 
         EmployeeService employeeService = new EmployeeService();
         employeeService.save(employee);
+        
 
         Employee empl = employeeService.getByEmail("columb@gmail.com");
         System.out.printf("Info: %s %s%n", empl.getFirstName(), empl.getLastName());
-        employeeService.delete(empl);
+       // employeeService.delete(empl);
         System.out.println("\nTHE END");
     }
 }

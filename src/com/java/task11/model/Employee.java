@@ -1,8 +1,10 @@
 package com.java.task11.model;
 
+import java.io.Serializable;
+
 import com.java.task11.utils.MD5Utils;
 
-public class Employee {
+public class Employee implements Serializable {
 	private int id;
 	private String email;
 	private String firstName;
