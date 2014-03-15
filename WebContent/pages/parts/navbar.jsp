@@ -12,7 +12,7 @@
 <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
     <div class="collapse navbar-collapse" id="navbar-collapse-01">
         <%--search field--%>
-        <%--<form class="navbar-form navbar-right" action="#" role="search">
+        <form class="navbar-form navbar-right" action="#" role="search">
             <div class="form-group">
                 <div class="input-group">
                     <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
@@ -21,24 +21,24 @@
                       </span>
                 </div>
             </div>
-        </form>--%>
+        </form>
 
         <% if (request.getSession().getAttribute("user") != null) { %>
         <div class="navbar-right logged-user">
-            <div class="profile-image flow-img" style="background-image:url(../img/users/${user.image})"></div>
+            <%--<div class="profile-image flow-img" style="background-image:url(../img/users/${user.image})"></div>--%>
             <p>${user.firstName} ${user.lastName}</p>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${user.role} eq admin">
                     <li>
                         <%--todo link to some admin functionality ???--%>
-                        <a href="<c:url value="/admin/employeestable"/>"><fmt:message key="nav.dropdown.admin"/></a>
+                        <a href="<c:url value="/admin/userstable"/>"><fmt:message key="nav.dropdown.admin"/></a>
                     </li>
                     <li class="divider"></li>
                 </c:if>
                 <c:if test="${user.role} eq manager">
                     <li>
                         <%--todo link to some manager features ??? --%>
-                        <a href="<c:url value="/manager/project"/>"><fmt:message key="nav.dropdown.manager"/></a>
+                        <a href="<c:url value="/manager/projects"/>"><fmt:message key="nav.dropdown.manager"/></a>
                     </li>
                     <li class="divider"></li>
                 </c:if>

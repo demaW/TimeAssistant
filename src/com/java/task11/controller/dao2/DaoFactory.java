@@ -13,7 +13,6 @@ public class DaoFactory {
     private ProjectDao projectDao = null;
     private TeamDao teamDao = null;
     private TaskDao taskDao = null;
-    private SubtaskDao subtaskDao = null;
 
     public DaoFactory() {
         employeeDao = new EmployeeDao();
@@ -21,7 +20,6 @@ public class DaoFactory {
         projectDao = new ProjectDao();
         teamDao = new TeamDao();
         taskDao = new TaskDao();
-        subtaskDao = new SubtaskDao();
     }
 
     public static synchronized DaoFactory getInstance() {
@@ -51,7 +49,4 @@ public class DaoFactory {
         return taskDao;
     }
 
-    public SubtaskDao getSubtaskDao() {
-        return subtaskDao;
-    }
 }

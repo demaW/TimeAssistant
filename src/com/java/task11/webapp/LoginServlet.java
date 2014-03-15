@@ -28,9 +28,9 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             log.info("Logged out: " + user.getFirstName() + " " + user.getLastName());
+//            remove current user from session
             session.removeAttribute("user");
-            // todo send redirect to next step
-//            response.sendRedirect("");
+            response.sendRedirect("/login");
         } else {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(url);
             } else {
                 // todo send redirect to next step
-//                response.sendRedirect("/");
+                response.sendRedirect("/edit");
             }
         } else {
             request.setAttribute("loginErrors", "Wrong email or password");
