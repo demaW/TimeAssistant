@@ -1,21 +1,19 @@
 package com.java.task11.controller.service;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServlet;
-
-import org.apache.log4j.Logger;
-
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 import com.java.task11.webapp.LoginServlet;
+import org.apache.log4j.Logger;
 
-public class EmployeeService implements IBaseService<Employee> {
+import javax.servlet.http.HttpServlet;
+import java.util.List;
+
+public class EmployeeService implements IBaseService<User> {
 	private static Logger log = Logger.getLogger(LoginServlet.class);
 
 	@Override
-	public Employee getByID(Integer id) {
+	public User getByID(Integer id) {
 		try {
 			return DAOFactory.getInstance().getEmployeeDAO()
 					.getByPrimaryKey(id);
@@ -26,7 +24,7 @@ public class EmployeeService implements IBaseService<Employee> {
 	}
 
 	@Override
-	public void save(Employee element) {
+	public void save(User element) {
 		try {
 			DAOFactory.getInstance().getEmployeeDAO().insert(element);
 		} catch (DAOException e) {
@@ -36,7 +34,7 @@ public class EmployeeService implements IBaseService<Employee> {
 	}
 
 	@Override
-	public void update(Employee element) {
+	public void update(User element) {
 		try {
 			DAOFactory.getInstance().getEmployeeDAO().update(element);
 		} catch (DAOException e) {
@@ -46,7 +44,7 @@ public class EmployeeService implements IBaseService<Employee> {
 	}
 
 	@Override
-	public void delete(Employee element) {
+	public void delete(User element) {
 		try {
 			DAOFactory.getInstance().getEmployeeDAO().delete(element);
 		} catch (DAOException e) {
@@ -56,7 +54,7 @@ public class EmployeeService implements IBaseService<Employee> {
 	}
 
 	@Override
-	public List<Employee> getListOfObjects() {
+	public List<User> getListOfObjects() {
 		try {
 			return DAOFactory.getInstance().getEmployeeDAO().selectAll();
 		} catch (DAOException e) {
@@ -66,7 +64,7 @@ public class EmployeeService implements IBaseService<Employee> {
 		// return DaoFactory.getInstance().getEmployeeDao().getListOfObjects();
 	}
 
-	public Employee getByEmail(String email) {
+	public User getByEmail(String email) {
 		
 
 		try {
@@ -79,11 +77,11 @@ public class EmployeeService implements IBaseService<Employee> {
 	}
 
 	public void delete(Integer userId, HttpServlet servlet) {
-		Employee empl = getByID(userId);
+		User empl = getByID(userId);
 		delete(empl, servlet);
 	}
 
-	public void delete(Employee empl, HttpServlet servlet) {
+	public void delete(User empl, HttpServlet servlet) {
 		delete(empl);
 	}
 }

@@ -1,7 +1,7 @@
 package com.java.task11.application;
 
 import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
@@ -15,18 +15,18 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        Employee employee = new Employee();
-        employee.setFirstName("Christoforo");
-        employee.setLastName("Columb");
-        employee.setEmail("columb@gmail.com");
-        employee.setEncryptedPassword("columb");
-        employee.setRoleId(1);
+        User user = new User();
+        user.setFirstName("Christoforo");
+        user.setLastName("Columb");
+        user.setEmail("columb@gmail.com");
+        user.setEncryptedPassword("columb");
+        user.setRoleId(1);
 
         EmployeeService employeeService = new EmployeeService();
-        employeeService.save(employee);
+        employeeService.save(user);
         
 
-        Employee empl = employeeService.getByEmail("columb@gmail.com");
+        User empl = employeeService.getByEmail("columb@gmail.com");
         System.out.printf("Info: %s %s%n", empl.getFirstName(), empl.getLastName());
        // employeeService.delete(empl);
         System.out.println("\nTHE END");

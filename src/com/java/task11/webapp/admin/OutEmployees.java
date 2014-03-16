@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 
 /**
  * Servlet implementation class OutEmployees
@@ -32,10 +32,10 @@ public class OutEmployees extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	List<Employee> employees  = new EmployeeService().getListOfObjects();
+	List<User> users = new EmployeeService().getListOfObjects();
 	HttpSession session = request.getSession();
 	
-	session.setAttribute("employees", employees);
+	session.setAttribute("users", users);
 	request.getRequestDispatcher("/pages/admin/empl.jsp").forward(request, response);
 	}
 

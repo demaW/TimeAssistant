@@ -5,6 +5,7 @@ import com.java.task11.model.Project;
 import java.util.List;
 
 public interface ProjectDAO {
+
 	public Project getByPrimaryKey(int id) throws DAOException;
 
 	public List<Project> selectAll() throws DAOException;

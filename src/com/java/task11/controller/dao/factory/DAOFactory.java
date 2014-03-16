@@ -3,22 +3,22 @@ package com.java.task11.controller.dao.factory;
 import java.sql.Connection;
 
 public abstract class DAOFactory {
-	private static DAOFactory singleton;
+	private static DAOFactory instance;
 
 	public static DAOFactory getInstance() throws DAOException {
 		try {
-			if (null == singleton) {
-				singleton = (DAOFactory) Class
+			if (null == instance) {
+				instance = (DAOFactory) Class
 						.forName(
 								"com.java.task11.controller.dao.implement.JDBCDAOFactory")
 						.newInstance();
 			}
 		} catch (Exception e) {
-			throw new DAOException("Could not create the DAOFactory singleton",
+			throw new DAOException("Could not create the DAOFactory instance",
 					e);
 		}
 
-		return singleton;
+		return instance;
 	}
 
 	public abstract EmployeeDAO getEmployeeDAO();

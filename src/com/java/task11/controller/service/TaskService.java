@@ -1,6 +1,6 @@
 package com.java.task11.controller.service;
 
-import com.java.task11.controller.dao.DaoFactory;
+import com.java.task11.controller.dao2.DaoFactory;
 import com.java.task11.model.Task;
 
 import java.util.List;

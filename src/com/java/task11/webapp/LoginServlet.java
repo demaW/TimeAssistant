@@ -1,7 +1,7 @@
 package com.java.task11.webapp;
 
 import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 import com.java.task11.utils.MD5Utils;
 import com.java.task11.utils.ValidationUtils;
 import org.apache.log4j.Logger;
@@ -26,11 +26,11 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("logout") != null) {
             HttpSession session = request.getSession();
-            Employee employee = (Employee) session.getAttribute("user");
-            log.info("Logged out: " + employee.getFirstName() + " " + employee.getLastName());
+            User user = (User) session.getAttribute("user");
+            log.info("Logged out: " + user.getFirstName() + " " + user.getLastName());
+//            remove current user from session
             session.removeAttribute("user");
-            // todo send redirect to next step
-//            response.sendRedirect("");
+            response.sendRedirect("/login");
         } else {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         }
@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String email = request.getParameter("email");
         String password = MD5Utils.getMD5String(request.getParameter("password"));
-        Employee user = new EmployeeService().getByEmail(email);
+        User user = new EmployeeService().getByEmail(email);
 
         if (!ValidationUtils.isNullOrEmpty(user.getEmail()) && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(url);
             } else {
                 // todo send redirect to next step
-//                response.sendRedirect("/");
+                response.sendRedirect("/edit");
             }
         } else {
             request.setAttribute("loginErrors", "Wrong email or password");

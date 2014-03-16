@@ -2,7 +2,7 @@ package com.java.task11.controller.dao.implement;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.EmployeeDAO;
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +41,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		this.conn = conn;
 	}
 
-	public Employee getByPrimaryKey(int id) throws DAOException {
+	public User getByPrimaryKey(int id) throws DAOException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -115,8 +115,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return 0;
 	}
 
-	public List<Employee> selectAll() throws DAOException {
-		List<Employee> ret = new ArrayList<Employee>();
+	public List<User> selectAll() throws DAOException {
+		List<User> ret = new ArrayList<User>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -136,9 +136,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return ret;
 	}
 
-	public List<Employee> select(String whereStatement)
+	public List<User> select(String whereStatement)
 			throws DAOException {
-		List<Employee> ret = new ArrayList<Employee>();
+		List<User> ret = new ArrayList<User>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -165,7 +165,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return ret;
 	}
 
-	public int update(Employee obj) throws DAOException {
+	public int update(User obj) throws DAOException {
 		PreparedStatement ps = null;
 		int pos = 1;
 
@@ -190,7 +190,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 	}
 
-	public int insert(Employee obj) throws DAOException {
+	public int insert(User obj) throws DAOException {
 		PreparedStatement ps = null;
 		int pos = 1;
 
@@ -215,7 +215,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 	}
 
-	public int delete(Employee obj) throws DAOException {
+	public int delete(User obj) throws DAOException {
 		PreparedStatement ps = null;
 
 		try {
@@ -238,10 +238,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 	}
 
-	public List<Employee> getByEmail(String email) throws DAOException {
+	public List<User> getByEmail(String email) throws DAOException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Employee> ret = new ArrayList<Employee>();
+		List<User> ret = new ArrayList<User>();
 
 		try {
 			if (null == email) {
@@ -268,10 +268,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return ret;
 	}
 
-	public List<Employee> getByPosition(String position) throws DAOException {
+	public List<User> getByPosition(String position) throws DAOException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Employee> ret = new ArrayList<Employee>();
+		List<User> ret = new ArrayList<User>();
 
 		try {
 			if (null == position) {
@@ -298,14 +298,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return ret;
 	}
 
-	protected int bindPrimaryKey(PreparedStatement ps, Employee obj, int pos)
+	protected int bindPrimaryKey(PreparedStatement ps, User obj, int pos)
 			throws SQLException {
 		DBUtil.bind(ps, pos++, obj.getId());
 
 		return pos;
 	}
 
-	protected int bindStdColumns(PreparedStatement ps, Employee obj, int pos)
+	protected int bindStdColumns(PreparedStatement ps, User obj, int pos)
 			throws SQLException {
 		DBUtil.bind(ps, pos++, obj.getEmail());
 		DBUtil.bind(ps, pos++, obj.getFirstName());
@@ -318,8 +318,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return pos;
 	}
 
-	protected Employee fromResultSet(ResultSet rs) throws SQLException {
-		Employee obj = new Employee();
+	protected User fromResultSet(ResultSet rs) throws SQLException {
+		User obj = new User();
 
 		obj.setId(DBUtil.getInt(rs, "id"));
 		obj.setEmail(DBUtil.getString(rs, "email"));

@@ -1,15 +1,15 @@
 package com.java.task11.controller.dao.factory;
 
-import com.java.task11.model.Employee;
+import com.java.task11.model.User;
 
 import java.util.List;
 
 public interface EmployeeDAO {
-	public Employee getByPrimaryKey(int id) throws DAOException;
+	public User getByPrimaryKey(int id) throws DAOException;
 
-	public List<Employee> selectAll() throws DAOException;
+	public List<User> selectAll() throws DAOException;
 
-	public List<Employee> select(String whereStatement)
+	public List<User> select(String whereStatement)
 			throws DAOException;
 
 	public long selectCount() throws DAOException;
@@ -17,13 +17,13 @@ public interface EmployeeDAO {
 	public long selectCount(String whereStatement)
 			throws DAOException;
 
-	public int update(Employee obj) throws DAOException;
+	public int update(User obj) throws DAOException;
 
-	public int insert(Employee obj) throws DAOException;
+	public int insert(User obj) throws DAOException;
 
-	public int delete(Employee obj) throws DAOException;
+	public int delete(User obj) throws DAOException;
 
-	public List<Employee> getByEmail(String email) throws DAOException;
+	public List<User> getByEmail(String email) throws DAOException;
 
-	public List<Employee> getByPosition(String position) throws DAOException;
+	public List<User> getByPosition(String position) throws DAOException;
 }
