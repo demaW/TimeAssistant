@@ -1,6 +1,12 @@
 package com.java.task11.model;
 
-public class Project {
+import java.io.Serializable;
+
+public class Project implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String description;
 	private String notes;

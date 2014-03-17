@@ -10,14 +10,14 @@
 
 <html lang="${language}">
 <head>
-<meta http-equiv="refresh" content="/TimeAssistant/pages/manger/" />
     <title>Projects</title>
     <jsp:include page="header.jsp" />
+    <meta http-equiv="refresh" content="/TimeAssistant/pages/manager/projects" />
 </head>
 <body>
 <div class="container">
 	<div id="tableContainer-1">
-		<form action="#" name="updateProject" method="post">
+		
 		<TABLE class="table table-bordered" >
 			<thead>
 				<tr>
@@ -32,6 +32,7 @@
 			<tbody>
 
 			<c:forEach var="project" items="${projects}">
+			<form action="/TimeAssistant/pages/manager/udapteprojects" name="updateProject" method="post">
 				<tr>
 					<td><input type="number" name="id" value="${project.id}"  readonly="readonly"></td>
 
@@ -39,14 +40,15 @@
 					<td><input type="text" name="description" value="${project.description}"></td>
 					<td><input type="text" name="notes" value="${project.notes}"></td>
 					
-					<td><button type="submit" name="update" value="update"> <fmt:message key="button.update"/></button></td>
-					<td><button type="submit" name="delete" value="delete"> <fmt:message key="button.delete"/></button></td>
+					<td><button type="submit" name="update" value="${project.id}"> <fmt:message key="button.update"/></button></td>
+					<td><button type="submit" name="delete" value="${project.id}"> <fmt:message key="button.delete"/></button></td>
 				</tr>
+				</form>
             </c:forEach>
 			<a href="/TimeAssistant/pages/manager/addproject.jsp"> <fmt:message key="button.addProject"/></a>
 			</tbody>
 		</TABLE>
-		</form>
+		
 	</div>
 </div>
 </body>

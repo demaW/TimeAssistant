@@ -8,17 +8,19 @@ import org.apache.log4j.Logger;
 
 import java.util.List;
 
-/**
- * @author nlelyak
- * @version 1.00 2014-03-05
- */
+
 public class ProjectService implements IBaseService<Project> {
 	private static Logger log = Logger.getLogger(LoginServlet.class);
 
 	@Override
 	public Project getByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return DAOFactory.getInstance().getProjectDAO()
+					.getByPrimaryKey(id);
+		} catch (DAOException e) {
+			log.error(e);
+			return null;
+		}
 	}
 
 	@Override
@@ -32,8 +34,11 @@ public class ProjectService implements IBaseService<Project> {
 
 	@Override
 	public void update(Project element) {
-		// TODO Auto-generated method stub
-		
+		try {
+			DAOFactory.getInstance().getProjectDAO().update(element);
+		} catch (DAOException e) {
+			log.error(e);
+		}		
 	}
 
 	@Override
