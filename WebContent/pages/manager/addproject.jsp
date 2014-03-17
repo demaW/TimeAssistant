@@ -12,7 +12,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
     <title>add project</title>
-    <jsp:include page="../parts/header.jsp" />
+    <jsp:include page="header.jsp" />
 </head>
 <body>
 	<div class="container">
