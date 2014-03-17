@@ -1,21 +1,23 @@
 package com.java.task11.controller.service;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServlet;
+
+import org.apache.log4j.Logger;
+
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.User;
 import com.java.task11.webapp.LoginServlet;
-import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpServlet;
-import java.util.List;
-
-public class EmployeeService implements IBaseService<User> {
+public class UserService implements IBaseService<User> {
 	private static Logger log = Logger.getLogger(LoginServlet.class);
 
 	@Override
 	public User getByID(Integer id) {
 		try {
-			return DAOFactory.getInstance().getEmployeeDAO()
+			return DAOFactory.getInstance().getUserDAO()
 					.getByPrimaryKey(id);
 		} catch (DAOException e) {
 			log.error(e);
@@ -26,7 +28,7 @@ public class EmployeeService implements IBaseService<User> {
 	@Override
 	public void save(User element) {
 		try {
-			DAOFactory.getInstance().getEmployeeDAO().insert(element);
+			DAOFactory.getInstance().getUserDAO().insert(element);
 		} catch (DAOException e) {
 			log.error(e);
 		}
@@ -36,7 +38,7 @@ public class EmployeeService implements IBaseService<User> {
 	@Override
 	public void update(User element) {
 		try {
-			DAOFactory.getInstance().getEmployeeDAO().update(element);
+			DAOFactory.getInstance().getUserDAO().update(element);
 		} catch (DAOException e) {
 			log.error(e);
 		}
@@ -46,7 +48,7 @@ public class EmployeeService implements IBaseService<User> {
 	@Override
 	public void delete(User element) {
 		try {
-			DAOFactory.getInstance().getEmployeeDAO().delete(element);
+			DAOFactory.getInstance().getUserDAO().delete(element);
 		} catch (DAOException e) {
 			log.error(e);
 		}
@@ -56,7 +58,7 @@ public class EmployeeService implements IBaseService<User> {
 	@Override
 	public List<User> getListOfObjects() {
 		try {
-			return DAOFactory.getInstance().getEmployeeDAO().selectAll();
+			return DAOFactory.getInstance().getUserDAO().selectAll();
 		} catch (DAOException e) {
 			log.error(e);
 			return null;
@@ -68,7 +70,7 @@ public class EmployeeService implements IBaseService<User> {
 		
 
 		try {
-			return DAOFactory.getInstance().getEmployeeDAO().getByEmail(email)
+			return DAOFactory.getInstance().getUserDAO().getByEmail(email)
 					.get(0);
 		} catch (DAOException | IndexOutOfBoundsException e) {
 			log.error(e);

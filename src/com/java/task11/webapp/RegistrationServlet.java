@@ -1,19 +1,21 @@
 package com.java.task11.webapp;
 
-import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.User;
-import com.java.task11.utils.ValidationErrors;
-import com.java.task11.utils.ValidationUtils;
-import org.apache.log4j.Logger;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.java.task11.controller.service.UserService;
+import com.java.task11.model.User;
+import com.java.task11.utils.ValidationErrors;
+import com.java.task11.utils.ValidationUtils;
 
 /**
  * @author nlelyak
@@ -22,7 +24,7 @@ import java.util.List;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(RegistrationServlet.class);
-    private EmployeeService employeeService = new EmployeeService();
+    private UserService employeeService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

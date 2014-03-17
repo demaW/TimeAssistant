@@ -1,8 +1,9 @@
 package com.java.task11.application;
 
-import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.User;
 import org.apache.log4j.PropertyConfigurator;
+
+import com.java.task11.controller.service.UserService;
+import com.java.task11.model.User;
 
 /**
  * @author nlelyak
@@ -22,7 +23,7 @@ public class Application {
         user.setEncryptedPassword("columb");
         user.setRoleId(1);
 
-        EmployeeService employeeService = new EmployeeService();
+        UserService employeeService = new UserService();
         employeeService.save(user);
         
 

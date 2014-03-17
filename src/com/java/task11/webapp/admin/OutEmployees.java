@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.java.task11.controller.service.EmployeeService;
+import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 
 /**
  * Servlet implementation class OutEmployees
  */
-@WebServlet("/OutEmployees")
+@WebServlet("/pages/admin/users")
 public class OutEmployees extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,7 +32,7 @@ public class OutEmployees extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	List<User> users = new EmployeeService().getListOfObjects();
+	List<User> users = new UserService().getListOfObjects();
 	HttpSession session = request.getSession();
 	
 	session.setAttribute("users", users);

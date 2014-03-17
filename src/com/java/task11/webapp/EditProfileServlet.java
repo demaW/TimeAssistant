@@ -1,10 +1,7 @@
 package com.java.task11.webapp;
 
-import com.java.task11.controller.service.EmployeeService;
-import com.java.task11.model.User;
-import com.java.task11.utils.FileUploadUtils;
-import com.java.task11.utils.ValidationUtils;
-import org.apache.log4j.Logger;
+import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,8 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.File;
-import java.io.IOException;
+
+import org.apache.log4j.Logger;
+
+import com.java.task11.controller.service.UserService;
+import com.java.task11.model.User;
+import com.java.task11.utils.FileUploadUtils;
+import com.java.task11.utils.ValidationUtils;
 
 /**
  * @author nlelyak
@@ -26,12 +28,12 @@ public class EditProfileServlet extends HttpServlet {
 
     private static Logger log = Logger.getLogger(EditProfileServlet.class);
     private static final String DATA_DIRECTORY = "img/employees";
-    private EmployeeService employeeService;
+    private UserService employeeService;
     private User user;
 
     @Override
     public void init() throws ServletException {
-        employeeService = new EmployeeService();
+        employeeService = new UserService();
     }
 
     @Override

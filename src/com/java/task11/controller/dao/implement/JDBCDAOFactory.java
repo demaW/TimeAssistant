@@ -1,21 +1,21 @@
 package com.java.task11.controller.dao.implement;
 
+import java.sql.Connection;
+
 import com.java.task11.controller.dao.factory.DAOFactory;
-import com.java.task11.controller.dao.factory.EmployeeDAO;
 import com.java.task11.controller.dao.factory.ProjectDAO;
 import com.java.task11.controller.dao.factory.RoleDAO;
 import com.java.task11.controller.dao.factory.TaskDAO;
 import com.java.task11.controller.dao.factory.TeamDAO;
-
-import java.sql.Connection;
+import com.java.task11.controller.dao.factory.UserDAO;
 
 public class JDBCDAOFactory extends DAOFactory {
-	public EmployeeDAO getEmployeeDAO() {
-		return new EmployeeDAOImpl();
+	public UserDAO getUserDAO() {
+		return new UserDAOImpl();
 	}
 
-	public EmployeeDAO getEmployeeDAO(Connection conn) {
-		return new EmployeeDAOImpl(conn);
+	public UserDAO getUserDAO(Connection conn) {
+		return new UserDAOImpl(conn);
 	}
 
 	public ProjectDAO getProjectDAO() {

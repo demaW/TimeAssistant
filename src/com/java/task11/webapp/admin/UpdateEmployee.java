@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.java.task11.controller.service.EmployeeService;
+import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 
 /**
@@ -53,7 +53,7 @@ public class UpdateEmployee extends HttpServlet {
 			HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(request.getParameter("delete"));
 				
-		EmployeeService employeeService = new EmployeeService();
+		UserService employeeService = new UserService();
 		User userC = employeeService.getByID(id);
 		employeeService.delete(userC);
 		response.sendRedirect("/TimeAssistant/pages/admin/employees");
@@ -74,7 +74,7 @@ public class UpdateEmployee extends HttpServlet {
 		 roleId = Integer.parseInt(request.getParameter("role"));}
 		
 		
-		EmployeeService employeeService = new EmployeeService();
+		UserService employeeService = new UserService();
 		User user = new User();
 	
 		user.setId(id);

@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/flat-ui.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
     <title>admin page</title>
-    <jsp:include page="../parts/header.jsp" />
+    <jsp:include page="header.jsp" />
 <meta http-equiv="refresh" content="/TimeAssistant/pages/admin/users" />
 </head>
 

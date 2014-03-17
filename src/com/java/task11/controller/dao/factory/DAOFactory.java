@@ -21,9 +21,9 @@ public abstract class DAOFactory {
 		return instance;
 	}
 
-	public abstract EmployeeDAO getEmployeeDAO();
+	public abstract UserDAO getUserDAO();
 
-	public abstract EmployeeDAO getEmployeeDAO(Connection conn);
+	public abstract UserDAO getUserDAO(Connection conn);
 
 	public abstract ProjectDAO getProjectDAO();
 
