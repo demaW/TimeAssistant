@@ -1,9 +1,5 @@
 package com.java.task11.controller.dao.implement;
 
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.dao.factory.EmployeeDAO;
-import com.java.task11.model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,11 +8,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class EmployeeDAOImpl implements EmployeeDAO {
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.dao.factory.UserDAO;
+import com.java.task11.model.User;
+
+public class UserDAOImpl implements UserDAO {
 	protected static List<String> pkColumns = new ArrayList<String>();
 	protected static List<String> stdColumns = new ArrayList<String>();
 	protected static List<String> allColumns = new ArrayList<String>();
-	protected static String tableName = "employees";
+	protected static String tableName = "users";
 
 	static {
 		pkColumns.add("id");
@@ -33,11 +33,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	protected Connection conn = null;
 
-	public EmployeeDAOImpl() {
+	public UserDAOImpl() {
 		this(null);
 	}
 
-	public EmployeeDAOImpl(Connection conn) {
+	public UserDAOImpl(Connection conn) {
 		this.conn = conn;
 	}
 

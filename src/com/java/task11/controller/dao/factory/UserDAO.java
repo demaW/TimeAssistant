@@ -4,7 +4,7 @@ import com.java.task11.model.User;
 
 import java.util.List;
 
-public interface EmployeeDAO {
+public interface UserDAO {
 	public User getByPrimaryKey(int id) throws DAOException;
 
 	public List<User> selectAll() throws DAOException;
