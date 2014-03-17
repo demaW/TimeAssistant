@@ -16,7 +16,7 @@ import com.java.task11.model.Project;
 /**
  * Servlet implementation class OutProjects
  */
-@WebServlet("/OutProjects")
+@WebServlet("/pages/manager/projects")
 public class OutProjects extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

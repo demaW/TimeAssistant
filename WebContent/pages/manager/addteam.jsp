@@ -11,7 +11,7 @@
 <html lang="${language}">
 <head>
     <title>add team</title>
-    <jsp:include page="../parts/header.jsp" />
+    <jsp:include page="header.jsp" />
 </head>
 <body>
 	<div class="container">
