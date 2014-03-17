@@ -36,7 +36,7 @@ public class OutEmployees extends HttpServlet {
 	HttpSession session = request.getSession();
 	
 	session.setAttribute("users", users);
-	request.getRequestDispatcher("/pages/admin/empl.jsp").forward(request, response);
+	request.getRequestDispatcher("/pages/admin/users.jsp").forward(request, response);
 	}
 
 	/**
