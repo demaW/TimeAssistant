@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +18,9 @@ import com.java.task11.webapp.LoginServlet;
 
 public class DBUtil {
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String url = "jdbc:mysql://localhost:3306/_time_assistant?characterEncoding=utf8";
+	private final static String url = "jdbc:mysql://localhost:3306/time_assistant?characterEncoding=utf8";
 	private final static String userName = "root";
-	private final static String password = "pass";
+	private final static String password = "root";
 	private static Connection conn = null;
 	private static Logger log = Logger.getLogger(LoginServlet.class);
 
@@ -209,6 +210,10 @@ public class DBUtil {
 
 	public static Date getDate(ResultSet rs, String col) throws SQLException {
 		return rs.getTimestamp(col);
+	}
+	
+	public static Time getTime(ResultSet rs, String col) throws SQLException {
+		return rs.getTime(col);
 	}
 
 	public static void bind(PreparedStatement ps, int pos, int val)
