@@ -14,7 +14,7 @@ import com.java.task11.model.User;
 /**
  * Servlet implementation class UpdateEmployee
  */
-@WebServlet("/UpdateEmployee")
+@WebServlet("/pages/admin/updateemployee")
 public class UpdateEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -56,7 +56,7 @@ public class UpdateEmployee extends HttpServlet {
 		UserService employeeService = new UserService();
 		User userC = employeeService.getByID(id);
 		employeeService.delete(userC);
-		response.sendRedirect("/TimeAssistant/pages/admin/employees");
+		response.sendRedirect("/TimeAssistant/pages/admin/users");
 	}
 
 	private void updateUser(HttpServletRequest request,
@@ -88,7 +88,7 @@ public class UpdateEmployee extends HttpServlet {
 	 
 		employeeService.update(user);
 		
-		response.sendRedirect("/TimeAssistant/pages/admin/employees");
+		response.sendRedirect("/TimeAssistant/pages/admin/users");
 	}
 
 }

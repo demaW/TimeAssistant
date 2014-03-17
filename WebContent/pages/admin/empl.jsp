@@ -51,7 +51,7 @@
 							
 					<td><input type="text" name="role" value="${user.roleId}"></td>
 					<td><input type="text" name="position" value="${user.position}"></td>
-					<td><button type="submit" name="update" value="${employe.id}"> <fmt:message key="button.update"/></button></td>
+					<td><button type="submit" name="update" value="${user.id}"> <fmt:message key="button.update"/></button></td>
 					<td><button type="submit" name="delete" value="${user.id}"> <fmt:message key="button.delete"/></button></td>
 			</tr>
 			</form>
