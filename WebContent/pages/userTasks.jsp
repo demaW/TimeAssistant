@@ -23,10 +23,10 @@
 
 			<div class="panel-body">
 				<ul class="pagination pagination-sm">
-					<li class="active"><a href="#">ALL</a></li>
-					<li><a href="#">NEW</a></li>
-					<li><a href="#">IN PROGRESS</a></li>
-					<li><a href="#">FINISHED</a></li>
+					<li <c:if test="${param.status == null}">class="active"</c:if> ><a href="${pageContext.request.contextPath}/user/tasks">ALL</a></li>
+					<li <c:if test="${param.status == 'NEW'}">class="active"</c:if> ><a href="${pageContext.request.contextPath}/user/tasks?status=NEW">NEW</a></li>
+					<li <c:if test="${param.status == 'IN PROGRESS'}">class="active"</c:if> ><a href="${pageContext.request.contextPath}/user/tasks?status=IN PROGRESS">IN PROGRESS</a></li>
+					<li <c:if test="${param.status == 'FINISHED'}">class="active"</c:if> ><a href="${pageContext.request.contextPath}/user/tasks?status=FINISHED">FINISHED</a></li>
 				</ul>
 			</div>
 
