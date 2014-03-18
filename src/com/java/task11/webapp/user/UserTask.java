@@ -1,4 +1,4 @@
-package com.java.task11.webapp;
+package com.java.task11.webapp.user;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +33,7 @@ public class UserTask extends HttpServlet {
 		}
 
 		request.setAttribute("tasks", tasks);
-		request.getRequestDispatcher("/pages/userTasks.jsp").forward(request,
+		request.getRequestDispatcher("/pages/user/userTasks.jsp").forward(request,
 				response);
 
 	}
