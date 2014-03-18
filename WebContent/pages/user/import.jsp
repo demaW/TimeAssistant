@@ -5,8 +5,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/flat-ui.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css"/>
-<link rel="stylesheet" type="text/css" href="../../css/docs.css"/>
-<link rel="stylesheet" type="text/css" href="../../css/demo.css"/>
 <script src="${pageContext.request.contextPath}/js/application.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-select.js"></script>
