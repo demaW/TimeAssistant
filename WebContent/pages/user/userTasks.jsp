@@ -85,7 +85,7 @@
 							<td><c:out value="${task.estimateTime}"></c:out></td>
 							<td><c:out value="${task.realTime}"></c:out></td>
 							<td><c:out value="${task.projectId}"></c:out></td>
-							<td><a href="#" class="btn btn-primary btn-xs">Start
+							<td><a href="${pageContext.request.contextPath}/user/task?task_id=${task.taskId}" class="btn btn-primary btn-xs">Start
 									work</a></td>
 						</tr>
 					</c:forEach>
