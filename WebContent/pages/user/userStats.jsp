@@ -22,9 +22,15 @@
 	});
 	google.setOnLoadCallback(drawChart);
 	function drawChart() {
-		var data = google.visualization.arrayToDataTable([
-				[ 'Task', 'Tasks per Day' ], [ 'NEW', 2 ],
-				[ 'IN PROGRESS', 1 ], [ 'FINISHED', 1 ] ]);
+
+		var values = [ [ 'Task', 'Tasks per Day' ] ];
+
+		var table = document.getElementById('data');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+           values.push([ table.rows[r].cells[0].innerHTML, parseInt(table.rows[r].cells[1].innerHTML, 10) ]);
+        }
+		
+		var data = google.visualization.arrayToDataTable(values);
 
 		var options = {
 			title : 'My tasks on today',
@@ -34,6 +40,7 @@
 		var chart = new google.visualization.PieChart(document
 				.getElementById('donutchart'));
 		chart.draw(data, options);
+		table.style.display = "none";
 	}
 </script>
 
@@ -79,7 +86,26 @@
 
 	<!-- CONTENT -->
 	<div class="container">
-		<div id="donutchart" style="width: 900px; height: 500px;"></div>
+		<div id="donutchart" style="width: 900px; height: 500px; margin: auto;"></div>
 	</div>
+
+	<!-- CHART DATA -->
+	<table id="data">
+		<tbody>
+			<tr>
+				<td>NEW</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>IN PROGRESS</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>FINISHED</td>
+				<td>1</td>
+			</tr>
+		</tbody>
+	</table>
+
 </body>
 </html>
