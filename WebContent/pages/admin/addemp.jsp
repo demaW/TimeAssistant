@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="container">
-		<form action="/TimeAssistant/pages/admin/adduser" method="post">
+		<form action="/pages/admin/adduser" method="post">
 			<table border=1>
 				<tr>
 					<td><fmt:message key="user.email" /></td>

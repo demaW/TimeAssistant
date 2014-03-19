@@ -16,7 +16,7 @@ import com.java.task11.model.User;
 /**
  * Servlet implementation class OutEmployees
  */
-@WebServlet("/pages/admin/users")
+@WebServlet("/admin/users")
 public class OutEmployees extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

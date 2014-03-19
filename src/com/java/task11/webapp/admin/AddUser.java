@@ -14,7 +14,7 @@ import com.java.task11.model.User;
 /**
  * Servlet implementation class AddUser
  */
-@WebServlet("/pages/admin/adduser")
+@WebServlet("/admin/adduser")
 public class AddUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -64,7 +64,7 @@ public class AddUser extends HttpServlet {
        
         UserService employeeService= new UserService();
 		employeeService.save(user);
-        response.sendRedirect("/TimeAssistant/pages/admin/users");    
+        response.sendRedirect("/pages/admin/users");    
 	}
 
 }
