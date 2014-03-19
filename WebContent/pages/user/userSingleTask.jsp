@@ -39,6 +39,14 @@
 	</nav>
 	<!-- /navbar -->
 
+	<!-- PAGE NAV -->
+	<ul class="nav nav-tabs nav-justified">
+		<li class="active"><a href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
+		<li><a href="#">Profile</a></li>
+		<li><a href="#">Statistic</a></li>
+	</ul>
+	<br />
+
 	<!-- CONTENT -->
 	<div class="container">
 		<p class="lead">

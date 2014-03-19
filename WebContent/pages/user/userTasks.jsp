@@ -38,6 +38,16 @@
 	</nav>
 	<!-- /navbar -->
 
+	<!-- PAGE NAV -->
+
+	<ul class="nav nav-tabs nav-justified">
+		<li class="active"><a href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
+		<li><a href="#">Profile</a></li>
+		<li><a href="#">Statistic</a></li>
+	</ul>
+	
+	<br/>
+
 	<!-- CONTENT -->
 	<div class="container">
 		<div class="panel panel-primary" style="width: 800px;">
@@ -85,8 +95,9 @@
 							<td><c:out value="${task.estimateTime}"></c:out></td>
 							<td><c:out value="${task.realTime}"></c:out></td>
 							<td><c:out value="${task.projectId}"></c:out></td>
-							<td><a href="${pageContext.request.contextPath}/user/task?task_id=${task.taskId}" class="btn btn-primary btn-xs">Start
-									work</a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/user/task?task_id=${task.taskId}"
+								class="btn btn-primary btn-xs">Start work</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
