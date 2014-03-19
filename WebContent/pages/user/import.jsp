@@ -3,7 +3,7 @@
 
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/flat-ui.css"/>
+<!--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/flat-ui.css"/> -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css"/>
 <script src="${pageContext.request.contextPath}/js/application.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
