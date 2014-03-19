@@ -56,7 +56,7 @@ public class UpdateEmployee extends HttpServlet {
 		UserService employeeService = new UserService();
 		User userC = employeeService.getByID(id);
 		employeeService.delete(userC);
-		response.sendRedirect("/pages/admin/users");
+		response.sendRedirect("/admin/users");
 	}
 
 	private void updateUser(HttpServletRequest request,
@@ -88,7 +88,7 @@ public class UpdateEmployee extends HttpServlet {
 	 
 		employeeService.update(user);
 		
-		response.sendRedirect("/pages/admin/users");
+		response.sendRedirect("/admin/users");
 	}
 
 }

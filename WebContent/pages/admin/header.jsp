@@ -27,7 +27,7 @@
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
 				<li><a href="${pageContext.request.contextPath}/admin/users">Display users</a></li>
-				<li><a href="${pageContext.request.contextPath}/admin/addemp.jsp">Add new user</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/adduser">Add new user</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
 				Looged in as ${userName} <a href="#logout">Log out</a>

@@ -10,14 +10,10 @@
 
 <html lang="${language}">
 <head>
-    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/flat-ui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
+   
     <title>admin page</title>
     <jsp:include page="header.jsp" />
-<meta http-equiv="refresh" content="/TimeAssistant/pages/admin/users" />
+<meta http-equiv="refresh" content="${pageContext.request.contextPath}/admin/users" />
 </head>
 
 <body>
@@ -39,7 +35,7 @@
 			<tbody>
 
 			<c:forEach var="user" items="${users}">
-				<form action="/TimeAssistant/pages/admin/updateemployee" name="updateEmployee" method="post">
+				<form action="${pageContext.request.contextPath}/admin/updateemployee" name="updateEmployee" method="post">
 				<tr>
 					<td><input type="number" name="id" value="${user.id}"  readonly="readonly"></td>
 
@@ -57,7 +53,7 @@
 			</form>
 		
 </c:forEach>
-			<a href="/TimeAssistant/pages/admin/addemp.jsp"> <fmt:message key="button.addUser"/></a>
+			<a href="${pageContext.request.contextPath}/admin/adduser"> <fmt:message key="button.addUser"/></a>
 			</tbody>
 		</TABLE>
 		
