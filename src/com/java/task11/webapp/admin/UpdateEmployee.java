@@ -82,7 +82,7 @@ public class UpdateEmployee extends HttpServlet {
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
-		user.setPassword(password);
+		user.setEncryptedPassword(password);
 		user.setImage(imageName);
 		user.setPosition(position);
 		user.setRoleId(roleId);
