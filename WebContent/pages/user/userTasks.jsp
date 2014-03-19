@@ -43,14 +43,14 @@
 	<ul class="nav nav-tabs nav-justified">
 		<li class="active"><a href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
 		<li><a href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
-		<li><a href="#">Statistic</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 	</ul>
 	
 	<br/>
 
 	<!-- CONTENT -->
 	<div class="container">
-		<div class="panel panel-primary" style="width: 800px;">
+		<div class="panel panel-primary" style="width: 1000px; margin: auto;">
 			<!-- Default panel contents -->
 			<div class="panel-heading">Tasks</div>
 
@@ -80,7 +80,7 @@
 						<th>State</th>
 						<th>Time</th>
 						<th>RTime</th>
-						<th>Project id</th>
+						<th>Project</th>
 						<th>Action</th>
 					</tr>
 				</thead>

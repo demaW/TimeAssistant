@@ -22,7 +22,8 @@ import com.java.task11.utils.ValidationUtils;
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private static Logger log = Logger.getLogger(LoginServlet.class);
+	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getLogger(LoginServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

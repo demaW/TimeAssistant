@@ -41,9 +41,11 @@
 
 	<!-- PAGE NAV -->
 	<ul class="nav nav-tabs nav-justified">
-		<li class="active"><a href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-		<li><a href="#">Profile</a></li>
-		<li><a href="#">Statistic</a></li>
+		<li class="active"><a
+			href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
+		<li><a
+			href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 	</ul>
 	<br />
 
@@ -52,44 +54,48 @@
 		<p class="lead">
 			<c:out value="${task.title}"></c:out>
 		</p>
+		<form action="${pageContext.request.contextPath}/user/task"
+			method="post">
+			<table class="table">
+				<tr>
+					<td>ID:</td>
+					<td><c:out value="${task.taskId}"></c:out></td>
+				</tr>
+				<tr>
+					<td>Description:</td>
+					<td><c:out value="${task.description}"></c:out></td>
+				</tr>
+				<tr>
+					<td>Status:</td>
+					<td><span class="label label-default"><c:out
+								value="${task.state}"></c:out></span></td>
+				</tr>
+				<tr>
+					<td>Project id:</td>
+					<td><c:out value="${task.projectId}"></c:out></td>
+				</tr>
+				<tr>
+					<td>Time estimate:</td>
+					<td><c:out value="${task.estimateTime}"></c:out></td>
+				</tr>
+				<tr>
+					<td>Real time:</td>
+					<td>
+						<div class="input-group input-group-sm">
+							<input type="text" name="realTime" value="${task.realTime}"
+							  pattern="[0-5][0-9]:[0-5][0-9]:[0-5][0-9]" required>
+						</div>
+					</td>
+				</tr>
 
-		<table>
-			<tr>
-				<td>ID:</td>
-				<td><c:out value="${task.taskId}"></c:out></td>
-			</tr>
-			<tr>
-				<td>Description:</td>
-				<td><c:out value="${task.description}"></c:out></td>
-			</tr>
-			<tr>
-				<td>Status:</td>
-				<td><span class="label label-default"><c:out
-							value="${task.state}"></c:out></span></td>
-			</tr>
-			<tr>
-				<td>Project id:</td>
-				<td><c:out value="${task.projectId}"></c:out></td>
-			</tr>
-			<tr>
-				<td>Time estimate:</td>
-				<td><c:out value="${task.estimateTime}"></c:out></td>
-			</tr>
-			<tr>
-				<td>Real time:</td>
-				<td>
-					<div class="input-group input-group-sm">
-						<input type="text" class="form-control"> <span
-							class="input-group-addon">h</span>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<td><a href="#" class="btn btn-default">Mark as finished</a></td>
-				<td><a href="#" class="btn btn-primary btn-hg">Save</a></td>
-			</tr>
-		</table>
+				<tr>
+					<td align="right"><a href="#" class="btn btn-default">Mark
+							as finished</a></td>
+					<td><button name="submit" type="submit"
+							class="btn btn-primary btn-hg" value="Submit">Save</button></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 
 </body>

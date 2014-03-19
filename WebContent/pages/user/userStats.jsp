@@ -13,6 +13,30 @@
 <head>
 <title>User Profile</title>
 <jsp:include page="import.jsp" />
+
+<!-- GRAPH SCRIPT -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load("visualization", "1", {
+		packages : [ "corechart" ]
+	});
+	google.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+				[ 'Task', 'Tasks per Day' ], [ 'NEW', 2 ],
+				[ 'IN PROGRESS', 1 ], [ 'FINISHED', 1 ] ]);
+
+		var options = {
+			title : 'My tasks on today',
+			pieHole : 0.4,
+		};
+
+		var chart = new google.visualization.PieChart(document
+				.getElementById('donutchart'));
+		chart.draw(data, options);
+	}
+</script>
+
 </head>
 
 <body>
@@ -43,42 +67,19 @@
 	<!-- PAGE NAV -->
 
 	<ul class="nav nav-tabs nav-justified">
+		<li><a href="${pageContext.request.contextPath}/user/tasks">User
+				tasks</a></li>
 		<li><a
-			href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-		<li class="active"><a href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
-		<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
+			href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
+		<li class="active"><a
+			href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 	</ul>
 
 	<br />
-	
-	<!-- CONTENT -->
-	
-	<div class="container">
-		<form action="${pageContext.request.contextPath}/user/userEditProfile" method="post">
-			<table  class="table">
-				<tr>
-					<td>First Name:</td>
-					<td><input type="text" name="firstName" required value="${user.firstName}"></td>
-				</tr>
-				<tr>
-					<td>Last Name</td>
-					<td><input type="text" name="lastName" required value="${user.lastName}"></td>
-				</tr>
-							<tr>
-					<td>email:</td>
-					<td><input type="text" name="email" pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${user.email}"></td>
-				</tr>
-				<tr>
-					<td align="right"><a href="${pageContext.request.contextPath}/user/tasks" class="btn btn-default">Cancel</a></td>
-					<td>
-						<button name="submit" type="submit" class="btn btn-primary btn-hg" value="Submit">
-							Save
-						</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
 
+	<!-- CONTENT -->
+	<div class="container">
+		<div id="donutchart" style="width: 900px; height: 500px;"></div>
+	</div>
 </body>
 </html>
