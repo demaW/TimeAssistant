@@ -31,7 +31,7 @@
 				<li class="active"><a href="#">Personal page</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${userName} <a href="#logout">Log out</a>
+				Looged in as ${user.firstName} | <a href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -42,7 +42,7 @@
 
 	<ul class="nav nav-tabs nav-justified">
 		<li class="active"><a href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-		<li><a href="#">Profile</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
 		<li><a href="#">Statistic</a></li>
 	</ul>
 	

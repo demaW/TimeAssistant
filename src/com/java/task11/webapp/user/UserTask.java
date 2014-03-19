@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.java.task11.controller.service.TaskService;
 import com.java.task11.model.Task;
+import com.java.task11.model.User;
 
 @WebServlet("/user/tasks")
 public class UserTask extends HttpServlet {
@@ -23,9 +25,11 @@ public class UserTask extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// HttpSession session = request.getSession();
-		// TODO get user from session, when login will be fixed
-		List<Task> tasks = new TaskService().getByEmployeeId(new Integer(1));
+		HttpSession session = request.getSession();
+		User loggedInUser = (User) session.getAttribute("user");
+		Integer userId = loggedInUser.getId();
+		
+		List<Task> tasks = new TaskService().getByEmployeeId(userId);
 
 		String filterStatusValue = request.getParameter("status");
 		if (filterStatusValue != null) {

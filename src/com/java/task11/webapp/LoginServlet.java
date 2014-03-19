@@ -55,7 +55,12 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(url);
             } else {
                 // todo send redirect to next step
-                response.sendRedirect("/edit");
+            	
+            	if (user.getRoleId().equals(1)) { // 1=user role
+            		String contextPath = request.getContextPath();
+            		response.sendRedirect(contextPath + "/user/tasks");
+            	}
+            	
             }
         } else {
             request.setAttribute("loginErrors", "Wrong email or password");
