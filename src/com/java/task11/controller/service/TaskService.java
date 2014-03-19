@@ -5,13 +5,9 @@ import java.util.List;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
-import com.java.task11.controller.dao2.DaoFactory;
 import com.java.task11.model.Task;
 
-/**
- * @author nlelyak
- * @version 1.00 2014-03-05
- */
+
 public class TaskService implements IBaseService<Task> {
 
 	@Override
@@ -36,18 +32,18 @@ public class TaskService implements IBaseService<Task> {
 	}
 
 	@Override
-	public void update(Task element) {
-		DaoFactory.getInstance().getTaskDao().update(element);
+	public void update(Task element) throws DAOException {
+		DAOFactory.getInstance().getTaskDAO().update(element);
 	}
 
 	@Override
-	public void delete(Task element) {
-		DaoFactory.getInstance().getTaskDao().delete(element);
+	public void delete(Task element) throws DAOException {
+		DAOFactory.getInstance().getTaskDAO().delete(element);
 	}
 
 	@Override
-	public List<Task> getListOfObjects() {
-		return DaoFactory.getInstance().getTaskDao().getListOfObjects();
+	public List<Task> getListOfObjects() throws DAOException {
+		return DAOFactory.getInstance().getTaskDAO().selectAll();
 	}
 
 	public List<Task> getByEmployeeId(Integer id) {
