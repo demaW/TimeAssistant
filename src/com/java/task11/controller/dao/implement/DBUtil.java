@@ -18,9 +18,9 @@ import com.java.task11.webapp.LoginServlet;
 
 public class DBUtil {
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String url = "jdbc:mysql://localhost:3306/time_assistant?characterEncoding=utf8";
+	private final static String url = "jdbc:mysql://localhost:3306/_time_assistant?characterEncoding=utf8";
 	private final static String userName = "root";
-	private final static String password = "root";
+	private final static String password = "pass";
 	private static Connection conn = null;
 	private static Logger log = Logger.getLogger(LoginServlet.class);
 
