@@ -13,7 +13,7 @@
    
     <title>admin page</title>
     <jsp:include page="header.jsp" />
-<meta http-equiv="refresh" content="${pageContext.request.contextPath}/admin/users" />
+<%-- <meta http-equiv="refresh" content="${pageContext.request.contextPath}/admin/users" /> --%>
 </head>
 
 <body>

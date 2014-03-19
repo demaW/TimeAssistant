@@ -30,8 +30,8 @@ public class AddUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-			request.getRequestDispatcher("/pages/admin/addemp.jsp")
+			
+		request.getRequestDispatcher("/pages/admin/adduser.jsp")
 					.forward(request, response);
 	}
 
@@ -66,7 +66,8 @@ public class AddUser extends HttpServlet {
        
         UserService employeeService= new UserService();
 		employeeService.save(user);
-        response.sendRedirect("/pages/admin/users");    
+		String contextPath = request.getContextPath();
+		response.sendRedirect(contextPath +"/admin/users");    
 	}
 
 }

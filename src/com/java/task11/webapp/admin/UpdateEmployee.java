@@ -56,7 +56,8 @@ public class UpdateEmployee extends HttpServlet {
 		UserService employeeService = new UserService();
 		User userC = employeeService.getByID(id);
 		employeeService.delete(userC);
-		response.sendRedirect("/admin/users");
+		String contextPath = request.getContextPath();
+		response.sendRedirect(contextPath + "/admin/users");
 	}
 
 	private void updateUser(HttpServletRequest request,
@@ -87,8 +88,8 @@ public class UpdateEmployee extends HttpServlet {
 		user.setRoleId(roleId);
 	 
 		employeeService.update(user);
-		
-		response.sendRedirect("/admin/users");
+		String contextPath = request.getContextPath();
+		response.sendRedirect(contextPath + "/admin/users");
 	}
 
 }
