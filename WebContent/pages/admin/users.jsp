@@ -18,6 +18,7 @@
 
 <body>
 
+<div class="panel panel-primary" style="width: 100%; margin: auto;">
 		<TABLE class="table"   style="overflow-x:scroll">
 			<thead>
 				<tr>
@@ -38,7 +39,7 @@
 			<c:forEach var="user" items="${users}">
 				<form action="${pageContext.request.contextPath}/admin/updateemployee" name="updateEmployee" method="post">
 				<tr>
-					<td><input type="number" name="id" value="${user.id}"  readonly="readonly" ></td>
+					<td><input type="number"  name="id" value="${user.id}"  readonly="readonly" ></td>
 
 					<td><input type="text" name="firstName" value="${user.firstName}"></td>
 					<td><input type="text" name="lastName" value="${user.lastName}"></td>
@@ -58,7 +59,7 @@
 			<a href="${pageContext.request.contextPath}/admin/adduser"> <fmt:message key="button.addUser"/></a>
 			</tbody>
 		</TABLE>
-		
+		</div>
 		
 		
 </body>

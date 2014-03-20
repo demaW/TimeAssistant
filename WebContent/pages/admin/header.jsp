@@ -28,9 +28,11 @@
 			<ul class="nav navbar-nav">
 				<li><a href="${pageContext.request.contextPath}/admin/users">Display users</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/adduser">Add new user</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/userEditProfile">Profile</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${userName} <a href="#logout">Log out</a>
+				Looged in as ${user.firstName} | <a
+					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
 		<!-- /.navbar-collapse -->
