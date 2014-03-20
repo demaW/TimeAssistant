@@ -27,11 +27,7 @@ public class RoleDAOImpl implements RoleDAO {
 	protected Connection conn = null;
 
 	public RoleDAOImpl() {
-		this(null);
-	}
-
-	public RoleDAOImpl(Connection conn) {
-		this.conn = conn;
+		this.conn = getConn();
 	}
 
 	public UserRole getByPrimaryKey(int roleId) throws DAOException {
@@ -55,55 +51,6 @@ public class RoleDAOImpl implements RoleDAO {
 		}
 
 		return null;
-	}
-
-	public long selectCount() throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			ps = getConn()
-					.prepareStatement("select count(*) from " + tableName);
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
-	}
-
-	public long selectCount(String whereStatement) throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
-			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
-			whereStatement = " " + whereStatement;
-		}
-
-		try {
-			ps = getConn().prepareStatement(
-					"select count(*) from " + tableName + whereStatement);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
 	}
 
 	public List<UserRole> selectAll() throws DAOException {

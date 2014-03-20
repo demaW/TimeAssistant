@@ -12,11 +12,6 @@ public interface RoleDAO {
 	public List<UserRole> select(String whereStatement)
 			throws DAOException;
 
-	public long selectCount() throws DAOException;
-
-	public long selectCount(String whereStatement)
-			throws DAOException;
-
 	public int update(UserRole obj) throws DAOException;
 
 	public int insert(UserRole obj) throws DAOException;

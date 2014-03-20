@@ -5,6 +5,7 @@ import com.java.task11.utils.MD5Utils;
 import java.io.Serializable;
 
 public class User implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -12,11 +13,11 @@ public class User implements Serializable {
 	private int id;
 	private String email;
 	private String firstName;
-	private String image;
 	private String lastName;
 	private String password;
 	private String position;
 	private Integer roleId;
+	private Double salaryRate;
 
 	public int getId() {
 		return this.id;
@@ -42,14 +43,6 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public String getImage() {
-		return this.image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -66,10 +59,10 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-    public void setEncryptedPassword(String password) {
-        this.password = MD5Utils.getMD5String(password);
-    }
-    
+	public void setEncryptedPassword(String password) {
+		this.password = MD5Utils.getMD5String(password);
+	}
+
 	public String getPosition() {
 		return this.position;
 	}
@@ -84,5 +77,13 @@ public class User implements Serializable {
 
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
+	}
+
+	public Double getSalaryRate() {
+		return salaryRate;
+	}
+
+	public void setSalaryRate(Double salaryRate) {
+		this.salaryRate = salaryRate;
 	}
 }

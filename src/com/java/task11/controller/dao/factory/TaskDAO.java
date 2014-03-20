@@ -12,11 +12,6 @@ public interface TaskDAO {
 	public List<Task> select(String whereStatement)
 			throws DAOException;
 
-	public long selectCount() throws DAOException;
-
-	public long selectCount(String whereStatement)
-			throws DAOException;
-
 	public int update(Task obj) throws DAOException;
 
 	public int insert(Task obj) throws DAOException;

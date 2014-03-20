@@ -13,11 +13,6 @@ public interface ProjectDAO {
 	public List<Project> select(String whereStatement)
 			throws DAOException;
 
-	public long selectCount() throws DAOException;
-
-	public long selectCount(String whereStatement)
-			throws DAOException;
-
 	public int update(Project obj) throws DAOException;
 
 	public int insert(Project obj) throws DAOException;

@@ -11,10 +11,6 @@ public interface TeamDAO {
 
 	public List<Team> select(String whereStatement) throws DAOException;
 
-	public long selectCount() throws DAOException;
-
-	public long selectCount(String whereStatement) throws DAOException;
-
 	public int update(Team obj) throws DAOException;
 
 	public int insert(Team obj) throws DAOException;

@@ -29,11 +29,7 @@ public class TeamDAOImpl implements TeamDAO {
 	protected Connection conn = null;
 
 	public TeamDAOImpl() {
-		this(null);
-	}
-
-	public TeamDAOImpl(Connection conn) {
-		this.conn = conn;
+		this.conn = getConn();
 	}
 
 	public Team getByPrimaryKey(int id) throws DAOException {
@@ -57,55 +53,6 @@ public class TeamDAOImpl implements TeamDAO {
 		}
 
 		return null;
-	}
-
-	public long selectCount() throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			ps = getConn()
-					.prepareStatement("select count(*) from " + tableName);
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
-	}
-
-	public long selectCount(String whereStatement) throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
-			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
-			whereStatement = " " + whereStatement;
-		}
-
-		try {
-			ps = getConn().prepareStatement(
-					"select count(*) from " + tableName + whereStatement);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
 	}
 
 	public List<Team> selectAll() throws DAOException {

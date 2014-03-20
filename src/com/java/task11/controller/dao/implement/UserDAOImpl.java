@@ -22,11 +22,11 @@ public class UserDAOImpl implements UserDAO {
 		pkColumns.add("id");
 		stdColumns.add("email");
 		stdColumns.add("first_name");
-		stdColumns.add("image");
 		stdColumns.add("last_name");
 		stdColumns.add("password");
 		stdColumns.add("position");
 		stdColumns.add("role_id");
+		stdColumns.add("salary_rate");
 		allColumns.addAll(pkColumns);
 		allColumns.addAll(stdColumns);
 	}
@@ -34,11 +34,7 @@ public class UserDAOImpl implements UserDAO {
 	protected Connection conn = null;
 
 	public UserDAOImpl() {
-		this(null);
-	}
-
-	public UserDAOImpl(Connection conn) {
-		this.conn = conn;
+		this.conn = getConn();
 	}
 
 	public User getByPrimaryKey(int id) throws DAOException {
@@ -64,57 +60,6 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	public long selectCount() throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			ps = getConn()
-					.prepareStatement("select count(*) from " + tableName);
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
-	}
-
-	public long selectCount(String whereStatement)
-			throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
-			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
-			whereStatement = " " + whereStatement;
-		}
-
-		try {
-			ps = getConn().prepareStatement(
-					"select count(*) from " + tableName + whereStatement);
-
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
-	}
-
 	public List<User> selectAll() throws DAOException {
 		List<User> ret = new ArrayList<User>();
 		PreparedStatement ps = null;
@@ -136,8 +81,7 @@ public class UserDAOImpl implements UserDAO {
 		return ret;
 	}
 
-	public List<User> select(String whereStatement)
-			throws DAOException {
+	public List<User> select(String whereStatement) throws DAOException {
 		List<User> ret = new ArrayList<User>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -309,11 +253,11 @@ public class UserDAOImpl implements UserDAO {
 			throws SQLException {
 		DBUtil.bind(ps, pos++, obj.getEmail());
 		DBUtil.bind(ps, pos++, obj.getFirstName());
-		DBUtil.bind(ps, pos++, obj.getImage());
 		DBUtil.bind(ps, pos++, obj.getLastName());
 		DBUtil.bind(ps, pos++, obj.getPassword());
 		DBUtil.bind(ps, pos++, obj.getPosition());
 		DBUtil.bind(ps, pos++, obj.getRoleId());
+		DBUtil.bind(ps, pos++, obj.getSalaryRate());
 
 		return pos;
 	}
@@ -324,11 +268,11 @@ public class UserDAOImpl implements UserDAO {
 		obj.setId(DBUtil.getInt(rs, "id"));
 		obj.setEmail(DBUtil.getString(rs, "email"));
 		obj.setFirstName(DBUtil.getString(rs, "first_name"));
-		obj.setImage(DBUtil.getString(rs, "image"));
 		obj.setLastName(DBUtil.getString(rs, "last_name"));
 		obj.setPassword(DBUtil.getString(rs, "password"));
 		obj.setPosition(DBUtil.getString(rs, "position"));
 		obj.setRoleId(DBUtil.getInteger(rs, "role_id"));
+		obj.setSalaryRate(DBUtil.getDouble(rs, "salary_rate"));
 
 		return obj;
 	}

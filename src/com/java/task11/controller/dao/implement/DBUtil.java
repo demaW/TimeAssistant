@@ -20,7 +20,7 @@ public class DBUtil {
 	private final static String driver = "com.mysql.jdbc.Driver";
 	private final static String url = "jdbc:mysql://localhost:3306/time_assistant?characterEncoding=utf8";
 	private final static String userName = "root";
-	private final static String password = "pass";
+	private final static String password = "root";
 	private static Connection conn = null;
 	private static Logger log = Logger.getLogger(LoginServlet.class);
 
@@ -45,13 +45,14 @@ public class DBUtil {
 	}
 
 	protected static Connection getConnection() {
-		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, userName, password);
-		} catch (ClassNotFoundException | SQLException e) {
-			log.error("problem with driver", e);
-		}
-		return conn;
+		 try {
+		 Class.forName(driver);
+		 conn = DriverManager.getConnection(url, userName, password);
+		 } catch (ClassNotFoundException | SQLException e) {
+		 log.error("problem with driver", e);
+		 }
+		 return conn;
+
 	}
 
 	protected static String getQuestionMarks(int size) {
@@ -208,10 +209,31 @@ public class DBUtil {
 		return rs.wasNull() ? null : new Integer(val);
 	}
 
+	public static Double getDouble(ResultSet rs, String col)
+			throws SQLException {
+		double val = rs.getDouble(col);
+
+		return rs.wasNull() ? null : new Double(val);
+	}
+
+	public static void bind(PreparedStatement ps, int pos, double val)
+			throws SQLException {
+		ps.setDouble(pos, val);
+	}
+
+	public static void bind(PreparedStatement ps, int pos, Double val)
+			throws SQLException {
+		if (null == val) {
+			ps.setNull(pos, Types.DOUBLE);
+		} else {
+			ps.setDouble(pos, val.doubleValue());
+		}
+	}
+
 	public static Date getDate(ResultSet rs, String col) throws SQLException {
 		return rs.getTimestamp(col);
 	}
-	
+
 	public static Time getTime(ResultSet rs, String col) throws SQLException {
 		return rs.getTime(col);
 	}

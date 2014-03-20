@@ -30,11 +30,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	protected Connection conn = null;
 
 	public ProjectDAOImpl() {
-		this(null);
-	}
-
-	public ProjectDAOImpl(Connection conn) {
-		this.conn = conn;
+		this.conn = getConn();
 	}
 
 	public Project getByPrimaryKey(int id) throws DAOException {
@@ -58,57 +54,6 @@ public class ProjectDAOImpl implements ProjectDAO {
 		}
 
 		return null;
-	}
-
-	public long selectCount() throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			ps = getConn()
-					.prepareStatement("select count(*) from " + tableName);
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
-	}
-
-	public long selectCount(String whereStatement)
-			throws DAOException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
-			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
-			whereStatement = " " + whereStatement;
-		}
-
-		try {
-			ps = getConn().prepareStatement(
-					"select count(*) from " + tableName + whereStatement);
-
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			DBUtil.close(ps, rs);
-		}
-
-		return 0;
 	}
 
 	public List<Project> selectAll() throws DAOException {

@@ -12,11 +12,6 @@ public interface UserDAO {
 	public List<User> select(String whereStatement)
 			throws DAOException;
 
-	public long selectCount() throws DAOException;
-
-	public long selectCount(String whereStatement)
-			throws DAOException;
-
 	public int update(User obj) throws DAOException;
 
 	public int insert(User obj) throws DAOException;

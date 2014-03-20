@@ -68,7 +68,6 @@ public class UpdateEmployee extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String imageName = "default.png";
 		String position = request.getParameter("position");
 		int roleId = 1;
 		if (request.getParameter("role")!= null && !request.getParameter("role").equals("")){
@@ -83,7 +82,6 @@ public class UpdateEmployee extends HttpServlet {
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setEncryptedPassword(password);
-		user.setImage(imageName);
 		user.setPosition(position);
 		user.setRoleId(roleId);
 	 
