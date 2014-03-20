@@ -43,7 +43,6 @@ public class AddUser extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String imageName = "default.png";
         String position = request.getParameter("position");
         String role = request.getParameter("role");
         int roleId = 1;
@@ -60,7 +59,6 @@ public class AddUser extends HttpServlet {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setEncryptedPassword(password);
-        user.setImage(imageName);
         user.setPosition(position);
         user.setRoleId(roleId);
        

@@ -69,6 +69,7 @@ public class UpdateEmployee extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String position = request.getParameter("position");
+		Double salaryRate = Double.parseDouble(request.getParameter("salaryRate"));
 		int roleId = 1;
 		if (request.getParameter("role")!= null && !request.getParameter("role").equals("")){
 		 roleId = Integer.parseInt(request.getParameter("role"));}
@@ -84,7 +85,8 @@ public class UpdateEmployee extends HttpServlet {
 		user.setEncryptedPassword(password);
 		user.setPosition(position);
 		user.setRoleId(roleId);
-	 
+		user.setSalaryRate(salaryRate);
+		
 		employeeService.update(user);
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");

@@ -17,8 +17,8 @@
 </head>
 
 <body>
-	<div class="tableContainer-1">
-		<TABLE class="table" align="center">
+
+		<TABLE class="table"   style="overflow-x:scroll">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -28,6 +28,7 @@
 					<th><fmt:message key="user.password"/></th>
 					<th><fmt:message key="user.role"/></th>
 					<th><fmt:message key="user.position"/></th>
+					<th><fmt:message key="user.salary"/></th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -37,7 +38,7 @@
 			<c:forEach var="user" items="${users}">
 				<form action="${pageContext.request.contextPath}/admin/updateemployee" name="updateEmployee" method="post">
 				<tr>
-					<td><input type="number" name="id" value="${user.id}"  readonly="readonly"></td>
+					<td><input type="number" name="id" value="${user.id}"  readonly="readonly" ></td>
 
 					<td><input type="text" name="firstName" value="${user.firstName}"></td>
 					<td><input type="text" name="lastName" value="${user.lastName}"></td>
@@ -47,6 +48,7 @@
 							
 					<td><input type="text" name="role" value="${user.roleId}"></td>
 					<td><input type="text" name="position" value="${user.position}"></td>
+					<td><input type="text" name="salaryRate" value="${user.salaryRate}"></td>
 					<td><button type="submit" name="update" value="${user.id}"> <fmt:message key="button.update"/></button></td>
 					<td><button type="submit" name="delete" value="${user.id}"> <fmt:message key="button.delete"/></button></td>
 			</tr>
@@ -57,8 +59,6 @@
 			</tbody>
 		</TABLE>
 		
-		
-		</div>
 		
 		
 </body>

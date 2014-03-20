@@ -70,24 +70,12 @@ public class EditProfileServlet extends HttpServlet {
         String position = (!ValidationUtils.isNullOrEmpty(request.getParameter("position-" + id)))
                 ? request.getParameter("position-" + id) : user.getPosition();
 
-        String imageName = user.getImage();
-        Part filePart = request.getPart("userImage-" + id);
-        try {
-            String contentType = filePart.getContentType();
-            if (contentType.startsWith("image")) {
-                File image = FileUploadUtils.uploadFile(this, DATA_DIRECTORY, filePart);
-                imageName = FileUploadUtils.getFilename(image);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error(e);
-        }
+        
 
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPosition(position);
-        user.setImage(imageName);
 
         employeeService.update(user);
     }
