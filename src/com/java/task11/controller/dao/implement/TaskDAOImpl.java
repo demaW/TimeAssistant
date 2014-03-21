@@ -272,8 +272,8 @@ public class TaskDAOImpl implements TaskDAO {
 		Task obj = new Task();
 
 		obj.setTaskId(DBUtil.getInt(rs, "task_id"));
-		obj.setEstimateTime(DBUtil.getDate(rs, "estimate_time"));
-		obj.setRealTime(DBUtil.getDate(rs, "real_time"));
+		obj.setEstimateTime(DBUtil.getTime(rs, "estimate_time"));
+		obj.setRealTime(DBUtil.getTime(rs, "real_time"));
 		obj.setState(DBUtil.getString(rs, "state"));
 		obj.setDescription(DBUtil.getString(rs, "description"));
 		obj.setTitle(DBUtil.getString(rs, "title"));

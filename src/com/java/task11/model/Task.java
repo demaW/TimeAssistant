@@ -1,11 +1,12 @@
 package com.java.task11.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Task {
 	private int taskId;
-	private Date estimateTime;
-	private Date realTime;
+	private Time estimateTime;
+	private Time realTime;
 	private String state;
 	private String description;
 	private String title;
@@ -23,19 +24,19 @@ public class Task {
 		this.taskId = taskId;
 	}
 
-	public Date getEstimateTime() {
+	public Time getEstimateTime() {
 		return this.estimateTime;
 	}
 
-	public void setEstimateTime(Date estimateTime) {
+	public void setEstimateTime(Time estimateTime) {
 		this.estimateTime = estimateTime;
 	}
 
-	public Date getRealTime() {
+	public Time getRealTime() {
 		return this.realTime;
 	}
 
-	public void setRealTime(Date realTime) {
+	public void setRealTime(Time realTime) {
 		this.realTime = realTime;
 	}
 
