@@ -61,7 +61,12 @@ public class AddTask extends HttpServlet {
 		createTask.setProjectId(Integer.parseInt(req.getParameter("project_id")));
 		createTask.setState("NEW");
 		
-		new TaskService().save(createTask);
+		try {
+			new TaskService().save(createTask);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//TODO redirect to project page
 		

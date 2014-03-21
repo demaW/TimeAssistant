@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.ProjectService;
 import com.java.task11.model.Project;
 /**
@@ -47,8 +48,19 @@ public class UpdateProject extends HttpServlet {
 			HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(request.getParameter("delete"));
 		ProjectService proServ = new ProjectService();
-		Project project = proServ.getByID(id);
-		proServ.delete(project);
+		Project project = null;
+		try {
+			project = proServ.getByID(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			proServ.delete(project);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		response.sendRedirect("/TimeAssistant/pages/manager/projects");
 	}
 
@@ -60,11 +72,22 @@ public class UpdateProject extends HttpServlet {
 				
 		int id = Integer.parseInt(request.getParameter("update"));
 		ProjectService proServ = new ProjectService();
-		Project project = proServ.getByID(id);
+		Project project = null;
+		try {
+			project = proServ.getByID(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		project.setProjectName(projectName);
 		project.setDescription(description);
 		project.setNotes(notes);
-		proServ.update(project);
+		try {
+			proServ.update(project);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		response.sendRedirect("/TimeAssistant/pages/manager/projects");
 	}
 	
