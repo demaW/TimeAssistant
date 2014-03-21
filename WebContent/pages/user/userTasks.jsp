@@ -13,6 +13,51 @@
 <head>
 <title>User Tasks</title>
 <jsp:include page="import.jsp" />
+
+<!-- Timeline Script -->
+
+<script type="text/javascript"
+	src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+       'version':'1','packages':['timeline']}]}"></script>
+<script type="text/javascript">
+	google.setOnLoadCallback(drawChart);
+
+	function drawChart() {
+		var container = document.getElementById('timeline');
+
+		var chart = new google.visualization.Timeline(container);
+
+		var dataTable = new google.visualization.DataTable();
+
+		dataTable.addColumn({
+			type : 'string',
+			id : 'Task'
+		});
+		dataTable.addColumn({
+			type : 'date',
+			id : 'Start'
+		});
+		dataTable.addColumn({
+			type : 'date',
+			id : 'End'
+		});
+
+		var table = document.getElementById('data');
+
+		for (var r = 0, n = table.rows.length; r < n; r++) {
+			dataTable.addRows([ [ table.rows[r].cells[0].innerHTML,
+					new Date(table.rows[r].cells[1].innerHTML),
+					new Date(table.rows[r].cells[2].innerHTML) ] ]);
+		}
+
+		var tableHeight = table.rows.length * 51 + 40;
+		document.getElementById('timeline').style.height = tableHeight + "px";
+
+		chart.draw(dataTable);
+		table.style.display = "none";
+	}
+</script>
+
 </head>
 
 <body>
@@ -31,7 +76,8 @@
 				<li class="active"><a href="#">Personal page</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${user.firstName} | <a href="${pageContext.request.contextPath}/logout">Log out</a>
+				Looged in as ${user.firstName} | <a
+					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -41,12 +87,14 @@
 	<!-- PAGE NAV -->
 
 	<ul class="nav nav-tabs nav-justified">
-		<li class="active"><a href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-		<li><a href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
+		<li class="active"><a
+			href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
+		<li><a
+			href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
 		<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 	</ul>
-	
-	<br/>
+
+	<br />
 
 	<!-- CONTENT -->
 	<div class="container">
@@ -103,6 +151,26 @@
 				</tbody>
 			</table>
 		</div>
+
+		<br/>
+		<div id="timeline" style="width: 1000px; margin: auto;"></div>
+
 	</div>
+
+	<!-- CHART DATA -->
+	<table id="data">
+		<tbody>
+			<c:forEach var="task" items="${tasks}">
+				<tr>
+					<td>${task.title}</td>
+					<td><fmt:formatDate value="${task.startDate}"
+							pattern="yyyy,MM,dd" /></td>
+					<td><fmt:formatDate value="${task.endDate}"
+							pattern="yyyy,MM,dd" /></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
 </body>
 </html>
