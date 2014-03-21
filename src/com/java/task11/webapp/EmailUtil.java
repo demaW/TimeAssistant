@@ -11,7 +11,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class EmailUtil {
-	public void sendMail() {
+	public void sendMail(String sendTo) {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
@@ -32,7 +32,7 @@ public class EmailUtil {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("timeassistant2014@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("demavov@gmail.com"));
+					InternetAddress.parse(sendTo)); // input own email
 			message.setSubject("Testing Subject");
 			message.setText("Dear Mail Crawler," +
 					"\n\n No spam to my email, please!");

@@ -90,7 +90,7 @@ public class UpdateEmployee extends HttpServlet {
 		
 		employeeService.update(user);
 		EmailUtil emailUtil = new EmailUtil();
-		emailUtil.sendMail();
+		emailUtil.sendMail(email);
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");
 	}
