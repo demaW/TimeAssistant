@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 
@@ -65,7 +66,12 @@ public class AddUser extends HttpServlet {
         user.setSalaryRate(salary);
        
         UserService employeeService= new UserService();
-		employeeService.save(user);
+		try {
+			employeeService.save(user);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath +"/admin/users");    
 	}
