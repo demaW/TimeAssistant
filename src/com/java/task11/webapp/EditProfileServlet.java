@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 
 import org.apache.log4j.Logger;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 import com.java.task11.utils.FileUploadUtils;
@@ -39,7 +40,12 @@ public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("update"));
-        user = employeeService.getByID(id);
+        try {
+			user = employeeService.getByID(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         request.setAttribute("user", user);
         request.getRequestDispatcher("/pages/editProfile.jsp").forward(request, response);
     }
@@ -55,7 +61,10 @@ public class EditProfileServlet extends HttpServlet {
 
     private void updateUser(HttpServletRequest request) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("update"));
-        User user = employeeService.getByID(id);
+        User user;
+		try {
+			user = employeeService.getByID(id);
+		
 
         String firstName = (!ValidationUtils.isNullOrEmpty(request.getParameter("first_name-" + id)))
                 ? request.getParameter("first_name-" + id) : user.getFirstName();
@@ -69,7 +78,7 @@ public class EditProfileServlet extends HttpServlet {
         }
         String position = (!ValidationUtils.isNullOrEmpty(request.getParameter("position-" + id)))
                 ? request.getParameter("position-" + id) : user.getPosition();
-
+		
         
 
         user.setFirstName(firstName);
@@ -78,6 +87,10 @@ public class EditProfileServlet extends HttpServlet {
         user.setPosition(position);
 
         employeeService.update(user);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }

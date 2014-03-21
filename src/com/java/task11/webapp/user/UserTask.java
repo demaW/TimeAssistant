@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.TaskService;
 import com.java.task11.model.Task;
 import com.java.task11.model.User;
@@ -29,7 +30,13 @@ public class UserTask extends HttpServlet {
 		User loggedInUser = (User) session.getAttribute("user");
 		Integer userId = loggedInUser.getId();
 		
-		List<Task> tasks = new TaskService().getByEmployeeId(userId);
+		List<Task> tasks = null;
+		try {
+			tasks = new TaskService().getByEmployeeId(userId);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		String filterStatusValue = request.getParameter("status");
 		if (filterStatusValue != null) {

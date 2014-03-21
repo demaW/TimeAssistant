@@ -7,8 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.TaskService;
 import com.java.task11.model.Task;
 
@@ -31,7 +31,7 @@ public class UserSingleTask extends HttpServlet {
 			request.setAttribute("task", task);
 			request.getRequestDispatcher("/pages/user/userSingleTask.jsp").forward(request, response);
 			
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException | DAOException e) {
 			e.printStackTrace();
 			response.sendRedirect("user/tasks");
 		}
