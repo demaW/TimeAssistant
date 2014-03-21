@@ -9,8 +9,8 @@ import com.java.task11.controller.dao.factory.DAOException;
  * @version 1.00 2014-03-05
  */
 public interface IBaseService<T> {
-    T getByID(Integer id);
-    void save(T element);
+    T getByID(Integer id) throws DAOException;
+    void save(T element) throws DAOException;
     void update(T element) throws DAOException;
     void delete(T element) throws DAOException;
     List<T> getListOfObjects() throws DAOException;

@@ -1,9 +1,10 @@
 package com.java.task11.controller.service;
 
-import com.java.task11.controller.dao2.DaoFactory;
-import com.java.task11.model.UserRole;
-
 import java.util.List;
+
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.dao.factory.DAOFactory;
+import com.java.task11.model.UserRole;
 
 /**
  * @author nlelyak
@@ -12,27 +13,27 @@ import java.util.List;
 public class RoleService implements IBaseService<UserRole> {
 
     @Override
-    public UserRole getByID(Integer id) {
-        return DaoFactory.getInstance().getRoleDao().getByID(id);
+    public UserRole getByID(Integer id) throws DAOException {
+        return DAOFactory.getInstance().getRoleDAO().getByPrimaryKey(id);
     }
 
     @Override
-    public void save(UserRole element) {
-        DaoFactory.getInstance().getRoleDao().save(element);
+    public void save(UserRole element) throws DAOException {
+        DAOFactory.getInstance().getRoleDAO().insert(element);
     }
 
     @Override
-    public void update(UserRole element) {
-        DaoFactory.getInstance().getRoleDao().update(element);
+    public void update(UserRole element) throws DAOException {
+        DAOFactory.getInstance().getRoleDAO().update(element);
     }
 
     @Override
-    public void delete(UserRole element) {
-        DaoFactory.getInstance().getRoleDao().delete(element);
+    public void delete(UserRole element) throws DAOException {
+        DAOFactory.getInstance().getRoleDAO().delete(element);
     }
 
     @Override
-    public List<UserRole> getListOfObjects() {
-        return DaoFactory.getInstance().getRoleDao().getListOfObjects();
+    public List<UserRole> getListOfObjects() throws DAOException {
+        return DAOFactory.getInstance().getRoleDAO().selectAll();
     }
 }

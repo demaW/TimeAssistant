@@ -1,9 +1,9 @@
 package com.java.task11.controller.service;
 
-import com.java.task11.controller.dao2.DaoFactory;
-import com.java.task11.model.Team;
-
 import java.util.List;
+
+import com.java.task11.model.Team;
+import com.java.task11.controller.dao.factory.DAOFactory;
 
 /**
  * @author nlelyak
@@ -13,12 +13,12 @@ public class TeamService implements IBaseService<Team> {
 
     @Override
     public Team getByID(Integer id) {
-        return DaoFactory.getInstance().getTeamDao().getByID(id);
+        return DAOFactory.getInstance().getTeamDAO().getByID(id);
     }
 
     @Override
     public void save(Team element) {
-        DaoFactory.getInstance().getTeamDao().save(element);
+        DAOFactory.getInstance().getTeamDAO().save(element);
     }
 
     @Override
