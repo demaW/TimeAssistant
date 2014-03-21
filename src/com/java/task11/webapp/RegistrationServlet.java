@@ -24,7 +24,11 @@ import com.java.task11.utils.ValidationUtils;
  */
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-    private static Logger log = Logger.getLogger(RegistrationServlet.class);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getLogger(RegistrationServlet.class);
     private UserService employeeService = new UserService();
 
     @Override
@@ -64,6 +68,7 @@ public class RegistrationServlet extends HttpServlet {
 				employeeService.save(user);
 			} catch (DAOException e) {
 				// TODO Auto-generated catch block
+				log.error(e);
 				e.printStackTrace();
 			}
             
