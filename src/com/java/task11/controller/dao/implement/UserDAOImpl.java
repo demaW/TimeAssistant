@@ -22,7 +22,6 @@ public class UserDAOImpl implements UserDAO {
 		pkColumns.add("id");
 		stdColumns.add("email");
 		stdColumns.add("first_name");
-		stdColumns.add("image");
 		stdColumns.add("last_name");
 		stdColumns.add("password");
 		stdColumns.add("position");
@@ -324,7 +323,6 @@ public class UserDAOImpl implements UserDAO {
 		obj.setId(DBUtil.getInt(rs, "id"));
 		obj.setEmail(DBUtil.getString(rs, "email"));
 		obj.setFirstName(DBUtil.getString(rs, "first_name"));
-		obj.setImage(DBUtil.getString(rs, "image"));
 		obj.setLastName(DBUtil.getString(rs, "last_name"));
 		obj.setPassword(DBUtil.getString(rs, "password"));
 		obj.setPosition(DBUtil.getString(rs, "position"));
