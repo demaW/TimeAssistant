@@ -81,6 +81,7 @@
 				<tr>
 					<td>Real time:</td>
 					<td>
+						<input type="hidden" value="${task.taskId}" name="task_id">
 						<div class="input-group input-group-sm">
 							<input type="text" name="realTime" value="${task.realTime}"
 							  pattern="[0-5][0-9]:[0-5][0-9]:[0-5][0-9]" required>

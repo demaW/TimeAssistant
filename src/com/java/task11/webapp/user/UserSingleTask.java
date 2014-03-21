@@ -1,6 +1,7 @@
 package com.java.task11.webapp.user;
 
 import java.io.IOException;
+import java.sql.Time;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,15 +35,34 @@ public class UserSingleTask extends HttpServlet {
 
 		} catch (NumberFormatException | DAOException e) {
 			e.printStackTrace();
-			response.sendRedirect("user/tasks");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(contextPath + "/user/tasks");
 		}
 	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			TaskService taskService = new TaskService();
+			
+			Integer taskId = Integer.parseInt(request.getParameter("task_id"));
+			String timeString = request.getParameter("realTime");
+			Time time = Time.valueOf(timeString);
+			
+			Task task = taskService.getByID(taskId);
+			task.setRealTime(time);
+			task.setState("IN Progress");
+			
+			taskService.update(task);
+			
+			String contextPath = request.getContextPath();
+			response.sendRedirect(contextPath + "/user/tasks");
 
-		System.out.println(request.getAttribute("task"));
-
+		} catch (NumberFormatException | DAOException e) {
+			e.printStackTrace();
+			String contextPath = request.getContextPath();
+			response.sendRedirect(contextPath + "/user/tasks");
+		}
 	}
 
 }
