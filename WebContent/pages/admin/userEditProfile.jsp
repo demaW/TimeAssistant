@@ -36,7 +36,7 @@
 					<td><input type="text" name="email" pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${user.email}"></td>
 				</tr>
 				<tr>
-					<td align="right"><a href="${pageContext.request.contextPath}/user/tasks" class="btn btn-default">Cancel</a></td>
+					<td align="right"><a href="${pageContext.request.contextPath}/admin/users" class="btn btn-default">Cancel</a></td>
 					<td>
 						<button name="submit" type="submit" class="btn btn-primary btn-hg" value="Submit">
 							Save

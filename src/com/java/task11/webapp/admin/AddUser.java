@@ -45,6 +45,7 @@ public class AddUser extends HttpServlet {
         String password = request.getParameter("password");
         String position = request.getParameter("position");
         String role = request.getParameter("role");
+        Double salary = Double.parseDouble(request.getParameter("salary"));
         int roleId = 1;
         if (role.equals("user")) {
 			roleId = 1;
@@ -61,6 +62,7 @@ public class AddUser extends HttpServlet {
         user.setEncryptedPassword(password);
         user.setPosition(position);
         user.setRoleId(roleId);
+        user.setSalaryRate(salary);
        
         UserService employeeService= new UserService();
 		employeeService.save(user);
