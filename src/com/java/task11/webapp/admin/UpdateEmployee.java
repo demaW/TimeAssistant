@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
+import com.java.task11.webapp.EmailUtil;
 
 /**
  * Servlet implementation class UpdateEmployee
@@ -88,6 +89,8 @@ public class UpdateEmployee extends HttpServlet {
 		user.setSalaryRate(salaryRate);
 		
 		employeeService.update(user);
+		EmailUtil emailUtil = new EmailUtil();
+		emailUtil.sendMail();
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");
 	}
