@@ -38,6 +38,10 @@
 					<td><input type="text" name="position"></td>
 				</tr>
 				<tr>
+					<td><fmt:message key="user.salary" /></td>
+					<td><input type="text" name="salary"></td>
+				</tr>
+				<tr>
 					<td><fmt:message key="user.role" /></td>
 					<td><select name="role">
 
