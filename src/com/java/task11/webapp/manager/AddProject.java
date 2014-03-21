@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.ProjectService;
 import com.java.task11.model.Project;
 
@@ -47,7 +48,12 @@ public class AddProject extends HttpServlet {
 		project.setNotes(notes);
 		
 		ProjectService projectService = new ProjectService();
-		projectService.save(project);
+		try {
+			projectService.save(project);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		 response.sendRedirect("/TimeAssistant/pages/manager/projects");
 		}
