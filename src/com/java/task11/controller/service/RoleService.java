@@ -6,10 +6,7 @@ import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.UserRole;
 
-/**
- * @author nlelyak
- * @version 1.00 2014-03-05
- */
+
 public class RoleService implements IBaseService<UserRole> {
 
     @Override
