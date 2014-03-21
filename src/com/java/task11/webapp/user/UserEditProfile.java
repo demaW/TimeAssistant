@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 
@@ -29,23 +30,28 @@ public class UserEditProfile extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		UserService userService = new UserService();
-		User user = (User) session.getAttribute("user");
+		try {
+			HttpSession session = request.getSession();
+			UserService userService = new UserService();
+			User user = (User) session.getAttribute("user");
 
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
+			String email = request.getParameter("email");
 
-		user.setEmail(email);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
+			user.setEmail(email);
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
 
-		userService.update(user);
-		
-		String contextPath = request.getContextPath();
-		response.sendRedirect(contextPath + "/user/userEditProfile");
+			userService.update(user);
 
+			String contextPath = request.getContextPath();
+			response.sendRedirect(contextPath + "/user/userEditProfile");
+
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
