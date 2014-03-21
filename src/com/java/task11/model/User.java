@@ -86,4 +86,14 @@ public class User implements Serializable {
 	public void setSalaryRate(Double salaryRate) {
 		this.salaryRate = salaryRate;
 	}
+	public String toString(){
+		return "Usrename: " + getFirstName() + " "+ getLastName() +"\n"+
+				"email: " + getEmail() +"\n"+
+				"password: " + getPassword()+"\n"+
+				"position: " + getPosition() +"\n"+
+				"salary rate: " + getSalaryRate();
+		
+		
+		
+	}
 }
