@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 import com.java.task11.utils.ValidationErrors;
@@ -44,7 +45,6 @@ public class RegistrationServlet extends HttpServlet {
         String email = request.getParameter("email");
         System.out.println(email);
         String password = request.getParameter("password");
-        String imageName = "default.png";
         String position = request.getParameter("position");
 
         List<String> registrationErrors = validateInputs(firstName, lastName, email, password);
@@ -58,10 +58,14 @@ public class RegistrationServlet extends HttpServlet {
             user.setLastName(lastName);
             user.setEmail(email);
             user.setEncryptedPassword(password);
-            user.setImage(imageName);
             user.setPosition(position);
 
-            employeeService.save(user);
+            try {
+				employeeService.save(user);
+			} catch (DAOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             
             String contextPath = request.getContextPath();
             response.sendRedirect(contextPath + "/pages/login");
@@ -82,9 +86,14 @@ public class RegistrationServlet extends HttpServlet {
             registrationErrors.add(ValidationErrors.EMAIL);
         }
         
-        if (employeeService.getByEmail(email) != null) {
-            registrationErrors.add(ValidationErrors.EMAIL_ALREADY_PRESENT);
-        }
+        try {
+			if (employeeService.getByEmail(email) != null) {
+			    registrationErrors.add(ValidationErrors.EMAIL_ALREADY_PRESENT);
+			}
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         if (ValidationUtils.isNullOrEmpty(password)) {
             registrationErrors.add(ValidationErrors.PASSWORD);
         }

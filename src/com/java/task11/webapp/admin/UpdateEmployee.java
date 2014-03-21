@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 import com.java.task11.webapp.EmailUtil;
@@ -55,8 +56,19 @@ public class UpdateEmployee extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("delete"));
 				
 		UserService employeeService = new UserService();
-		User userC = employeeService.getByID(id);
-		employeeService.delete(userC);
+		User userC = null;
+		try {
+			userC = employeeService.getByID(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			employeeService.delete(userC);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(request.getParameter("notification") != null)
 		{
@@ -97,7 +109,12 @@ public class UpdateEmployee extends HttpServlet {
 		user.setRoleId(roleId);
 		user.setSalaryRate(salaryRate);
 		
-		employeeService.update(user);
+		try {
+			employeeService.update(user);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(request.getParameter("notification") != null)
 			{

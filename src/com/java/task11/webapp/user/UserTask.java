@@ -31,9 +31,7 @@ public class UserTask extends HttpServlet {
 			User loggedInUser = (User) session.getAttribute("user");
 			Integer userId = loggedInUser.getId();
 
-			List<Task> tasks;
-
-			tasks = new TaskService().getByEmployeeId(userId);
+			List<Task> tasks = new TaskService().getByEmployeeId(userId);
 
 			String filterStatusValue = request.getParameter("status");
 			if (filterStatusValue != null) {
@@ -43,12 +41,10 @@ public class UserTask extends HttpServlet {
 			request.setAttribute("tasks", tasks);
 			request.getRequestDispatcher("/pages/user/userTasks.jsp").forward(
 					request, response);
-
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	protected List<Task> filterResults(List<Task> tasks, String status) {

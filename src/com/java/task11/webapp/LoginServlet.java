@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 import com.java.task11.utils.MD5Utils;
@@ -46,7 +47,13 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String email = request.getParameter("email");
         String password = MD5Utils.getMD5String(request.getParameter("password"));
-        User user = new UserService().getByEmail(email);
+        User user = null;
+		try {
+			user = new UserService().getByEmail(email);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         if (!ValidationUtils.isNullOrEmpty(user.getEmail()) && user.getPassword().equals(password)) {
             session.setAttribute("user", user);

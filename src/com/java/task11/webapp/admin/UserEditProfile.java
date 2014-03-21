@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 
@@ -42,7 +43,12 @@ public class UserEditProfile extends HttpServlet {
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 
-		userService.update(user);
+		try {
+			userService.update(user);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/userEditProfile");

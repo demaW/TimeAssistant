@@ -22,15 +22,16 @@ public class UserSingleTask extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try {
 			Integer taskId = Integer.parseInt(request.getParameter("task_id"));
-			
+
 			Task task = new TaskService().getByID(taskId);
-			
+
 			request.setAttribute("task", task);
-			request.getRequestDispatcher("/pages/user/userSingleTask.jsp").forward(request, response);
-			
+			request.getRequestDispatcher("/pages/user/userSingleTask.jsp")
+					.forward(request, response);
+
 		} catch (NumberFormatException | DAOException e) {
 			e.printStackTrace();
 			response.sendRedirect("user/tasks");
@@ -39,9 +40,9 @@ public class UserSingleTask extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		System.out.println(request.getAttribute("task"));
-		
+
 	}
 
 }
