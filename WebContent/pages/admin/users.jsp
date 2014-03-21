@@ -30,6 +30,8 @@
 					<th><fmt:message key="user.role"/></th>
 					<th><fmt:message key="user.position"/></th>
 					<th><fmt:message key="user.salary"/></th>
+					<th><fmt:message key="user.notification"/></th>
+					
 					<th></th>
 					<th></th>
 				</tr>
@@ -50,6 +52,7 @@
 					<td><input type="text" name="role" value="${user.roleId}"></td>
 					<td><input type="text" name="position" value="${user.position}"></td>
 					<td><input type="text" name="salaryRate" value="${user.salaryRate}"></td>
+					<td><input type="checkbox" name="notification" value="${user.id}"></td>
 					<td><button type="submit" name="update" value="${user.id}"> <fmt:message key="button.update"/></button></td>
 					<td><button type="submit" name="delete" value="${user.id}"> <fmt:message key="button.delete"/></button></td>
 			</tr>

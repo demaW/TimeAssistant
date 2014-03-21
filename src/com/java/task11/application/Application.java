@@ -25,11 +25,12 @@ public class Application {
 
         UserService employeeService = new UserService();
         employeeService.save(user);
+        System.out.println(user.toString());
         
 
         User empl = employeeService.getByEmail("columb@gmail.com");
         System.out.printf("Info: %s %s%n", empl.getFirstName(), empl.getLastName());
-       // employeeService.delete(empl);
+        employeeService.delete(empl);
         System.out.println("\nTHE END");
     }
 }

@@ -57,6 +57,15 @@ public class UpdateEmployee extends HttpServlet {
 		UserService employeeService = new UserService();
 		User userC = employeeService.getByID(id);
 		employeeService.delete(userC);
+		
+		if(request.getParameter("notification") != null)
+		{
+		String email = request.getParameter("email");
+		String messageText = "Your account was deleted"; 
+		EmailUtil emailUtil = new EmailUtil();
+		emailUtil.sendMail(email,messageText);
+		}
+		
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");
 	}
@@ -89,8 +98,14 @@ public class UpdateEmployee extends HttpServlet {
 		user.setSalaryRate(salaryRate);
 		
 		employeeService.update(user);
-		EmailUtil emailUtil = new EmailUtil();
-		emailUtil.sendMail(email);
+		
+		if(request.getParameter("notification") != null)
+			{
+			String messageText = "Your account was updated" + user.toString(); 
+			EmailUtil emailUtil = new EmailUtil();
+			emailUtil.sendMail(email, messageText);
+			}
+		
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");
 	}
