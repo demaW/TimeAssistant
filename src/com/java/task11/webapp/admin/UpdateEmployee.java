@@ -101,7 +101,7 @@ public class UpdateEmployee extends HttpServlet {
 		
 		if(request.getParameter("notification") != null)
 			{
-			String messageText = "Your account was updated" + user.toString(); 
+			String messageText = "Your account was updated" +"\n"+ user.toString(); 
 			EmailUtil emailUtil = new EmailUtil();
 			emailUtil.sendMail(email, messageText);
 			}

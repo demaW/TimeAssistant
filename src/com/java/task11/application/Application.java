@@ -5,10 +5,7 @@ import org.apache.log4j.PropertyConfigurator;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 
-/**
- * @author nlelyak
- * @version 1.00 2014-03-05
- */
+
 public class Application {
 
     static {
