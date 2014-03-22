@@ -44,17 +44,23 @@ public class UserSingleTask extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			TaskService taskService = new TaskService();
-			
+
 			Integer taskId = Integer.parseInt(request.getParameter("task_id"));
 			String timeString = request.getParameter("realTime");
 			Time time = Time.valueOf(timeString);
-			
+			String isFinished = request.getParameter("finished");
+
 			Task task = taskService.getByID(taskId);
 			task.setRealTime(time);
-			task.setState("IN Progress");
 			
+			if (isFinished == null) {
+				task.setState("IN Progress");		
+			} else {
+				task.setState("FINISHED");
+			}
+
 			taskService.update(task);
-			
+
 			String contextPath = request.getContextPath();
 			response.sendRedirect(contextPath + "/user/tasks");
 

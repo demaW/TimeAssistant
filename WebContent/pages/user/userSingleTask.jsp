@@ -88,10 +88,12 @@
 						</div>
 					</td>
 				</tr>
-
 				<tr>
-					<td align="right"><a href="#" class="btn btn-default">Mark
-							as finished</a></td>
+					<td>Is finished:</td>
+					<td><input type="checkbox" name="finished"></td>
+				</tr>
+				<tr>
+					<td></td>
 					<td><button name="submit" type="submit"
 							class="btn btn-primary btn-hg" value="Submit">Save</button></td>
 				</tr>
