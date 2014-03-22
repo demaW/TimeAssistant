@@ -72,8 +72,11 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
-				<li><a href="#">Home</a></li>
-				<li class="active"><a href="#">Personal page</a></li>
+				<li class="active"><a
+					href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
 				Looged in as ${user.firstName} | <a
@@ -83,16 +86,6 @@
 		<!-- /.navbar-collapse -->
 	</nav>
 	<!-- /navbar -->
-
-	<!-- PAGE NAV -->
-
-	<ul class="nav nav-tabs nav-justified">
-		<li class="active"><a
-			href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-		<li><a
-			href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
-		<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
-	</ul>
 
 	<br />
 
@@ -152,7 +145,7 @@
 			</table>
 		</div>
 
-		<br/>
+		<br />
 		<div id="timeline" style="width: 1000px; margin: auto;"></div>
 
 	</div>

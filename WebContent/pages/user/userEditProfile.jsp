@@ -28,8 +28,11 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
-				<li><a href="#">Home</a></li>
-				<li class="active"><a href="#">Personal page</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/tasks">User
+						tasks</a></li>
+				<li class="active"><a
+					href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
 				Looged in as ${user.firstName} | <a
@@ -40,40 +43,36 @@
 	</nav>
 	<!-- /navbar -->
 
-	<!-- PAGE NAV -->
-
-	<ul class="nav nav-tabs nav-justified">
-		<li><a
-			href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-		<li class="active"><a href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
-		<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
-	</ul>
-
 	<br />
-	
+
 	<!-- CONTENT -->
-	
+
 	<div class="container">
-		<form action="${pageContext.request.contextPath}/user/userEditProfile" method="post">
-			<table  class="table">
+		<form action="${pageContext.request.contextPath}/user/userEditProfile"
+			method="post">
+			<table class="table">
 				<tr>
 					<td>First Name:</td>
-					<td><input type="text" name="firstName" required value="${user.firstName}"></td>
+					<td><input type="text" name="firstName" required
+						value="${user.firstName}"></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
-					<td><input type="text" name="lastName" required value="${user.lastName}"></td>
-				</tr>
-							<tr>
-					<td>email:</td>
-					<td><input type="text" name="email" pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${user.email}"></td>
+					<td><input type="text" name="lastName" required
+						value="${user.lastName}"></td>
 				</tr>
 				<tr>
-					<td align="right"><a href="${pageContext.request.contextPath}/user/tasks" class="btn btn-default">Cancel</a></td>
+					<td>email:</td>
+					<td><input type="text" name="email"
+						pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${user.email}"></td>
+				</tr>
+				<tr>
+					<td align="right"><a
+						href="${pageContext.request.contextPath}/user/tasks"
+						class="btn btn-default">Cancel</a></td>
 					<td>
-						<button name="submit" type="submit" class="btn btn-primary btn-hg" value="Submit">
-							Save
-						</button>
+						<button name="submit" type="submit" class="btn btn-primary btn-hg"
+							value="Submit">Save</button>
 					</td>
 				</tr>
 			</table>
