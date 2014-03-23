@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
@@ -34,7 +35,19 @@ public class UpdateEmployee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int id = Integer.parseInt(request.getParameter("notification"));
+		try {
+			User userToEdit = new UserService().getByID(id);
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("userToEdit", userToEdit);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.getRequestDispatcher("/pages/admin/edituser.jsp")
+		.forward(request, response);
 	}
 
 	/**
@@ -53,29 +66,22 @@ public class UpdateEmployee extends HttpServlet {
 
 	private void deleteUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("delete"));
-				
+		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println(id);
 		UserService employeeService = new UserService();
-		User userC = null;
-		try {
-			userC = employeeService.getByID(id);
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			employeeService.delete(userC);
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		if(request.getParameter("notification") != null)
-		{
-		String email = request.getParameter("email");
-		String messageText = "Your account was deleted"; 
-		EmailUtil emailUtil = new EmailUtil();
-		emailUtil.sendMail(email,messageText);
+		try {
+			User user = employeeService.getByID(id);
+			employeeService.delete(employeeService.getByID(id));
+			if(request.getParameter("mailNotification") != null && request.getParameter("mailNotification").equals("yes" ))
+			{
+			String email = request.getParameter("email");
+			String messageText = "Your account was updated" +"\n"+ user.toString(); 
+			EmailUtil emailUtil = new EmailUtil();
+			emailUtil.sendMail(email, messageText);
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
 		}
 		
 		String contextPath = request.getContextPath();
@@ -84,7 +90,7 @@ public class UpdateEmployee extends HttpServlet {
 
 	private void updateUser(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("update"));
+		int id = Integer.parseInt(request.getParameter("id"));
 
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -116,7 +122,7 @@ public class UpdateEmployee extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if(request.getParameter("notification") != null)
+		if(request.getParameter("mailNotification") != null && request.getParameter("mailNotification").equals("yes" ))
 			{
 			String messageText = "Your account was updated" +"\n"+ user.toString(); 
 			EmailUtil emailUtil = new EmailUtil();

@@ -18,18 +18,19 @@
 
 <body>
 
-<div class="panel panel-primary" >
-<form action="${pageContext.request.contextPath}/admin/updateemployee" name="updateEmployee" method="get">
-		<TABLE class="table"   >
+<div class="panel panel-primary" style="width: 100%; margin: auto;">
+		<TABLE class="table"   style="overflow-x:scroll">
 			<thead>
 				<tr>
 					<th>Id</th>
 					<th><fmt:message key="user.firstName"/></th>
 					<th><fmt:message key="user.lastName"/></th>
 					<th><fmt:message key="user.email"/></th>
+					<th><fmt:message key="user.password"/></th>
 					<th><fmt:message key="user.role"/></th>
 					<th><fmt:message key="user.position"/></th>
 					<th><fmt:message key="user.salary"/></th>
+					<th><fmt:message key="user.notification"/></th>
 					
 					<th></th>
 					<th></th>
@@ -38,30 +39,29 @@
 			<tbody>
 
 			<c:forEach var="user" items="${users}">
-				
+				<form action="${pageContext.request.contextPath}/admin/updateemployee" name="updateEmployee" method="post">
 				<tr>
 					<td>${user.id}</td>
 
 					<td>${user.firstName}</td>
 					<td>${user.lastName}</td>
-					<td>${user.email}</td>
-					<td>${user.roleId}</td>
-					<td>${user.position}</td>
-					<td>${user.salaryRate}</td>
-					<td><input type="radio" name="notification" value="${user.id}"></td>
-					
+
+					<td><input type="text" name="email" value="${user.email}"></td>
+					<td><input type="text" name="password" value="${user.password}"></td>
+							
+					<td><input type="text" name="role" value="${user.roleId}"></td>
+					<td><input type="text" name="position" value="${user.position}"></td>
+					<td><input type="text" name="salaryRate" value="${user.salaryRate}"></td>
+					<td><input type="checkbox" name="notification" value="${user.id}"></td>
+					<td><button type="submit" name="update" value="${user.id}"> <fmt:message key="button.update"/></button></td>
+					<td><button type="submit" name="delete" value="${user.id}"> <fmt:message key="button.delete"/></button></td>
 			</tr>
-			
-		
+			</form>
 		
 </c:forEach>
-
 			<a href="${pageContext.request.contextPath}/admin/adduser"> <fmt:message key="button.addUser"/></a>
 			</tbody>
-			
 		</TABLE>
-		<td><button type="submit" name="edit" > <fmt:message key="button.edit"/></button></td>
-			</form>
 		</div>
 		
 		
