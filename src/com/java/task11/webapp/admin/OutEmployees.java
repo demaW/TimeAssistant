@@ -36,7 +36,6 @@ public class OutEmployees extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	List<User> users = null;
-	List<UserRole> roles = null;
 	try {
 		users = new UserService().getListOfObjects();
 		roles = new RoleService().getListOfObjects();
@@ -44,9 +43,8 @@ public class OutEmployees extends HttpServlet {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	HttpSession session = request.getSession();
-	session.setAttribute("roles", roles);
-	session.setAttribute("users", users);
+	
+	request.setAttribute("users", users);
 	request.getRequestDispatcher("/pages/admin/users.jsp").forward(request, response);
 	}
 

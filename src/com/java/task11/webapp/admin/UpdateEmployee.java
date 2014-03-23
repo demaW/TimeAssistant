@@ -44,9 +44,9 @@ public class UpdateEmployee extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("notification"));
 		try {
 			User userToEdit = new UserService().getByID(id);
-			HttpSession session = request.getSession();
 			
-			session.setAttribute("userToEdit", userToEdit);
+			
+			request.setAttribute("userToEdit", userToEdit);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
