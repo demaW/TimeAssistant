@@ -73,7 +73,7 @@ public class RegistrationServlet extends HttpServlet {
 			}
             
             String contextPath = request.getContextPath();
-            response.sendRedirect(contextPath + "/pages/login");
+            response.sendRedirect(contextPath + "/login");
         }
 
     }
