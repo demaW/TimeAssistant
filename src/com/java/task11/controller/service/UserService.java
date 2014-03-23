@@ -36,25 +36,32 @@ public class UserService implements IBaseService<User> {
 	}
 
 	public User getByEmail(String email) throws DAOException {
-		return DAOFactory.getInstance().getUserDAO().getByEmail(email).get(0);
+		if (DAOFactory.getInstance().getUserDAO().getByEmail(email).isEmpty()) {
+			return null;
+		} else {
+			return DAOFactory.getInstance().getUserDAO().getByEmail(email)
+					.get(0);
+		}
 	}
-	
+
 	public List<User> getByPosition(String position) throws DAOException {
 		return DAOFactory.getInstance().getUserDAO().getByPosition(position);
 	}
 
+	public List<User> getUsersByProjectId(Integer project_id)
+			throws DAOException {
+		List<Team> team = DAOFactory.getInstance().getTeamDAO()
+				.getByProjectId(project_id);
 
-	public List<User> getUsersByProjectId(Integer project_id) throws DAOException {
-		List<Team> team = DAOFactory.getInstance().getTeamDAO().getByProjectId(project_id);
-		
 		List<User> usersInProject = new ArrayList<>();
-		
+
 		for (Team singleTeam : team) {
 			Integer userId = singleTeam.getEmployeeId();
-			User user = DAOFactory.getInstance().getUserDAO().getByPrimaryKey(userId);
+			User user = DAOFactory.getInstance().getUserDAO()
+					.getByPrimaryKey(userId);
 			usersInProject.add(user);
 		}
-		
+
 		return usersInProject;
 	}
 }
