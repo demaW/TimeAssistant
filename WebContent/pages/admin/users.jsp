@@ -75,7 +75,7 @@
 			</tbody>
 			
 		</TABLE>
-		<td><button type="submit" name="edit" class="btn btn-primary btn-hg" > <fmt:message key="button.edit" /></button></td>
+		<button type="submit" name="edit" class = 'btn btn-success pull-right'  style= "margin-right: 5%"> <fmt:message key="button.edit" /></button>
 			</form>
 		</div>
 		
