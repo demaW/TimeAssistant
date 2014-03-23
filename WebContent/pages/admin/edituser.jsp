@@ -72,10 +72,10 @@
 				<tr>
 					<td></td>
 					<td>
-						<button name="update" type="submit" value="update">
+						<button name="update" type="submit" value="update" class="btn btn-primary btn-hg">
 							<fmt:message key="button.update" />
 						</button>
-						<button name="delete" type="submit" value="delete">
+						<button name="delete" type="submit" value="delete" class="btn btn-primary btn-hg">
 							<fmt:message key="button.delete" />
 						</button>
 					</td>

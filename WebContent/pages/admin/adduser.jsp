@@ -53,7 +53,7 @@
 				<tr>
 					<td></td>
 					<td>
-						<button name="submit" type="submit" value="Submit">
+						<button name="submit" type="submit" value="Submit" class="btn btn-primary btn-hg">
 							<fmt:message key="button.addUser" />
 						</button>
 					</td>
