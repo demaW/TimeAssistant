@@ -70,6 +70,10 @@
 				<input type="radio" name ="mailNotification" value = "no" checked> no </td>
 				</tr>
 				<tr>
+					
+					<td align="right"><a
+						href="${pageContext.request.contextPath}/admin/users"
+						class="btn btn-default"><fmt:message key="button.cancel" /></a></td>
 					<td>
 						<button name="update" type="submit" value="update" class="btn btn-primary btn-hg">
 							<fmt:message key="button.update" />
