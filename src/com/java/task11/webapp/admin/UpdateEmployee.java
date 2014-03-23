@@ -35,6 +35,12 @@ public class UpdateEmployee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		if (request.getParameter("notification")==null) 
+			{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(contextPath + "/admin/users");
+			return;
+			}
 		int id = Integer.parseInt(request.getParameter("notification"));
 		try {
 			User userToEdit = new UserService().getByID(id);
