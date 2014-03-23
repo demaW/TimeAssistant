@@ -56,7 +56,20 @@
 				</tr>
 				<tr>
 					<td><fmt:message key="user.role" /></td>
-					<td><input type="text" name="role" value="${userToEdit.roleId}"></td>
+					<td><c:choose>
+					  <c:when test="${userToEdit.roleId=='1'}">
+					  user
+					  </c:when>
+					
+					  <c:when test="${userToEdit.roleId=='2'}">
+					   manger
+					  </c:when>
+					
+					  <c:when test="${userToEdit.roleId=='3'}">
+					   admin
+					  </c:when>
+					
+					</c:choose></td>
 					<td><select name="role">
 
 							<option value="user">user</option>

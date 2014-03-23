@@ -1,3 +1,4 @@
+<%@page import="com.java.task11.model.User"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-
+<jsp:useBean id="roles" scope="page" class="com.java.task11.model.UserRole" />
 <div class="panel panel-primary" >
 <form action="${pageContext.request.contextPath}/admin/updateemployee" name="updateEmployee" method="get">
 		<TABLE class="table"   >
@@ -37,7 +38,7 @@
 			</thead>
 			<tbody>
 
-			<c:forEach var="user" items="${users}">
+			<c:forEach var="user" items="${users}" >
 				
 				<tr>
 					<td>${user.id}</td>
@@ -45,7 +46,21 @@
 					<td>${user.firstName}</td>
 					<td>${user.lastName}</td>
 					<td>${user.email}</td>
-					<td>${user.roleId}</td>
+					<td> <c:choose>
+					  <c:when test="${user.roleId=='1'}">
+					  user
+					  </c:when>
+					
+					  <c:when test="${user.roleId=='2'}">
+					   manger
+					  </c:when>
+					
+					  <c:when test="${user.roleId=='3'}">
+					   admin
+					  </c:when>
+					
+					</c:choose>
+					</td>
 					<td>${user.position}</td>
 					<td>${user.salaryRate}</td>
 					<td><input type="radio" name="notification" value="${user.id}"></td>
