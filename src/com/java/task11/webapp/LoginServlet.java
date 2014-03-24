@@ -28,16 +28,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("logout") != null) {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            log.info("Logged out: " + user.getFirstName() + " " + user.getLastName());
-//            remove current user from session
-            session.removeAttribute("user");
-            response.sendRedirect("/login");
-        } else {
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
-        }
     }
 
     @Override
@@ -62,11 +53,14 @@ public class LoginServlet extends HttpServlet {
                 String url = session.getAttribute("waitUrl").toString();
                 response.sendRedirect(url);
             } else {
-                // todo send redirect to next step
+            	String contextPath = request.getContextPath();
             	
             	if (user.getRoleId().equals(1)) { // 1=user role
-            		String contextPath = request.getContextPath();
             		response.sendRedirect(contextPath + "/user/tasks");
+            	} if (user.getRoleId().equals(2)) { // 2 manager role
+            		response.sendRedirect(contextPath + "/pages/manager/projects");
+            	} if (user.getRoleId().equals(3)) { // 3 admin role
+            		response.sendRedirect(contextPath + "/admin/users");
             	}
             	
             }
