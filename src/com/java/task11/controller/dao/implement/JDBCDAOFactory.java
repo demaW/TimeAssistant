@@ -1,6 +1,7 @@
 package com.java.task11.controller.dao.implement;
 
 import com.java.task11.controller.dao.factory.DAOFactory;
+import com.java.task11.controller.dao.factory.HourDAO;
 import com.java.task11.controller.dao.factory.ProjectDAO;
 import com.java.task11.controller.dao.factory.RoleDAO;
 import com.java.task11.controller.dao.factory.TaskDAO;
@@ -26,5 +27,9 @@ public class JDBCDAOFactory extends DAOFactory {
 
 	public TeamDAO getTeamDAO() {
 		return new TeamDAOImpl();
+	}
+
+	public HourDAO getHourDAO() {
+		return new HourDAOImpl();
 	}
 }

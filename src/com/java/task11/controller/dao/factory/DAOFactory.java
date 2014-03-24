@@ -29,5 +29,7 @@ public abstract class DAOFactory {
 	public abstract TaskDAO getTaskDAO();
 
 	public abstract TeamDAO getTeamDAO();
+	
+	public abstract HourDAO getHourDAO();
 
 }
