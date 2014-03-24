@@ -58,15 +58,15 @@
 					<td><fmt:message key="user.role" /></td>
 					<td><c:choose>
 					  <c:when test="${userToEdit.roleId=='1'}">
-					  user
+					 	${requestScope.roles[0].roleName}
 					  </c:when>
 					
 					  <c:when test="${userToEdit.roleId=='2'}">
-					   manger
+					 	${requestScope.roles[0].roleName}
 					  </c:when>
 					
 					  <c:when test="${userToEdit.roleId=='3'}">
-					   admin
+					   	${requestScope.roles[0].roleName}
 					  </c:when>
 					
 					</c:choose></td>
