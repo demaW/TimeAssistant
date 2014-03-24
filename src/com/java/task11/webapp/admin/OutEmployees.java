@@ -38,7 +38,6 @@ public class OutEmployees extends HttpServlet {
 	List<User> users = null;
 	try {
 		users = new UserService().getListOfObjects();
-		roles = new RoleService().getListOfObjects();
 	} catch (DAOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
