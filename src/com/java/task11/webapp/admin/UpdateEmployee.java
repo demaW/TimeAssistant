@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.service.RoleService;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
+import com.java.task11.model.UserRole;
 import com.java.task11.webapp.EmailUtil;
 
 /**
@@ -44,8 +46,9 @@ public class UpdateEmployee extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("notification"));
 		try {
 			User userToEdit = new UserService().getByID(id);
+			UserRole role = new RoleService().getByID(userToEdit.getRoleId());
 			
-			
+			request.setAttribute("role", role);
 			request.setAttribute("userToEdit", userToEdit);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block

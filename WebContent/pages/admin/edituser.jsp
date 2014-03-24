@@ -56,25 +56,11 @@
 				</tr>
 				<tr>
 					<td><fmt:message key="user.role" /></td>
-					<td><c:choose>
-					  <c:when test="${userToEdit.roleId=='1'}">
-					 	${requestScope.roles[0].roleName}
-					  </c:when>
-					
-					  <c:when test="${userToEdit.roleId=='2'}">
-					 	${requestScope.roles[0].roleName}
-					  </c:when>
-					
-					  <c:when test="${userToEdit.roleId=='3'}">
-					   	${requestScope.roles[0].roleName}
-					  </c:when>
-					
-					</c:choose></td>
 					<td><select name="role">
 
-							<option value="user">user</option>
-							<option value="manager">manager</option>
-							<option value="admin">admin</option>
+							<option value="user" ${role.roleName == 'user' ? 'selected' :''}>user</option>
+							<option value="manager"${role.roleName == 'manager' ? 'selected' :''}>manager</option>
+							<option value="admin" ${role.roleName == 'admin' ? 'selected' :''}>admin</option>
 					</select></td>
 				</tr>
 				<tr>
