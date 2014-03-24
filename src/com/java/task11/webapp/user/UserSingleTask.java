@@ -1,7 +1,9 @@
 package com.java.task11.webapp.user;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Time;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,7 +60,10 @@ public class UserSingleTask extends HttpServlet {
 			} else {
 				task.setState("FINISHED");
 			}
-
+			
+			java.sql.Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
+			task.setFinished(dateNow);
+			
 			taskService.update(task);
 
 			String contextPath = request.getContextPath();
