@@ -107,10 +107,15 @@ public class UpdateEmployee extends HttpServlet {
 		String password = request.getParameter("password");
 		String position = request.getParameter("position");
 		Double salaryRate = Double.parseDouble(request.getParameter("salaryRate"));
+		String role = request.getParameter("role"); 
 		int roleId = 1;
-		if (request.getParameter("role")!= null && !request.getParameter("role").equals("")){
-		 roleId = Integer.parseInt(request.getParameter("role"));}
-		
+	        if (role.equals("user")) {
+				roleId = 1;
+			}else if (role.equals("manager")) {
+				roleId = 2;
+			} else if (role.equals("admin")) {
+				roleId = 3;
+			}
 		
 		UserService employeeService = new UserService();
 		User user = new User();
