@@ -19,8 +19,7 @@ public class LoginFilter implements Filter {
 
 		if (session == null || session.getAttribute("user") == null) {
 			httpRequest.setAttribute("loginErrors", "Login please");
-			httpRequest.getRequestDispatcher("/pages/login.jsp").forward(
-					httpRequest, httpResponse);
+			httpRequest.getRequestDispatcher("/pages/login.jsp").forward(httpRequest, httpResponse);
 		} else {
 			User user = (User) session.getAttribute("user");
 			if (httpRequest.getRequestURI().contains("/admin/")) {
@@ -29,8 +28,7 @@ public class LoginFilter implements Filter {
 				} else {
 					httpRequest
 							.setAttribute("loginErrors", "You are not admin");
-					httpRequest.getRequestDispatcher("/pages/login.jsp")
-							.forward(httpRequest, httpResponse);
+					httpRequest.getRequestDispatcher("/pages/login.jsp").forward(httpRequest, httpResponse);
 				}
 			} else if (httpRequest.getRequestURI().contains("/manager/")) {
 				if (user.getRoleId().equals(2)) {
@@ -46,8 +44,7 @@ public class LoginFilter implements Filter {
 					chain.doFilter(request, response);
 				} else {
 					httpRequest.setAttribute("loginErrors", "You are not user");
-					httpRequest.getRequestDispatcher("/pages/login.jsp")
-							.forward(httpRequest, httpResponse);
+					httpRequest.getRequestDispatcher("/pages/login.jsp").forward(httpRequest, httpResponse);
 				}
 			} else {
 				chain.doFilter(request, response);

@@ -31,7 +31,7 @@
 				<li><a href="#">Home</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${user.firstName} | <a
+				Looged in as ${sessionScope.user.firstName} | <a
 					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
