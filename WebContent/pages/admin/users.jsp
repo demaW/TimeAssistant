@@ -48,15 +48,15 @@
 					<td>${user.email}</td>
 					<td> <c:choose>
 					  <c:when test="${user.roleId=='1'}">
-					  user
+					  	${requestScope.roles[0].roleName}
 					  </c:when>
 					
 					  <c:when test="${user.roleId=='2'}">
-					   manger
+					   	${requestScope.roles[1].roleName}
 					  </c:when>
 					
 					  <c:when test="${user.roleId=='3'}">
-					   admin
+					   	${requestScope.roles[2].roleName}
 					  </c:when>
 					
 					</c:choose>
@@ -70,11 +70,11 @@
 		
 		
 </c:forEach>
-
 			<a href="${pageContext.request.contextPath}/admin/adduser"> <fmt:message key="button.addUser"/></a>
 			</tbody>
 			
 		</TABLE>
+	
 		<button type="submit" name="edit" class = 'btn btn-success pull-right'  style= "margin-right: 5%"> <fmt:message key="button.edit" /></button>
 			</form>
 		</div>
