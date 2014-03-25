@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
                     if (user.getRoleId().equals(1)) { // 1=user role
                         response.sendRedirect(contextPath + "/user/tasks");
                     } if (user.getRoleId().equals(2)) { // 2 manager role
-                        response.sendRedirect(contextPath + "/pages/manager/projects");
+                        response.sendRedirect(contextPath + "/manager/projects");
                     } if (user.getRoleId().equals(3)) { // 3 admin role
                         response.sendRedirect(contextPath + "/admin/users");
                     }
