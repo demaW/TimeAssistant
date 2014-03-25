@@ -19,7 +19,7 @@ import java.io.IOException;
  * @author nlelyak
  * @version 1.00 2014-03-06
  */
-@WebServlet("/login")
+@WebServlet( urlPatterns = {"/login","/admin/login", "/user/login", "/manager/login"})
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(LoginServlet.class);

@@ -28,6 +28,7 @@ public class LoginFilter implements Filter {
 				} else {
 					httpRequest
 							.setAttribute("loginErrors", "You are not admin");
+					
 					httpRequest.getRequestDispatcher("/login").forward(httpRequest, httpResponse);
 				}
 			} else if (httpRequest.getRequestURI().contains("/manager/")) {
@@ -45,6 +46,7 @@ public class LoginFilter implements Filter {
 				} else {
 					httpRequest.setAttribute("loginErrors", "You are not user");
 					httpRequest.getRequestDispatcher("/login").forward(httpRequest, httpResponse);
+					
 				}
 			} else {
 				chain.doFilter(request, response);
