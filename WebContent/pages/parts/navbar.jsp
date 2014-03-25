@@ -25,33 +25,30 @@
 
         <% if (request.getSession().getAttribute("user") != null) { %>
         <div class="navbar-right logged-user">
-            <%--<div class="profile-image flow-img" style="background-image:url(../img/users/${user.image})"></div>--%>
-            <p>${user.firstName} ${user.lastName}</p>
+            <p>${sessionScope.user.firstName} ${sessionScope.user.lastName}</p>
             <ul class="nav navbar-nav navbar-right">
-                <c:if test="${user.role} eq admin">
+                <c:if test="${sessionScope.user.roleId} == 3">
                     <li>
-                        <%--todo link to some admin functionality ???--%>
-                        <a href="<c:url value="/admin/userstable"/>"><fmt:message key="nav.dropdown.admin"/></a>
+                        <a href="<c:url value="/admin/users"/>"><fmt:message key="nav.dropdown.admin"/></a>
                     </li>
                     <li class="divider"></li>
                 </c:if>
-                <c:if test="${user.role} eq manager">
+                <c:if test="${sessionScope.user.roleId} == 2">
                     <li>
-                        <%--todo link to some manager features ??? --%>
-                        <a href="<c:url value="/manager/projects"/>"><fmt:message key="nav.dropdown.manager"/></a>
+                        <a href="<c:url value="/manager/projectstable"/>"><fmt:message key="nav.dropdown.manager"/></a>
                     </li>
                     <li class="divider"></li>
                 </c:if>
 
                 <%--edit profile link--%>
                 <li>
-                    <a href="<c:url value="/edit?edit=${user.id}"/>"><fmt:message key="nav.dropdown.profile"/></a>
+                    <a href="<c:url value="/edit?edit=${sessionScope.user.id}"/>"><fmt:message key="nav.dropdown.profile"/></a>
                 </li>
                 <li class="divider"></li>
 
                 <%--log out link--%>
                 <li>
-                    <a href="<c:url value="/login?logout=${user.id}"/>"><fmt:message key="nav.dropdown.logout"/></a>
+                    <a href="<c:url value="/login?logout=${sessionScope.user.id}"/>"><fmt:message key="nav.dropdown.logout"/></a>
                 </li>
                 <li class="lang">
                     <a href="<%= request.getContextPath()%>?language=${language == 'uk' ? 'en' : 'uk'}">
@@ -76,5 +73,5 @@
             </li>
         </ul>
         <% } %>
-    </div><!-- /.navbar-collapse -->
-</nav><!-- /navbar -->
+    </div>
+</nav>

@@ -85,7 +85,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
 		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
 			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
+		} else if (!whereStatement.startsWith(" ")) {
 			whereStatement = " " + whereStatement;
 		}
 
@@ -192,14 +192,14 @@ public class ProjectDAOImpl implements ProjectDAO {
 								DBUtil.selectNull(
 										tableName,
 										allColumns,
-										Arrays.asList(new String[] { "project_name" })));
+										Arrays.asList("project_name")));
 			} else {
 				ps = getConn()
 						.prepareStatement(
 								DBUtil.select(
 										tableName,
 										allColumns,
-										Arrays.asList(new String[] { "project_name" })));
+										Arrays.asList("project_name")));
 				DBUtil.bind(ps, 1, projectName);
 			}
 

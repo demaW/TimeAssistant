@@ -8,13 +8,11 @@ public abstract class DAOFactory {
 		try {
 			if (null == instance) {
 				instance = (DAOFactory) Class
-						.forName(
-								"com.java.task11.controller.dao.implement.JDBCDAOFactory")
+						.forName("com.java.task11.controller.dao.implement.JDBCDAOFactory")
 						.newInstance();
 			}
 		} catch (Exception e) {
-			throw new DAOException("Could not create the DAOFactory instance",
-					e);
+			throw new DAOException("Could not create the DAOFactory instance", e);
 		}
 
 		return instance;

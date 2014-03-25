@@ -11,40 +11,39 @@
 
 <html lang="${language}">
 <head>
-<title>User Profile</title>
-<jsp:include page="import.jsp" />
+    <title>User Profile</title>
+    <jsp:include page="import.jsp" />
 
-<!-- GRAPH SCRIPT -->
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-	google.load("visualization", "1", {
-		packages : [ "corechart" ]
-	});
-	google.setOnLoadCallback(drawChart);
-	function drawChart() {
+    <!-- GRAPH SCRIPT -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {
+            packages : [ "corechart" ]
+        });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
 
-		var values = [ [ 'Task', 'Tasks per Day' ] ];
+            var values = [ [ 'Task', 'Tasks per Day' ] ];
 
-		var table = document.getElementById('data');
-		for (var r = 0, n = table.rows.length; r < n; r++) {
-			values.push([ table.rows[r].cells[0].innerHTML,
-					parseInt(table.rows[r].cells[1].innerHTML, 10) ]);
-		}
+            var table = document.getElementById('data');
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                values.push([ table.rows[r].cells[0].innerHTML,
+                        parseInt(table.rows[r].cells[1].innerHTML, 10) ]);
+            }
 
-		var data = google.visualization.arrayToDataTable(values);
+            var data = google.visualization.arrayToDataTable(values);
 
-		var options = {
-			title : 'My tasks on today',
-			pieHole : 0.4,
-		};
+            var options = {
+                title : 'My tasks on today',
+                pieHole : 0.4,
+            };
 
-		var chart = new google.visualization.PieChart(document
-				.getElementById('donutchart'));
-		chart.draw(data, options);
-		table.style.display = "none";
-	}
-</script>
-
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('donutchart'));
+            chart.draw(data, options);
+            table.style.display = "none";
+        }
+    </script>
 </head>
 
 <body>
@@ -68,14 +67,11 @@
 					href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${user.firstName} | <a
+				Looged in as ${sessionScope.user.firstName} | <a
 					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
-		<!-- /.navbar-collapse -->
 	</nav>
-	<!-- /navbar -->
-
 	<br />
 
 	<!-- CONTENT -->
@@ -101,6 +97,5 @@
 			</tr>
 		</tbody>
 	</table>
-
 </body>
 </html>

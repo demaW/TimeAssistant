@@ -9,8 +9,7 @@ public interface RoleDAO {
 
 	public List<UserRole> selectAll() throws DAOException;
 
-	public List<UserRole> select(String whereStatement)
-			throws DAOException;
+	public List<UserRole> select(String whereStatement) throws DAOException;
 
 	public int update(UserRole obj) throws DAOException;
 

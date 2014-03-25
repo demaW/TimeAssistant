@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -11,12 +10,11 @@
 
 <html lang="${language}">
 <head>
-<title>User Profile</title>
-<jsp:include page="import.jsp" />
+    <title>User Profile</title>
+    <jsp:include page="import.jsp" />
 </head>
 
 <body>
-
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
@@ -35,18 +33,14 @@
 				<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${user.firstName} | <a
+				Looged in as ${sessionScope.user.firstName} | <a
 					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
-		<!-- /.navbar-collapse -->
 	</nav>
-	<!-- /navbar -->
-
 	<br />
 
 	<!-- CONTENT -->
-
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/user/userEditProfile"
 			method="post">
@@ -54,17 +48,17 @@
 				<tr>
 					<td>First Name:</td>
 					<td><input type="text" name="firstName" required
-						value="${user.firstName}"></td>
+						value="${sessionScope.user.firstName}"></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
 					<td><input type="text" name="lastName" required
-						value="${user.lastName}"></td>
+						value="${sessionScope.user.lastName}"></td>
 				</tr>
 				<tr>
 					<td>email:</td>
 					<td><input type="text" name="email"
-						pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${user.email}"></td>
+						pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${sessionScope.user.email}"></td>
 				</tr>
 				<tr>
 					<td align="right"><a
@@ -78,6 +72,5 @@
 			</table>
 		</form>
 	</div>
-
 </body>
 </html>

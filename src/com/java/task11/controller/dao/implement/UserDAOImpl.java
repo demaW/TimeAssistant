@@ -1,5 +1,9 @@
 package com.java.task11.controller.dao.implement;
 
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.dao.factory.UserDAO;
+import com.java.task11.model.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,10 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.dao.factory.UserDAO;
-import com.java.task11.model.User;
 
 public class UserDAOImpl implements UserDAO {
 	protected static List<String> pkColumns = new ArrayList<String>();
@@ -88,7 +88,7 @@ public class UserDAOImpl implements UserDAO {
 
 		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
 			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
+		} else if (!whereStatement.startsWith(" ")) {
 			whereStatement = " " + whereStatement;
 		}
 
@@ -191,11 +191,11 @@ public class UserDAOImpl implements UserDAO {
 			if (null == email) {
 				ps = getConn().prepareStatement(
 						DBUtil.selectNull(tableName, allColumns,
-								Arrays.asList(new String[] { "email" })));
+								Arrays.asList("email")));
 			} else {
 				ps = getConn().prepareStatement(
 						DBUtil.select(tableName, allColumns,
-								Arrays.asList(new String[] { "email" })));
+								Arrays.asList("email")));
 				DBUtil.bind(ps, 1, email);
 			}
 
@@ -221,11 +221,11 @@ public class UserDAOImpl implements UserDAO {
 			if (null == position) {
 				ps = getConn().prepareStatement(
 						DBUtil.selectNull(tableName, allColumns,
-								Arrays.asList(new String[] { "position" })));
+								Arrays.asList("position")));
 			} else {
 				ps = getConn().prepareStatement(
 						DBUtil.select(tableName, allColumns,
-								Arrays.asList(new String[] { "position" })));
+								Arrays.asList("position")));
 				DBUtil.bind(ps, 1, position);
 			}
 

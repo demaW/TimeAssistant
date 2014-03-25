@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -11,12 +10,11 @@
 
 <html lang="${language}">
 <head>
-<title>Add task</title>
-<jsp:include page="/pages/user/import.jsp" />
+    <title>Add task</title>
+    <jsp:include page="/pages/user/import.jsp" />
 </head>
 
 <body>
-
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
@@ -32,13 +30,11 @@
 				<li class="active"><a href="#">Personal page</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${user.firstName} | <a
+				Looged in as ${sessionScope.user.firstName} | <a
 					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
-		<!-- /.navbar-collapse -->
 	</nav>
-	<!-- /navbar -->
 
 	<!-- PAGE NAV -->
 	<ul class="nav nav-tabs nav-justified">
@@ -47,7 +43,6 @@
 	<br />
 
 	<!-- CONTENT -->
-
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/manager/addTask"
 			method="post">

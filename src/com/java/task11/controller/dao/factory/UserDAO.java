@@ -9,8 +9,7 @@ public interface UserDAO {
 
 	public List<User> selectAll() throws DAOException;
 
-	public List<User> select(String whereStatement)
-			throws DAOException;
+	public List<User> select(String whereStatement) throws DAOException;
 
 	public int update(User obj) throws DAOException;
 

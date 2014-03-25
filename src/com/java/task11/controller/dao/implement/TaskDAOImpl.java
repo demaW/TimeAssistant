@@ -1,5 +1,9 @@
 package com.java.task11.controller.dao.implement;
 
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.dao.factory.TaskDAO;
+import com.java.task11.model.Task;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,10 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.dao.factory.TaskDAO;
-import com.java.task11.model.Task;
 
 public class TaskDAOImpl implements TaskDAO {
 	protected static List<String> pkColumns = new ArrayList<String>();
@@ -91,7 +91,7 @@ public class TaskDAOImpl implements TaskDAO {
 
 		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
 			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
+		} else if (!whereStatement.startsWith(" ")) {
 			whereStatement = " " + whereStatement;
 		}
 
@@ -194,11 +194,11 @@ public class TaskDAOImpl implements TaskDAO {
 			if (null == employeeId) {
 				ps = getConn().prepareStatement(
 						DBUtil.selectNull(tableName, allColumns,
-								Arrays.asList(new String[] { "employee_id" })));
+								Arrays.asList("employee_id")));
 			} else {
 				ps = getConn().prepareStatement(
 						DBUtil.select(tableName, allColumns,
-								Arrays.asList(new String[] { "employee_id" })));
+								Arrays.asList("employee_id")));
 				DBUtil.bind(ps, 1, employeeId);
 			}
 
@@ -224,11 +224,11 @@ public class TaskDAOImpl implements TaskDAO {
 			if (null == projectId) {
 				ps = getConn().prepareStatement(
 						DBUtil.selectNull(tableName, allColumns,
-								Arrays.asList(new String[] { "project_id" })));
+								Arrays.asList("project_id")));
 			} else {
 				ps = getConn().prepareStatement(
 						DBUtil.select(tableName, allColumns,
-								Arrays.asList(new String[] { "project_id" })));
+								Arrays.asList("project_id")));
 				DBUtil.bind(ps, 1, projectId);
 			}
 

@@ -1,28 +1,19 @@
 package com.java.task11.controller.dao.implement;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Time;
-import java.sql.Types;
+import org.apache.log4j.Logger;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import com.java.task11.webapp.LoginServlet;
 
 public class DBUtil {
 	private final static String driver = "com.mysql.jdbc.Driver";
 	private final static String url = "jdbc:mysql://localhost:3306/time_assistant?characterEncoding=utf8";
 	private final static String userName = "root";
-	private final static String password = "pass";
+	private final static String password = "pass"; //pass
 	private static Connection conn = null;
-	private static Logger log = Logger.getLogger(LoginServlet.class);
+	private static Logger log = Logger.getLogger(DBUtil.class);
 
 	public static void close(ResultSet res) {
 		close(null, res);
@@ -33,26 +24,27 @@ public class DBUtil {
 			if (res != null) {
 				res.close();
 			}
-		} catch (SQLException ex) {
+		} catch (SQLException ignored) {
+            log.error(ignored);
 		} finally {
 			try {
 				if (stmt != null) {
 					stmt.close();
 				}
-			} catch (SQLException ex) {
+			} catch (SQLException ignored) {
+                log.error(ignored);
 			}
 		}
 	}
 
 	protected static Connection getConnection() {
 		 try {
-		 Class.forName(driver);
-		 conn = DriverManager.getConnection(url, userName, password);
+             Class.forName(driver);
+             conn = DriverManager.getConnection(url, userName, password);
 		 } catch (ClassNotFoundException | SQLException e) {
-		 log.error("problem with driver", e);
+		    log.error("problem with driver", e);
 		 }
 		 return conn;
-
 	}
 
 	protected static String getQuestionMarks(int size) {
@@ -70,8 +62,7 @@ public class DBUtil {
 	}
 
 	public static String delete(String tableName, List<String> pkColumns) {
-		StringBuffer buf = new StringBuffer("DELETE FROM ").append(tableName)
-				.append(" WHERE ");
+		StringBuffer buf = new StringBuffer("DELETE FROM ").append(tableName).append(" WHERE ");
 
 		for (int i = 0; i < pkColumns.size(); i++) {
 			if (i > 0) {
@@ -88,8 +79,7 @@ public class DBUtil {
 		return select(tableName, selectColumns, new ArrayList<String>());
 	}
 
-	public static String select(String tableName, List<String> selectColumns,
-			List<String> whereColumns) {
+	public static String select(String tableName, List<String> selectColumns, List<String> whereColumns) {
 		StringBuffer buf = new StringBuffer("SELECT ");
 
 		for (int i = 0; i < selectColumns.size(); i++) {
@@ -175,8 +165,7 @@ public class DBUtil {
 	public static String insert(String tableName, List<String> pkColumns,
 			List<String> stdColumns) {
 		List<String> allColumns = new ArrayList<String>(pkColumns);
-		StringBuffer buf = new StringBuffer("INSERT INTO ").append(tableName)
-				.append(" ( ");
+		StringBuffer buf = new StringBuffer("INSERT INTO ").append(tableName).append(" ( ");
 
 		allColumns.addAll(stdColumns);
 
@@ -206,14 +195,14 @@ public class DBUtil {
 			throws SQLException {
 		int val = rs.getInt(col);
 
-		return rs.wasNull() ? null : new Integer(val);
+		return rs.wasNull() ? null : val;
 	}
 
 	public static Double getDouble(ResultSet rs, String col)
 			throws SQLException {
 		double val = rs.getDouble(col);
 
-		return rs.wasNull() ? null : new Double(val);
+		return rs.wasNull() ? null : val;
 	}
 
 	public static void bind(PreparedStatement ps, int pos, double val)
@@ -226,7 +215,7 @@ public class DBUtil {
 		if (null == val) {
 			ps.setNull(pos, Types.DOUBLE);
 		} else {
-			ps.setDouble(pos, val.doubleValue());
+			ps.setDouble(pos, val);
 		}
 	}
 
@@ -248,7 +237,7 @@ public class DBUtil {
 		if (null == val) {
 			ps.setNull(pos, Types.INTEGER);
 		} else {
-			ps.setInt(pos, val.intValue());
+			ps.setInt(pos, val);
 		}
 	}
 

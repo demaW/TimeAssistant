@@ -14,6 +14,7 @@
     <title>add project</title>
     <jsp:include page="header.jsp" />
 </head>
+
 <body>
 	<div class="container">
 		<form action="/TimeAssistant/pages/manager/addproject" method="post">

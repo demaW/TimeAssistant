@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -11,12 +10,11 @@
 
 <html lang="${language}">
 <head>
-<title>User Task</title>
-<jsp:include page="import.jsp" />
+    <title>User Task</title>
+    <jsp:include page="import.jsp" />
 </head>
 
 <body>
-
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
@@ -35,13 +33,10 @@
 				<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${userName} <a href="#logout">Log out</a>
+				Looged in as ${sessionScope.userName} <a href="#logout">Log out</a>
 			</div>
 		</div>
-		<!-- /.navbar-collapse -->
 	</nav>
-	<!-- /navbar -->
-
 	<br />
 
 	<!-- CONTENT -->

@@ -27,7 +27,7 @@
                 <div class="login-form col-md-4 col-sm-8 col-xs-12 col-md-offset-1 col-sm-offset-1">
                     <form action="registration" method="post">
                         <div class="form-group">
-                            <c:forEach items="${registrationErrors}" var="error">
+                            <c:forEach items="${requestScope.registrationErrors}" var="error">
                                 <p class="error">${error}</p>
                             </c:forEach>
                         </div>

@@ -6,9 +6,6 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String email;
@@ -86,14 +83,12 @@ public class User implements Serializable {
 	public void setSalaryRate(Double salaryRate) {
 		this.salaryRate = salaryRate;
 	}
+
 	public String toString(){
-		return "Usrename: " + getFirstName() + " "+ getLastName() +"\n"+
+		return "Username: " + getFirstName() + " "+ getLastName() +"\n"+
 				"email: " + getEmail() +"\n"+
 				"password: " + getPassword()+"\n"+
 				"position: " + getPosition() +"\n"+
 				"salary rate: " + getSalaryRate();
-		
-		
-		
 	}
 }

@@ -1,12 +1,12 @@
 package com.java.task11.controller.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.Team;
 import com.java.task11.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserService implements IBaseService<User> {
 
@@ -39,8 +39,7 @@ public class UserService implements IBaseService<User> {
 		if (DAOFactory.getInstance().getUserDAO().getByEmail(email).isEmpty()) {
 			return null;
 		} else {
-			return DAOFactory.getInstance().getUserDAO().getByEmail(email)
-					.get(0);
+			return DAOFactory.getInstance().getUserDAO().getByEmail(email).get(0);
 		}
 	}
 

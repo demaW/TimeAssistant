@@ -10,8 +10,7 @@ public interface ProjectDAO {
 
 	public List<Project> selectAll() throws DAOException;
 
-	public List<Project> select(String whereStatement)
-			throws DAOException;
+	public List<Project> select(String whereStatement) throws DAOException;
 
 	public int update(Project obj) throws DAOException;
 

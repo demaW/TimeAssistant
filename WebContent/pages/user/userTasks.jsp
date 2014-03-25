@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -11,53 +10,51 @@
 
 <html lang="${language}">
 <head>
-<title>User Tasks</title>
-<jsp:include page="import.jsp" />
+    <title>User Tasks</title>
+    <jsp:include page="import.jsp" />
 
 <!-- Timeline Script -->
-
 <script type="text/javascript"
 	src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
        'version':'1','packages':['timeline']}]}"></script>
-<script type="text/javascript">
-	google.setOnLoadCallback(drawChart);
+    <script type="text/javascript">
+        google.setOnLoadCallback(drawChart);
 
-	function drawChart() {
-		var container = document.getElementById('timeline');
+        function drawChart() {
+            var container = document.getElementById('timeline');
 
-		var chart = new google.visualization.Timeline(container);
+            var chart = new google.visualization.Timeline(container);
 
-		var dataTable = new google.visualization.DataTable();
+            var dataTable = new google.visualization.DataTable();
 
-		dataTable.addColumn({
-			type : 'string',
-			id : 'Task'
-		});
-		dataTable.addColumn({
-			type : 'date',
-			id : 'Start'
-		});
-		dataTable.addColumn({
-			type : 'date',
-			id : 'End'
-		});
+            dataTable.addColumn({
+                type : 'string',
+                id : 'Task'
+            });
+            dataTable.addColumn({
+                type : 'date',
+                id : 'Start'
+            });
+            dataTable.addColumn({
+                type : 'date',
+                id : 'End'
+            });
 
-		var table = document.getElementById('data');
+            var table = document.getElementById('data');
 
-		for (var r = 0, n = table.rows.length; r < n; r++) {
-			dataTable.addRows([ [ table.rows[r].cells[0].innerHTML,
-					new Date(table.rows[r].cells[1].innerHTML),
-					new Date(table.rows[r].cells[2].innerHTML) ] ]);
-		}
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                dataTable.addRows([ [ table.rows[r].cells[0].innerHTML,
+                        new Date(table.rows[r].cells[1].innerHTML),
+                        new Date(table.rows[r].cells[2].innerHTML) ] ]);
+            }
 
-		var tableHeight = table.rows.length * 51 + 40;
-		document.getElementById('timeline').style.height = tableHeight + "px";
+            var tableHeight = table.rows.length * 51 + 40;
+            document.getElementById('timeline').style.height = tableHeight + "px";
 
-		chart.draw(dataTable);
-		table.style.display = "none";
-	}
-</script>
-
+            chart.draw(dataTable);
+            table.style.display = "none";
+        }
+    </script>
 </head>
 
 <body>
@@ -79,14 +76,11 @@
 				<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${user.firstName} | <a
+				Looged in as ${sessionScope.user.firstName} | <a
 					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
-		<!-- /.navbar-collapse -->
 	</nav>
-	<!-- /navbar -->
-
 	<br />
 
 	<!-- CONTENT -->
@@ -126,7 +120,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="task" items="${tasks}">
+					<c:forEach var="task" items="${requestScope.tasks}">
 						<tr>
 							<td><c:out value="${task.taskId}"></c:out></td>
 							<td><c:out value="${task.title}"></c:out></td>
@@ -153,7 +147,7 @@
 	<!-- CHART DATA -->
 	<table id="data">
 		<tbody>
-			<c:forEach var="task" items="${tasks}">
+			<c:forEach var="task" items="${requestScope.tasks}">
 				<tr>
 					<td>${task.title}</td>
 					<td><fmt:formatDate value="${task.startDate}"
@@ -164,6 +158,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
 </body>
 </html>

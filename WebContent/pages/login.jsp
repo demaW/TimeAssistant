@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:set var="language"
        value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
        scope="session"/>
@@ -25,7 +26,7 @@
                 <div class="login-form col-md-4 col-sm-8 col-xs-12 col-md-offset-1 col-sm-offset-1">
                     <form action="login" method="post">
                         <div class="form-group">
-                            <p class="error">${loginErrors}</p>
+                            <p class="error">${requestScope.loginErrors}</p>
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="email" placeholder="<fmt:message key="login.email"/>" name="email"
@@ -42,7 +43,7 @@
                                     type="submit" value="Submit">
                                 <fmt:message key="button.submit"/>
                             </button>
-                            <a class="login-link" href="<c:url value="/pages/registration"/>"><fmt:message key="login.singup"/></a>
+                            <a class="login-link" href="<c:url value="/registration"/>"><fmt:message key="login.singup"/></a>
                         </div>
                     </form>
                 </div>

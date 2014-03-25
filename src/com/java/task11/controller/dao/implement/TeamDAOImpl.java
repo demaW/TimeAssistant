@@ -83,7 +83,7 @@ public class TeamDAOImpl implements TeamDAO {
 
 		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
 			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
+		} else if (!whereStatement.startsWith(" ")) {
 			whereStatement = " " + whereStatement;
 		}
 
@@ -186,11 +186,11 @@ public class TeamDAOImpl implements TeamDAO {
 			if (null == employeeId) {
 				ps = getConn().prepareStatement(
 						DBUtil.selectNull(tableName, allColumns,
-								Arrays.asList(new String[] { "employee_id" })));
+								Arrays.asList("employee_id")));
 			} else {
 				ps = getConn().prepareStatement(
 						DBUtil.select(tableName, allColumns,
-								Arrays.asList(new String[] { "employee_id" })));
+								Arrays.asList("employee_id")));
 				DBUtil.bind(ps, 1, employeeId);
 			}
 
@@ -216,11 +216,11 @@ public class TeamDAOImpl implements TeamDAO {
 			if (null == projectId) {
 				ps = getConn().prepareStatement(
 						DBUtil.selectNull(tableName, allColumns,
-								Arrays.asList(new String[] { "project_id" })));
+								Arrays.asList("project_id")));
 			} else {
 				ps = getConn().prepareStatement(
 						DBUtil.select(tableName, allColumns,
-								Arrays.asList(new String[] { "project_id" })));
+								Arrays.asList("project_id")));
 				DBUtil.bind(ps, 1, projectId);
 			}
 

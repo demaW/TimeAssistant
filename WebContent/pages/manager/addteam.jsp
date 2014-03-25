@@ -13,6 +13,7 @@
     <title>add team</title>
     <jsp:include page="header.jsp" />
 </head>
+
 <body>
 	<div class="container">
 		<form action="#" method="post">

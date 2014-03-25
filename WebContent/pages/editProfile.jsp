@@ -36,10 +36,10 @@
                     <ul class="dropdown-menu">
                         <li>
                             <%--todo pages for current project + curr. tasks for user--%>
-                            <a href="/projects"><fmt:message key="projects.title"/></a>
+                            <a href="${pageContext.request.contextPath}/projects"><fmt:message key="projects.title"/></a>
                         </li>
                         <li>
-                            <a href="/tasks"><fmt:message key="tasks.title"/></a>
+                            <a href="${pageContext.request.contextPath}/tasks"><fmt:message key="tasks.title"/></a>
                         </li>
                     </ul>
                 </li>
@@ -67,61 +67,38 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>${user.id}</td>
-                            <td>${user.firstName}</td>
-                            <td>${user.lastName}</td>
-                            <td>${user.email}</td>
-                            <td>${user.password}</td>
-                            <td>${user.position}</td>
-                                <%--edit photo--%>
-                            <td>
-                                <span class="fui-photo modal-icon" data-toggle="modal"
-                                    data-target="#modalImage${user.id}"></span>
-
-                                <div class="modal fade" id="modalImage${user.id}" tabindex="-1" userRole="dialog"
-                                     aria-labelledby="modalImageLabel${user.id}" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">${user.firstName} ${user.lastName}</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <img src="../img/employees/${user.image}">
-
-                                                <p>${user.image}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>${sessionScope.user.id}</td>
+                            <td>${sessionScope.user.firstName}</td>
+                            <td>${sessionScope.user.lastName}</td>
+                            <td>${sessionScope.user.email}</td>
+                            <td>${sessionScope.user.password}</td>
+                            <td>${sessionScope.user.position}</td>
                                 <%--edit profile pop up window--%>
                             <td>
                                     <span class="fui-new modal-icon" data-toggle="modal"
-                                          data-target="#modalEdit${user.id}"></span>
+                                          data-target="#modalEdit${sessionScope.user.id}"></span>
 
-                                <div class="modal fade" id="modalEdit${user.id}" tabindex="-1" userRole="dialog"
-                                     aria-labelledby="modalEditLabel${user.id}" aria-hidden="true">
+                                <div class="modal fade" id="modalEdit${sessionScope.user.id}" tabindex="-1" userRole="dialog"
+                                     aria-labelledby="modalEditLabel${sessionScope.user.id}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">ID: ${user.id}</h4>
+                                                <h4 class="modal-title">ID: ${sessionScope.user.id}</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <span><fmt:message key="user.firstName"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="user.firstName"/>"
-                                                           name="first_name-${user.id}"
-                                                           value="${user.firstName}"/>
+                                                           name="first_name-${sessionScope.user.id}"
+                                                           value="${sessionScope.user.firstName}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="user.lastName"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="user.lastName"/>"
-                                                           name="last_name-${user.id}"
-                                                           value="${user.lastName}"/>
+                                                           name="last_name-${sessionScope.user.id}"
+                                                           value="${sessionScope.user.lastName}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="user.image"/></span>
@@ -129,7 +106,7 @@
                                                             <span class="input-group-btn">
                                                                 <span class="btn btn-primary btn-file">
                                                                     <fmt:message key="button.browse"/>
-                                                                    <input type="file" name="userImage-${user.id}"
+                                                                    <input type="file" name="userImage-${sessionScope.user.id}"
                                                                            accept="image/*"/>
                                                                 </span>
                                                             </span>
@@ -139,18 +116,18 @@
                                                 <div class="form-group">
                                                     <span><fmt:message key="user.email"/></span>
                                                     <input class="form-control" type="email" placeholder="<fmt:message key="user.email"/>"
-                                                           name="email-${user.id}"
-                                                           pattern="[^ @]*@[^ @]*\.[^ @]{2,}" value="${user.email}"/>
+                                                           name="email-${sessionScope.user.id}"
+                                                           pattern="[^ @]*@[^ @]*\.[^ @]{2,}" value="${sessionScope.user.email}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="user.position"/></span>
                                                     <input class="form-control" type="text" placeholder="<fmt:message key="user.position"/>"
-                                                           name="discount-${user.id}"
-                                                           value="${user.position}"/>
+                                                           name="discount-${sessionScope.user.id}"
+                                                           value="${sessionScope.user.position}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <button class="btn btn-primary btn-lg btn-block" name="update"
-                                                            type="submit" value="${user.id}">
+                                                            type="submit" value="${sessionScope.user.id}">
                                                         <fmt:message key="button.update"/>
                                                     </button>
                                                 </div>

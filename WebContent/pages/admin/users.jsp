@@ -1,8 +1,8 @@
-<%@page import="com.java.task11.model.User"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%--<%@page import="com.java.task11.model.User"%>--%>
+
 <c:set var="language"
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
 	scope="session" />
@@ -11,7 +11,6 @@
 
 <html lang="${language}">
 <head>
-   
     <title>admin page</title>
     <jsp:include page="header.jsp" />
 <%-- <meta http-equiv="refresh" content="${pageContext.request.contextPath}/admin/users" /> --%>
@@ -78,7 +77,5 @@
 		<button type="submit" name="edit" class = 'btn btn-success pull-right'  style= "margin-right: 5%"> <fmt:message key="button.edit" /></button>
 			</form>
 		</div>
-		
-		
 </body>
 </html>

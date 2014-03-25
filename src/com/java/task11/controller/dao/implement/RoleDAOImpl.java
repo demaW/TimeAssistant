@@ -1,15 +1,15 @@
 package com.java.task11.controller.dao.implement;
 
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.dao.factory.RoleDAO;
+import com.java.task11.model.UserRole;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.dao.factory.RoleDAO;
-import com.java.task11.model.UserRole;
 
 public class RoleDAOImpl implements RoleDAO {
 	protected static List<String> pkColumns = new ArrayList<String>();
@@ -81,7 +81,7 @@ public class RoleDAOImpl implements RoleDAO {
 
 		if (!whereStatement.trim().toUpperCase().startsWith("WHERE")) {
 			whereStatement = " WHERE " + whereStatement;
-		} else if (whereStatement.startsWith(" ") == false) {
+		} else if (!whereStatement.startsWith(" ")) {
 			whereStatement = " " + whereStatement;
 		}
 

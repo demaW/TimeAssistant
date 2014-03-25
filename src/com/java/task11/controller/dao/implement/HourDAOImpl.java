@@ -1,5 +1,9 @@
 package com.java.task11.controller.dao.implement;
 
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.dao.factory.HourDAO;
+import com.java.task11.model.Hour;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,10 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.dao.factory.HourDAO;
-import com.java.task11.model.Hour;
 
 public class HourDAOImpl implements HourDAO {
 	protected static List<String> pkColumns = new ArrayList<String>();
@@ -136,11 +136,11 @@ public class HourDAOImpl implements HourDAO {
 			if (null == userId) {
 				ps = getConn().prepareStatement(
 						DBUtil.selectNull(tableName, allColumns,
-								Arrays.asList(new String[] { "userId" })));
+								Arrays.asList("userId")));
 			} else {
 				ps = getConn().prepareStatement(
 						DBUtil.select(tableName, allColumns,
-								Arrays.asList(new String[] { "userId" })));
+								Arrays.asList("userId")));
 				DBUtil.bind(ps, 1, userId);
 			}
 

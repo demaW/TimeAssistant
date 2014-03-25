@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -11,12 +10,11 @@
 
 <html lang="${language}">
 <head>
-<title>User Profile</title>
-<jsp:include page="user/import.jsp" />
+    <title>User Profile</title>
+    <jsp:include page="user/import.jsp" />
 </head>
 
 <body>
-
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
@@ -35,10 +33,7 @@
 					href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
-		<!-- /.navbar-collapse -->
 	</nav>
-	<!-- /navbar -->
-
 
 	<!-- CONTENT -->
 	<h2 align="center">Something bad happened.</h2>
