@@ -19,7 +19,7 @@ public class LoginFilter implements Filter {
 
 		if (session == null || session.getAttribute("user") == null) {
 			httpRequest.setAttribute("loginErrors", "Login please");
-			httpRequest.getRequestDispatcher("/pages/login.jsp").forward(httpRequest, httpResponse);
+			httpRequest.getRequestDispatcher("/login").forward(httpRequest, httpResponse);
 		} else {
 			User user = (User) session.getAttribute("user");
 			if (httpRequest.getRequestURI().contains("/admin/")) {
