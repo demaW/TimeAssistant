@@ -15,7 +15,7 @@ import com.java.task11.model.Project;
 /**
  * Servlet implementation class AddProject
  */
-@WebServlet("/pages/manager/addproject")
+@WebServlet("/manager/addproject")
 public class AddProject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,7 @@ public class AddProject extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/pages/manager/addproject.jsp").forward(request, response);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class AddProject extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		 response.sendRedirect("/TimeAssistant/pages/manager/projects");
+		 response.sendRedirect("/manager/projects");
 		}
 		
 	}

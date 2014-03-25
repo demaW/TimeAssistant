@@ -26,7 +26,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
-				<li><a href="/TimeAssistant/pages/manager/addproject.jsp">Add
+				<li><a href="${pageContext.request.contextPath}/manager/addproject">Add
 						new project</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/pages/manager/addTask.jsp">Tasks</a></li>
