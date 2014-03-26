@@ -27,12 +27,12 @@
 	  	<th>Task</th>
 	  	<th>Worked hours</th>
 	  	<th>Salary rate</th>
-	  	<th>Cost per customer</th>
+	  	<th>Cost per employee</th>
 	  	</tr>
 	  	</thead>
-	  	<c:forEach var="invoice" items="${invoices}">
+	  	<c:forEach var="invoice" items="${invoice}">
 	  	<tr>
-	  		<td>user.name+user.last.name</td>
+	  		<td></td>
 	  		<td>user.position</td>
 	  		<td>task.name</td>
 	  		<td>task.realTime</td>
