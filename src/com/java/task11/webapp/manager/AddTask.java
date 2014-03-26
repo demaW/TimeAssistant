@@ -1,7 +1,6 @@
 package com.java.task11.webapp.manager;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -56,7 +55,7 @@ public class AddTask extends HttpServlet {
 		createTask.setTitle(req.getParameter("title"));
 		createTask.setDescription(req.getParameter("description"));
 		createTask.setEmployeeId(Integer.parseInt(req.getParameter("user_id")));
-		createTask.setEstimateTime(Time.valueOf(req.getParameter("estimate_time")));
+		createTask.setEstimateTime(Integer.parseInt(req.getParameter("estimate_time")));
 		createTask.setProjectId(Integer.parseInt(req.getParameter("project_id")));
 		createTask.setState("NEW");
 		

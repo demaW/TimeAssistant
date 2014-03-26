@@ -2,7 +2,6 @@ package com.java.task11.webapp.user;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Time;
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
@@ -49,7 +48,7 @@ public class UserSingleTask extends HttpServlet {
 
 			Integer taskId = Integer.parseInt(request.getParameter("task_id"));
 			String timeString = request.getParameter("realTime");
-			Time time = Time.valueOf(timeString);
+			Integer time = Integer.parseInt(timeString);
 			String isFinished = request.getParameter("finished");
 
 			Task task = taskService.getByID(taskId);
