@@ -15,6 +15,15 @@
     <jsp:include page="header.jsp" />
 </head>
 <body>
+ <% String exportToExcel = request.getParameter("exportToExcel");
+        if (exportToExcel != null
+                && exportToExcel.toString().equalsIgnoreCase("YES")) {
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-Disposition", "inline; filename="
+                    + "invoice.xls");
+ 
+        }
+ %>
 <div class="container">
   <h3>Project name: ${project.projectName}</h3> <br>
   <p> Project id: ${project.id }</p>
@@ -49,7 +58,14 @@
     <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Total cost:  ${sumCost} $ </span></div>
     <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Planed total cost:  ${planedSumCost} $ </span></div>
   </div>
-  <button> generate excel file</button>
+  <%
+        if (exportToExcel == null) {
+    %>
+    <a href="${pageContext.request.contextPath}/manager/invoice?exportToExcel=YES">Export to Excel</a>
+    <%
+        }
+    %>
+
   </div>
 
 	
