@@ -30,8 +30,8 @@
 				<li class="active"><a href="#">Personal page</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${sessionScope.user.firstName} | <a
-					href="${pageContext.request.contextPath}/logout">Log out</a>
+                ${sessionScope.user.firstName} ${sessionScope.user.lastName}
+                <a href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
 	</nav>
@@ -46,7 +46,7 @@
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/manager/addTask"
 			method="post">
-			<input type="hidden" name="project_id" value="${project_id}">
+			<input type="hidden" name="project_id" value="${requestScope.project_id}">
 			<table class="table">
 				<tr>
 					<td>Title:</td>
@@ -67,7 +67,7 @@
 				<tr>
 					<td>Assign user:</td>
 					<td><select name="user_id">
-							<c:forEach var="user" items="${users_in_project}">
+							<c:forEach var="user" items="${requestScope.users_in_project}">
 								<option value="${user.id}">${user.firstName}
 									${user.lastName}</option>
 							</c:forEach>

@@ -26,61 +26,33 @@
 </head>
 
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#navbar-collapse-01">
-                <span class="sr-only">Toggle navigation</span>
-            </button>
-            <a class="navbar-brand" href="#">TimeAssistant</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse-01">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li class="active"><a href="#">Personal page</a></li>
-            </ul>
-            <div class="navbar-form navbar-right">
-                ${sessionScope.user.firstName} ${sessionScope.user.lastName}  | <a href="${pageContext.request.contextPath}/logout">Log out</a>
-            </div>
-        </div>
-    </nav>
+<!-- CONTENT -->
+<div class="container tasks-table">
+    <div class="panel panel-primary" style="width: 1000px; margin: auto;">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><fmt:message key="task.title"/></div>
 
-    <!-- PAGE NAV -->
-    <ul class="nav nav-tabs nav-justified">
-        <li class="active"><a href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-        <li><a href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
-        <li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
-    </ul>
-    <br/>
+        <!-- Table -->
+        <form action="${pageContext.request.contextPath}/manager/project" method="post" id="tasks-form">
+            <div class="row">
+                <div class="table-responsive tile col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th><fmt:message key="task.name" /></th> <!-- title property -->
+                            <th><fmt:message key="task.description" /></th>
+                            <th><fmt:message key="task.state" /></th>
+                            <th><fmt:message key="task.estimate" /></th>
+                            <th><fmt:message key="task.real" /></th>
+                            <th><fmt:message key="task.start" /></th>
+                            <th><fmt:message key="task.end" /></th>
+                            <th><fmt:message key="task.finished" /></th>
+                        </tr>
+                        </thead>
 
-    <!-- CONTENT -->
-    <div class="container tasks-table">
-        <div class="panel panel-primary" style="width: 1000px; margin: auto;">
-            <!-- Default panel contents -->
-            <div class="panel-heading"><fmt:message key="task.title"/></div>
-
-            <!-- Table -->
-            <form action="${pageContext.request.contextPath}/manager/project" method="post" id="tasks-form">
-                <div class="row">
-                    <div class="table-responsive tile col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th><fmt:message key="task.name" /></th> <!-- title property -->
-                                <th><fmt:message key="task.description" /></th>
-                                <th><fmt:message key="task.state" /></th>
-                                <th><fmt:message key="task.estimate" /></th>
-                                <th><fmt:message key="task.real" /></th>
-                                <th><fmt:message key="task.start" /></th>
-                                <th><fmt:message key="task.end" /></th>
-                                <th><fmt:message key="task.finished" /></th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <c:forEach var="task" items="${requestScope.tasks}">
+                        <tbody>
+                        <c:forEach var="task" items="${requestScope.tasks}">
                             <tr>
                                 <td>
                                     <label class="checkbox" for="checkbox${task.id}">
@@ -97,7 +69,7 @@
                                 <td>${task.endDate}</td>
                                 <td>${task.finished}</td>
 
-                                <%--edit task icon => edit user info pop up window--%>
+                                    <%--edit task icon => edit user info pop up window--%>
                                 <td>
                                 <span class="fui-new modal-icon" data-toggle="modal"
                                       data-target="#modalEdit${task.id}"></span>
@@ -116,55 +88,55 @@
                                                         <span><fmt:message key="task.name"/></span>
                                                         <input class="form-control" placeholder="<fmt:message key="task.name"/>"
                                                                name="task_name-${task.id}"
-                                                               value="${task.firstName}"/>
+                                                               value="${task.title}"/>
                                                     </div>
                                                     <div class="form-group">
                                                         <span><fmt:message key="task.description"/></span>
                                                         <input class="form-control" placeholder="<fmt:message key="task.description"/>"
                                                                name="task_description-${task.id}"
-                                                               value="${task.lastName}"/>
+                                                               value="${task.description}"/>
                                                     </div>
                                                     <div class="form-group">
-                                                        <%--@declare id="tasks-form"--%>
+                                                            <%--@declare id="tasks-form"--%>
                                                         <span><fmt:message key="task.state"/></span>
-                                                            <select name="state-${task.id}" class="select-block"
-                                                                    form="tasks-form">
-                                                                <c:choose>
-                                                                    <c:when test="${task.state == 'NEW'}">
-                                                                        <option value="NEW" selected="selected">
-                                                                            <fmt:message key="state.new"/>
-                                                                        </option>
-                                                                        <option value="IN PROGRESS">
-                                                                            <fmt:message key="state.progres"/>
-                                                                        </option>
-                                                                        <option value="FINISHED">
-                                                                            <fmt:message key="state.done"/>
-                                                                        </option>
-                                                                    </c:when>
-                                                                    <c:when test="${task.state == 'IN PROGRESS'}">
-                                                                        <option value="NEW">
-                                                                            <fmt:message key="state.new"/>
-                                                                        </option>
-                                                                        <option value="IN PROGRESS" selected="selected">
-                                                                            <fmt:message key="state.progres"/>
-                                                                        </option>
-                                                                        <option value="FINISHED">
-                                                                            <fmt:message key="state.done"/>
-                                                                        </option>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <option value="NEW">
-                                                                            <fmt:message key="state.new"/>
-                                                                        </option>
-                                                                        <option value="IN PROGRESS">
-                                                                            <fmt:message key="state.progres"/>
-                                                                        </option>
-                                                                        <option value="FINISHED" selected="selected">
-                                                                            <fmt:message key="state.done"/>
-                                                                        </option>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </select>
+                                                        <select name="state-${task.id}" class="select-block"
+                                                                form="tasks-form">
+                                                            <c:choose>
+                                                                <c:when test="${task.state == 'NEW'}">
+                                                                    <option value="NEW" selected="selected">
+                                                                        <fmt:message key="state.new"/>
+                                                                    </option>
+                                                                    <option value="IN PROGRESS">
+                                                                        <fmt:message key="state.progres"/>
+                                                                    </option>
+                                                                    <option value="FINISHED">
+                                                                        <fmt:message key="state.done"/>
+                                                                    </option>
+                                                                </c:when>
+                                                                <c:when test="${task.state == 'IN PROGRESS'}">
+                                                                    <option value="NEW">
+                                                                        <fmt:message key="state.new"/>
+                                                                    </option>
+                                                                    <option value="IN PROGRESS" selected="selected">
+                                                                        <fmt:message key="state.progres"/>
+                                                                    </option>
+                                                                    <option value="FINISHED">
+                                                                        <fmt:message key="state.done"/>
+                                                                    </option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="NEW">
+                                                                        <fmt:message key="state.new"/>
+                                                                    </option>
+                                                                    <option value="IN PROGRESS">
+                                                                        <fmt:message key="state.progres"/>
+                                                                    </option>
+                                                                    <option value="FINISHED" selected="selected">
+                                                                        <fmt:message key="state.done"/>
+                                                                    </option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <span><fmt:message key="task.estimate"/></span>
@@ -196,24 +168,24 @@
                                     </div>
                                 </td>
                             </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="row">
-                    <div class="col-md-7 col-sm-7 col-xs-6 col-md-offset-1">
-                        <button id="trigger-overlay" type="button" class="btn btn-primary">
-                            <fmt:message key="button.addTask"/>
-                        </button>
-                        <button class="btn btn-danger" name="delete" type="submit" value="Delete">
-                            <fmt:message key="button.delete"/>
-                        </button>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 col-sm-7 col-xs-6 col-md-offset-1">
+                    <button id="trigger-overlay" type="button" class="btn btn-primary" name="addTask">
+                        <fmt:message key="button.addTask"/>
+                    </button>
+                    <button class="btn btn-danger" name="delete" type="submit" value="Delete">
+                        <fmt:message key="button.delete"/>
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-    <jsp:include page="../parts/scripts.jsp"/>
+</div>
+<jsp:include page="../parts/scripts.jsp"/>
 </body>
 </html>

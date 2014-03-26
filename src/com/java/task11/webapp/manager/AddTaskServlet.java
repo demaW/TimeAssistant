@@ -24,7 +24,7 @@ import java.util.List;
  * @author nlelyak
  * @version 1.00 2014-03-21
  */
-@WebServlet("/manager/project")
+@WebServlet("/pages/manager/project")
 @MultipartConfig
 public class AddTaskServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(AddTaskServlet.class);

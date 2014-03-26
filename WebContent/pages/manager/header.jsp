@@ -26,16 +26,25 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/manager/addproject">Add
-						new project</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/pages/manager/addTask.jsp">Tasks</a></li>
+				<li>
+                    <a href="${pageContext.request.contextPath}/manager/addproject">
+                    Add new project</a>
+                </li>
+				<li>
+                    <a href="${pageContext.request.contextPath}/pages/manager/addTask.jsp">Tasks</a>
+                </li>
 				<li><a href="#fakelink">Employees</a></li>
 				<li><a href="#fakelink">other Features</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${sessionScope.user.firstName} | <a
-					href="${pageContext.request.contextPath}/logout">Log out</a>
+                ${sessionScope.user.firstName} ${sessionScope.user.lastName}
+                <a href="${pageContext.request.contextPath}/logout">Log out</a>
+                    <%-- i18n --%>
+                <li class="lang">
+                    <a href="<%= request.getContextPath()%>?language=${language == 'uk' ? 'en' : 'uk'}">
+                        ${language == 'uk' ? 'EN' : 'UKR'}
+                    </a>
+                </li>
 			</div>
 		</div>
 	</nav>

@@ -1,63 +1,46 @@
 package com.java.task11.webapp.manager;
 
-import java.io.IOException;
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.service.ProjectService;
+import com.java.task11.model.Project;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.service.ProjectService;
-import com.java.task11.model.Project;
-
-/**
- * Servlet implementation class AddProject
- */
 @WebServlet("/manager/addproject")
 public class AddProject extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddProject() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    private static Logger log = Logger.getLogger(AddProject.class);
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/pages/manager/addproject.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String projectName = request.getParameter("name");
-		String description = request.getParameter("description");
-		String notes = request.getParameter("notes");
-		
-		Project project = new Project();
-		project.setProjectName(projectName);
-		project.setDescription(description);
-		project.setNotes(notes);
-		
-		ProjectService projectService = new ProjectService();
+        ProjectService projectService = new ProjectService();
+        Project project = new Project();
+
+        String projectName = request.getParameter("name");
+        String description = request.getParameter("description");
+        String notes = request.getParameter("notes");
+
+        project.setProjectName(projectName);
+        project.setDescription(description);
+        project.setNotes(notes);
+
 		try {
 			projectService.save(project);
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            log.error(e);
 		}
 		
-		 response.sendRedirect("/manager/projects");
-		}
-		
+		response.sendRedirect("/manager/projects");
 	}
+		
+}
 
 

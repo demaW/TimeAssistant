@@ -9,6 +9,7 @@ import com.java.task11.controller.dao.factory.TeamDAO;
 import com.java.task11.controller.dao.factory.UserDAO;
 
 public class JDBCDAOFactory extends DAOFactory {
+
 	public UserDAO getUserDAO() {
 		return new UserDAOImpl();
 	}
