@@ -11,7 +11,7 @@ import com.java.task11.model.ProjectInvoice;
 
 public class ProjectIvoiceDao {
 
-	public static final String SELECTINVOICE = "SELECT DISTINCT tasks.title, tasks.real_time, users.first_name, users.last_name, users.position, "
+	public static final String SELECTINVOICE = "SELECT DISTINCT tasks.title, tasks.real_time, tasks.estimate_time, users.first_name, users.last_name, users.position, "
 			+ "users.salary_rate FROM tasks  INNER JOIN users  ON (tasks.employee_id = users.id)"
 			+ " WHERE tasks.project_id = ?";
 	protected Connection conn = null;
@@ -36,10 +36,13 @@ public class ProjectIvoiceDao {
 				invoice.setLastName(resultSet.getString("last_name"));
 				invoice.setWorkedTime(Integer.parseInt(resultSet
 						.getString("real_time")));
+				invoice.setPlanedTime(Integer.parseInt(resultSet
+						.getString("estimate_time")));
 				invoice.setPosition(resultSet.getString("position"));
 				invoice.setSalaryRate(Double.parseDouble(resultSet
 						.getString("salary_rate")));
 				invoice.setCosPerEmployee();
+				invoice.setPlanedCostPerEmployee();
 				invoices.add(invoice);
 			}
 		} catch (SQLException e) {

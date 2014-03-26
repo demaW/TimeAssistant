@@ -26,8 +26,10 @@
 	  	<th>Position</th>
 	  	<th>Task</th>
 	  	<th>Worked hours</th>
-	  	<th>Salary rate</th>
-	  	<th>Cost per employee</th>
+	  	<th>Booked hours</th>
+	  	<th>Salary rate <br> $/hour </th>
+	  	<th>Costs <br>per employee, $</th>
+	  	<th>Planned costs <br> per employee, $</th>
 	  	</tr>
 	  	</thead>
 	  	<c:forEach var="invoice" items="${invoices}">
@@ -36,17 +38,21 @@
 	  		<td>${invoice.position}</td>
 	  		<td>${invoice.taskName }</td>
 	  		<td>${invoice.workedTime}</td>
+	  		<td><c:out value=" ${invoice.planedTime}"></c:out></td>
 	  		<td>${invoice.salaryRate}</td>
 	  		<td>${invoice.cosPerEmployee}</td>
+	  		<td><c:out value ="${invoice.planedCostPerEmployee}" ></c:out></td>
 	  	</tr>
 	  	</c:forEach>
 	  </table>
 	  	 <div class="row"> 
     <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Total cost:  ${sumCost} $ </span></div>
+    <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Planed total cost:  ${planedSumCost} $ </span></div>
   </div>
+  <button> generate excel file</button>
   </div>
 
-	<button> generate excel file</button>
+	
 
 	
 	

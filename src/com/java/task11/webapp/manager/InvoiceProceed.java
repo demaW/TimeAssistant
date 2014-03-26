@@ -18,7 +18,7 @@ import com.java.task11.model.ProjectInvoice;
 /**
  * Servlet implementation class InvoiceProceed
  */
-@WebServlet("/InvoiceProceed")
+@WebServlet("/manager/invoice")
 public class InvoiceProceed extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +39,7 @@ public class InvoiceProceed extends HttpServlet {
 		// int projectId = Integer.parseInt(request.getParameter("projectId"));
 		int projectID = 1;
 		Double sumCost = new Double(0);
+		Double planedSumCost = new Double(0);
 		Project project = null;
 		try {
 			project = new ProjectService().getByID(projectID);
@@ -51,7 +52,9 @@ public class InvoiceProceed extends HttpServlet {
 		for (ProjectInvoice projectInvoice : invoices) {
 			
 			sumCost+= projectInvoice.getCosPerEmployee();
+			planedSumCost+=projectInvoice.getPlanedCostPerEmployee();
 		}
+		request.setAttribute("planedSumCost", planedSumCost);
 		request.setAttribute("sumCost", sumCost);
 		request.setAttribute("project", project);
 		request.setAttribute("invoices", invoices);

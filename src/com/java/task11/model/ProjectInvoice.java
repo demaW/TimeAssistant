@@ -7,8 +7,10 @@ private String firstName;
 private String lastName;
 private String position;
 private int workedTime;
+private int planedTime;
 private double salaryRate;
 private double costPerEmployee;
+private double planedCostPerEmployee;
 public String getFirstName() {
 	return firstName;
 }
@@ -51,6 +53,18 @@ public String getTaskName() {
 }
 public void setTaskName(String taskName) {
 	this.taskName = taskName;
+}
+public int getPlanedTime() {
+	return planedTime;
+}
+public void setPlanedTime(int planedTime) {
+	this.planedTime = planedTime;
+}
+public double getPlanedCostPerEmployee() {
+	return planedCostPerEmployee;
+}
+public void setPlanedCostPerEmployee() {
+	this.planedCostPerEmployee = getSalaryRate() * getPlanedTime();
 }
 
 
