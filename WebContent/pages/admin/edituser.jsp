@@ -12,6 +12,8 @@
 <head>
     <title>admin page</title>
     <jsp:include page="header.jsp" />
+    
+    
 </head>
 
 <body>
