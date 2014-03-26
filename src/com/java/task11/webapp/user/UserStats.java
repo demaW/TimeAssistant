@@ -36,11 +36,15 @@ public class UserStats extends HttpServlet {
 			List<Task> finishedTasks = new TaskService()
 					.getByEmployeeIdAndStatus(userId, "FINISHED");
 
-			Time summaryRealTime;
+			Integer summaryRealTime = new Integer(0);
+			Integer summaryEstimateTime = new Integer(0);
 			for (Task task : finishedTasks) {
-				summaryRealTime = TimeUtils.addTimes(task.getRealTime(), task.getEstimateTime());
-				System.out.println(summaryRealTime);
+				summaryRealTime += task.getRealTime();
+				summaryEstimateTime += task.getEstimateTime();
 			}
+			
+			request.setAttribute("estimate_time_summ", summaryEstimateTime);
+			request.setAttribute("real_time_summ", summaryRealTime);
 			
 			request.getRequestDispatcher("/pages/user/userStats.jsp").forward(
 					request, response);

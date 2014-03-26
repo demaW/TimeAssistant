@@ -1,13 +1,12 @@
 package com.java.task11.model;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class Hour {
 	private int hoursId;
 	private int userId;
 	private Date date;
-	private Time hours;
+	private Integer hours;
 
 	public int getHoursId() {
 		return hoursId;
@@ -33,11 +32,11 @@ public class Hour {
 		this.date = date;
 	}
 
-	public Time getHours() {
+	public Integer getHours() {
 		return hours;
 	}
 
-	public void setHours(Time hours) {
+	public void setHours(Integer hours) {
 		this.hours = hours;
 	}
 }

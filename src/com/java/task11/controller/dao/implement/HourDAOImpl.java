@@ -179,7 +179,7 @@ public class HourDAOImpl implements HourDAO {
 		obj.setHoursId(DBUtil.getInt(rs, "hoursId"));
 		obj.setUserId(DBUtil.getInt(rs, "userId"));
 		obj.setDate(DBUtil.getDate(rs, "date"));
-		obj.setHours(DBUtil.getTime(rs, "hours"));
+		obj.setHours(DBUtil.getInt(rs, "hours"));
 
 		return obj;
 	}
