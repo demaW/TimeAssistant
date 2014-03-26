@@ -41,12 +41,12 @@
 	  	</tr>
 	  	</c:forEach>
 	  </table>
-	  	 <div class="row">
-    <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Total cost:  $42</span></div>
+	  	 <div class="row"> 
+    <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Total cost:  summ of task.realtime*user.salatyRate </span></div>
   </div>
   </div>
 
-			
+	<button> generate excel file</button>
 
 	
 	
