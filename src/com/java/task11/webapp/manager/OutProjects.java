@@ -36,7 +36,7 @@ public class OutProjects extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().setAttribute("projects", projects);
-        request.getRequestDispatcher(request.getContextPath() + "/pages/manager/projects.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/manager/projects.jsp").forward(request, response);
 	}
 
     @Override

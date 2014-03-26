@@ -48,7 +48,7 @@
                 </form>
             </c:forEach>
 
-            <a href="${pageContext.request.contextPath}/pages/manager/addproject.jsp"> <fmt:message key="button.addProject"/></a>
+            <a href="${pageContext.request.contextPath}/manager/addproject"> <fmt:message key="button.addProject"/></a>
             </tbody>
         </TABLE>
     </div>
