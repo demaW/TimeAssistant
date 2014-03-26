@@ -17,7 +17,7 @@
 <body>
 <div class="container">
   <h3>Project name: ${project.projectName}</h3> <br>
-  <p> Project id: ${project.projectId }</p>
+  <p> Project id: ${project.id }</p>
   <br>
 	  <table  class="table table-striped"  >
 	  	<thead>
@@ -27,22 +27,22 @@
 	  	<th>Task</th>
 	  	<th>Worked hours</th>
 	  	<th>Salary rate</th>
-	  	<th>Cost per customer</th>
+	  	<th>Cost per employee</th>
 	  	</tr>
 	  	</thead>
 	  	<c:forEach var="invoice" items="${invoices}">
 	  	<tr>
-	  		<td>user.name+user.last.name</td>
-	  		<td>user.position</td>
-	  		<td>task.name</td>
-	  		<td>task.realTime</td>
-	  		<td>user.salaryRate</td>
-	  		<td>task.realtime*user.salatyRate</td>
+	  		<td>${invoice.firstName} ${invoice.lastName}</td>
+	  		<td>${invoice.position}</td>
+	  		<td>${invoice.taskName }</td>
+	  		<td>${invoice.workedTime}</td>
+	  		<td>${invoice.salaryRate}</td>
+	  		<td>${invoice.cosPerEmployee}</td>
 	  	</tr>
 	  	</c:forEach>
 	  </table>
 	  	 <div class="row"> 
-    <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Total cost:  summ of task.realtime*user.salatyRate </span></div>
+    <div class="col-md-6" ></div><div class="col-md-6"><span class="pull-right"> Total cost:  ${sumCost} $ </span></div>
   </div>
   </div>
 
