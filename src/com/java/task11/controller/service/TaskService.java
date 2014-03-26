@@ -3,10 +3,13 @@ package com.java.task11.controller.service;
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.Task;
+
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServlet;
+
 import java.util.List;
+import java.util.ListIterator;
 
 public class TaskService implements IBaseService<Task> {
     private static Logger log = Logger.getLogger(TaskService.class);
@@ -42,6 +45,19 @@ public class TaskService implements IBaseService<Task> {
 	
 	public List<Task> getByProjectId(Integer projectId) throws DAOException {
 		return DAOFactory.getInstance().getTaskDAO().getByProjectId(projectId);
+	}
+	
+	public List<Task> getByEmployeeIdAndStatus(Integer id, String status) throws DAOException {
+		List<Task> resultList = getByEmployeeId(id);
+		
+		for (ListIterator<Task> iterator = resultList.listIterator(); iterator
+				.hasNext();) {
+			if (!iterator.next().getState().equalsIgnoreCase(status)) {
+				iterator.remove();
+			}
+		}
+		
+		return resultList;
 	}
 
     public void delete(int taskId, HttpServlet servlet) {
