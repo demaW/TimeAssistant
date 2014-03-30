@@ -10,20 +10,17 @@
 
 <html lang="${language}">
 <head>
- <script type="text/javascript">
-   function validateForm()
-{	 alert(document.edituser.salaryRate.value);
-    if(isNaN(document.edituser.salaryRate.value))
-    {	
-    	
-    
-    	document.edituser.salaryRate.value=0;	
-      alert("Salary input invalid 0.0 setted as dafault value");
-      document.edituser.username.salaryRate.focus();
-      return false;
+<script type="text/javascript">
+function validate() {
+    if (isNaN(document.edituser.salaryRate.value)) {
+        alert("Enter nubmer please");
+        document.edituser.salaryRate.focus();
+        return false;
     }
- </script>
-    
+   
+   
+    return true;
+}</script>
     <title>admin page</title>
     <jsp:include page="header.jsp" />
  
@@ -31,7 +28,7 @@
 
 <body>
 	<div class="container">
-		<form name = "edituser" action="${pageContext.request.contextPath}/admin/updateemployee" method="post" onsubmit="return validateForm()">
+		<form name = "edituser" action="${pageContext.request.contextPath}/admin/updateemployee" method="post" onsubmit="return validate(this);">
 			<table border=1>
 				<tr>
 					<td>ID</td>
@@ -98,6 +95,8 @@
 				</tr>
 			</table>
 		</form>
+	
+                     
 	</div>
 </body>
 </html>
