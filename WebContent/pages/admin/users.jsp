@@ -11,6 +11,7 @@
 
 <html lang="${language}">
 <head>
+
     <title>admin page</title>
     <jsp:include page="header.jsp" />
 <%-- <meta http-equiv="refresh" content="${pageContext.request.contextPath}/admin/users" /> --%>
@@ -18,7 +19,7 @@
 
 <body>
 <jsp:useBean id="roles" scope="page" class="com.java.task11.model.UserRole" />
-<div class="panel panel-primary" >
+<div class="container">
 <form action="${pageContext.request.contextPath}/admin/updateemployee" name="updateEmployee" method="get">
 		<TABLE class="table"   >
 			<thead>
@@ -74,7 +75,7 @@
 			
 		</TABLE>
 	
-		<button type="submit" name="edit" class = 'btn btn-success pull-right'  style= "margin-right: 5%"> <fmt:message key="button.edit" /></button>
+		<button type="submit" name="edit" class = 'btn btn-success pull-right'  style= "margin-right: 2%"> <fmt:message key="button.edit" /></button>
 			</form>
 		</div>
 </body>

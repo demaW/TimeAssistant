@@ -10,16 +10,28 @@
 
 <html lang="${language}">
 <head>
+ <script type="text/javascript">
+   function validateForm()
+{	 alert(document.edituser.salaryRate.value);
+    if(isNaN(document.edituser.salaryRate.value))
+    {	
+    	
+    
+    	document.edituser.salaryRate.value=0;	
+      alert("Salary input invalid 0.0 setted as dafault value");
+      document.edituser.username.salaryRate.focus();
+      return false;
+    }
+ </script>
+    
     <title>admin page</title>
     <jsp:include page="header.jsp" />
-    
-    
+ 
 </head>
 
 <body>
 	<div class="container">
-		<form action="${pageContext.request.contextPath}/admin/updateemployee"
-			method="post">
+		<form name = "edituser" action="${pageContext.request.contextPath}/admin/updateemployee" method="post" onsubmit="return validateForm()">
 			<table border=1>
 				<tr>
 					<td>ID</td>
@@ -29,32 +41,32 @@
 
 				<tr>
 					<td><fmt:message key="user.email" /></td>
-					<td><input type="text" name="email" value="${userToEdit.email}"></td>
+					<td><input type="text" name="email" value="${userToEdit.email}" required id="email"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.password" /></td>
 					<td><input type="text" name="password"
-						value="${userToEdit.password}"></td>
+						value="${userToEdit.password}" required id="password"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.firstName" /></td>
 					<td><input type="text" name="firstName"
-						value="${userToEdit.firstName}"></td>
+						value="${userToEdit.firstName}" required id="firstName"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.lastName" /></td>
 					<td><input type="text" name="lastName"
-						value="${userToEdit.lastName}"></td>
+						value="${userToEdit.lastName}" required id="lastName"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.position" /></td>
 					<td><input type="text" name="position"
-						value="${userToEdit.position}"></td>
+						value="${userToEdit.position}" required id="position"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.salary" /></td>
 					<td><input type="text" name="salaryRate"
-						value="${userToEdit.salaryRate}"></td>
+						value="${userToEdit.salaryRate}"required id="salaryRate"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.role" /></td>

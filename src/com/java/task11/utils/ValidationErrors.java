@@ -8,5 +8,7 @@ public class ValidationErrors {
     public static final String PASSWORD = "Password can't be empty.";
     public static final String DATE_FORMAT = "Wrong date format.";
     public static final String DATE_SEQUENCE = "Arrival date should go after depart date.";
-    public static final String PRICE = "Price must be an number.";
+    public static final String SALARY = "Salry rate must be a number.";
+    public static final String NOTEMPTY = "feild can`t be empty";
+    
 }

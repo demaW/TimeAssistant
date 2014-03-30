@@ -1,6 +1,8 @@
 package com.java.task11.webapp.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
+import com.java.task11.utils.ValidationErrors;
+import com.java.task11.utils.ValidationUtils;
 
 /**
  * Servlet implementation class AddUser
@@ -46,7 +50,8 @@ public class AddUser extends HttpServlet {
         String password = request.getParameter("password");
         String position = request.getParameter("position");
         String role = request.getParameter("role");
-        Double salary = Double.parseDouble(request.getParameter("salary"));
+        String salaryS = request.getParameter("salary");
+        Double salary = Double.parseDouble(salaryS);
         int roleId = 1;
         if (role.equals("user")) {
 			roleId = 1;
@@ -55,7 +60,12 @@ public class AddUser extends HttpServlet {
 		} else if (role.equals("admin")) {
 			roleId = 3;
 		}
-       
+        List<String> addingErrors = validateInputs(firstName, lastName, email, password,salaryS);
+
+        if (addingErrors.size() > 0) {
+            request.setAttribute("registrationErrors", addingErrors);
+            request.getRequestDispatcher("/pages/admin/adduser.jsp").forward(request, response);
+        } else {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -73,7 +83,31 @@ public class AddUser extends HttpServlet {
 			e.printStackTrace();
 		}
 		String contextPath = request.getContextPath();
-		response.sendRedirect(contextPath +"/admin/users");    
+		response.sendRedirect(contextPath +"/admin/users");    }
 	}
+	
+	 private List<String> validateInputs(String firstName, String lastName, String email, String password, String salary) {
+	        List<String> registrationErrors = new ArrayList<>();
+
+	        if (ValidationUtils.isNullOrEmpty(firstName)) {
+	            registrationErrors.add(ValidationErrors.FIRST_NAME);
+	        }
+	        if (ValidationUtils.isNullOrEmpty(lastName)) {
+	            registrationErrors.add(ValidationErrors.LAST_NAME);
+	        }
+	        if (!ValidationUtils.validEmail(email)) {
+	            registrationErrors.add(ValidationErrors.EMAIL);
+	        }
+	        	       
+	        if (ValidationUtils.isNullOrEmpty(password)) {
+	            registrationErrors.add(ValidationErrors.PASSWORD);
+	        }
+	        if (ValidationUtils.isNullOrEmpty(salary)) {
+				registrationErrors.add(ValidationErrors.NOTEMPTY);
+			}
+	        if (ValidationUtils.isNumber(salary)) {
+				registrationErrors.add(ValidationErrors.SALARY);
+			}
+	        return registrationErrors;    }
 
 }
