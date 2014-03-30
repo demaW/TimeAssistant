@@ -3,6 +3,7 @@ package com.java.task11.webapp.manager;
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.ProjectService;
 import com.java.task11.model.Project;
+import com.java.task11.utils.ValidationUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -33,18 +34,9 @@ public class ProjectsTableServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (!request.getParameter("project_id").isEmpty()) {
-            request.getRequestDispatcher("/pages/manager/project.jsp").forward(request, response);
-            return;
-        }
         updateTable();
         request.setAttribute("projects", projects);
         request.getRequestDispatcher("/pages/manager/projectsTable.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 
     private void updateTable() {
@@ -53,5 +45,51 @@ public class ProjectsTableServlet extends HttpServlet {
         } catch (DAOException e) {
             log.error(e);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
+        if (request.getParameter("delete") != null) {
+            deleteProject(request);
+        } else if (request.getParameter("update") != null) {
+            updateProject(request);
+        }
+        doGet(request, response);
+    }
+
+    private void deleteProject(HttpServletRequest request) {
+        try {
+            String[] projects = request.getParameterValues("checkedProjects");
+            for (String projectId : projects) {
+                projectService.delete(Integer.parseInt(projectId), this);
+            }
+        } catch (DAOException e) {
+            log.error(e);
+        }
+    }
+
+    private void updateProject(HttpServletRequest request) {
+        try {
+            int id = Integer.parseInt(request.getParameter("update"));
+            Project project = projectService.getByID(id);
+
+            String name = (!ValidationUtils.isNullOrEmpty(request.getParameter("project_name-" + id)))
+                    ? request.getParameter("project_name-" + id) : project.getProjectName();
+            String description = (!ValidationUtils.isNullOrEmpty(request.getParameter("project_description-" + id)))
+                    ? request.getParameter("project_description-" + id) : project.getDescription();
+            String notes = (!ValidationUtils.isNullOrEmpty(request.getParameter("project_notes-" + id)))
+                    ? request.getParameter("project_name-" + id) : project.getNotes();
+
+            project.setProjectName(name);
+            project.setDescription(description);
+            project.setNotes(notes);
+
+            projectService.update(project);
+        } catch (DAOException e) {
+            log.error(e);
+        }
+
     }
 }

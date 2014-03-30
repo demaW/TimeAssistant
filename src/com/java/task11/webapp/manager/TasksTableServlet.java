@@ -20,16 +20,19 @@ import java.util.List;
 
 /**
  * @author nlelyak
- * @version 1.00 2014-03-26
+ * @version 1.00 2014-03-21
  */
-@WebServlet("/manager/projectaa")
+@WebServlet("/manager/taskstable")
 @MultipartConfig
-public class TasksForProjectServlet extends HttpServlet {
-    private static Logger log = Logger.getLogger(TasksForProjectServlet.class);
+public class TasksTableServlet extends HttpServlet {
+    private static Logger log = Logger.getLogger(AddTaskServlet.class);
     private TaskService taskService;
     private List<Task> tasks;
-//    private static DateFormat format = new SimpleDateFormat("hh:mm:ss");
     private static final String DATE_FORMAT = "MM/dd/yyyy";
+
+    public static final String ATTRIBUTE_TO_MODEL = "tasksList";
+    public static final String PAGE_OK = "/pages/manager/tasksTable.jsp";
+    public static final String PAGE_ERROR_URL = "error";
 
     @Override
     public void init() throws ServletException {
@@ -39,12 +42,24 @@ public class TasksForProjectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String projectId = request.getParameter("project_id");
-            tasks = taskService.getByProjectId(Integer.parseInt(projectId));
+            if (request.getParameter("project_id") != null) {
+                updateTable(request);
+                if (!tasks.isEmpty()) {
+                    request.setAttribute(ATTRIBUTE_TO_MODEL, tasks);
+                    request.getRequestDispatcher(PAGE_OK);
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            log.error(e);
+        }
+        response.sendRedirect(PAGE_ERROR_URL);
+    }
 
-            request.setAttribute("tasks", tasks);
-
-            request.getRequestDispatcher(request.getContextPath() + "/pages/manager/project.jsp").forward(request, response);
+    private void updateTable(HttpServletRequest request) {
+        try {
+            int id = Integer.parseInt(request.getParameter("project_id"));
+            tasks = taskService.getByProjectId(id);
         } catch (DAOException e) {
             log.error(e);
         }
@@ -53,23 +68,12 @@ public class TasksForProjectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-
-        if (request.getParameter("update") != null) {
-            updateTask(request);
-        } else if (request.getParameter("delete") != null) {
+        if (request.getParameter("delete") != null) {
             deleteTask(request);
-        } else if (request.getParameter("addTask") != null) {
-            response.sendRedirect(request.getContextPath() + "/pages/manager/addTask");
-            return; // not sure about necessary of return statement
+        } else if (request.getParameter("update") != null) {
+            updateTask(request);
         }
         doGet(request, response);
-    }
-
-    private void deleteTask(HttpServletRequest request) {
-        String[] tasks = request.getParameterValues("checkedTasks");
-        for (String taskId : tasks) {
-            taskService.delete(Integer.parseInt(taskId), this);
-        }
     }
 
     private void updateTask(HttpServletRequest request) {
@@ -77,11 +81,11 @@ public class TasksForProjectServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("update"));
             Task task = taskService.getByID(id);
 
-            String name = (!ValidationUtils.isNullOrEmpty(request.getParameter("task_name-" + id)))
+            String name = (!ValidationUtils.isNullOrEmpty(request.getParameter("name-" + id)))
                     ? request.getParameter("task_name-" + id) : task.getTitle();
             String description = (!ValidationUtils.isNullOrEmpty(request.getParameter("task_description-" + id)))
                     ? request.getParameter("task_description-" + id) : task.getDescription();
-            String state = request.getParameter("state");
+            String state = request.getParameter("state-" + id);
             int estimateTime = (request.getParameter("estimate_time-" + id) != null)
                     ? Integer.parseInt(request.getParameter("estimate_time-" + id))
                     : task.getEstimateTime();
@@ -104,4 +108,12 @@ public class TasksForProjectServlet extends HttpServlet {
             log.error(e);
         }
     }
+
+    private void deleteTask(HttpServletRequest request) {
+        String[] tasks = request.getParameterValues("checkedTasks");
+        for (String taskId : tasks) {
+            taskService.delete(Integer.parseInt(taskId), this);
+        }
+    }
+
 }

@@ -19,7 +19,7 @@ import java.io.IOException;
  * @author nlelyak
  * @version 1.00 2014-03-06
  */
-@WebServlet( urlPatterns = {"/login","/admin/login", "/user/login", "/manager/login"})
+@WebServlet( urlPatterns = { "/login", "/admin/login", "/user/login", "/manager/login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(LoginServlet.class);
@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
                     if (user.getRoleId().equals(1)) { // 1=user role
                         response.sendRedirect(contextPath + "/user/tasks");
                     } if (user.getRoleId().equals(2)) { // 2 manager role
-                        response.sendRedirect(contextPath + "/manager/projects");
+                        response.sendRedirect(contextPath + "/manager/projectstable");
                     } if (user.getRoleId().equals(3)) { // 3 admin role
                         response.sendRedirect(contextPath + "/admin/users");
                     }

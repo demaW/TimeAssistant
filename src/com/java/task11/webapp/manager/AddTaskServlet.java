@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Time;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,14 +22,14 @@ import java.util.List;
  * @author nlelyak
  * @version 1.00 2014-03-21
  */
-@WebServlet("/pages/manager/project")
+@WebServlet("/manager/project")
 @MultipartConfig
 public class AddTaskServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(AddTaskServlet.class);
     private TaskService taskService;
     private List<Task> tasks;
     private static final String DATE_FORMAT = "MM/dd/yyyy";
-    private static DateFormat format = new SimpleDateFormat("hh:mm:ss");
+//    private static DateFormat format = new SimpleDateFormat("hh:mm:ss");
 
     @Override
     public void init() throws ServletException {
@@ -82,8 +80,8 @@ public class AddTaskServlet extends HttpServlet {
         String description = (!ValidationUtils.isNullOrEmpty(request.getParameter("task_description-" + id)))
                 ? request.getParameter("task_description-" + id) : task.getDescription();
         String state = request.getParameter("state-" + id);
-        Time estimateTime = (request.getParameter("estimate_time-" + id) != null)
-                ? new Time(format.parse(request.getParameter("estimate_time-" + id)).getTime())
+        int estimateTime = (request.getParameter("estimate_time-" + id) != null)
+                ? Integer.parseInt(request.getParameter("estimate_time-" + id))
                 : task.getEstimateTime();
         Date startDate = (request.getParameter("start_date-" + id) != null)
                 ? new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("start_date-" + id))

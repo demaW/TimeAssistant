@@ -1,6 +1,10 @@
 package com.java.task11.webapp;
 
-import java.io.IOException;
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.service.UserService;
+import com.java.task11.model.User;
+import com.java.task11.utils.ValidationUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -8,13 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
-
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.service.UserService;
-import com.java.task11.model.User;
-import com.java.task11.utils.ValidationUtils;
+import java.io.IOException;
 
 /**
  * @author nlelyak
@@ -23,9 +21,7 @@ import com.java.task11.utils.ValidationUtils;
 @WebServlet("/edit")
 @MultipartConfig
 public class EditProfileServlet extends HttpServlet {
-
     private static Logger log = Logger.getLogger(EditProfileServlet.class);
-    private static final String DATA_DIRECTORY = "img/employees";
     private UserService employeeService;
     private User user;
 

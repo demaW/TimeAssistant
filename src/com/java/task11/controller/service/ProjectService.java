@@ -1,18 +1,18 @@
 package com.java.task11.controller.service;
 
-import java.util.List;
-
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.Project;
+
+import javax.servlet.http.HttpServlet;
+import java.util.List;
 
 
 public class ProjectService implements IBaseService<Project> {
 
 	@Override
 	public Project getByID(Integer id) throws DAOException {
-			return DAOFactory.getInstance().getProjectDAO()
-					.getByPrimaryKey(id);
+			return DAOFactory.getInstance().getProjectDAO().getByPrimaryKey(id);
 	}
 
 	@Override
@@ -40,5 +40,8 @@ public class ProjectService implements IBaseService<Project> {
 		return DAOFactory.getInstance().getProjectDAO().getByProjectName(projectName);
 	}
 
-  
+    public void delete(int projectId, HttpServlet servlet) throws DAOException {
+        Project project = getByID(projectId);
+        delete(project);
+    }
 }

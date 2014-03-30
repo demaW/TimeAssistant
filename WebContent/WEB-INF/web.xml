@@ -11,7 +11,7 @@
     <url-pattern>/admin/*</url-pattern>
     <url-pattern>/manager/*</url-pattern>
   </filter-mapping>
-  <jsp-config>
+    <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
       <page-encoding>UTF-8</page-encoding>

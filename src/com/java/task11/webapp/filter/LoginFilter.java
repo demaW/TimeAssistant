@@ -26,19 +26,15 @@ public class LoginFilter implements Filter {
 				if (user.getRoleId().equals(3)) {
 					chain.doFilter(request, response);
 				} else {
-					httpRequest
-							.setAttribute("loginErrors", "You are not admin");
-					
+					httpRequest.setAttribute("loginErrors", "You are not admin");
 					httpRequest.getRequestDispatcher("/login").forward(httpRequest, httpResponse);
 				}
 			} else if (httpRequest.getRequestURI().contains("/manager/")) {
 				if (user.getRoleId().equals(2)) {
 					chain.doFilter(request, response);
 				} else {
-					httpRequest.setAttribute("loginErrors",
-							"You are not manager");
-					httpRequest.getRequestDispatcher("/login")
-							.forward(httpRequest, httpResponse);
+					httpRequest.setAttribute("loginErrors", "You are not manager");
+					httpRequest.getRequestDispatcher("/login").forward(httpRequest, httpResponse);
 				}
 			} else if (httpRequest.getRequestURI().contains("/user/")) {
 				if (user.getRoleId().equals(1)) {
@@ -46,7 +42,6 @@ public class LoginFilter implements Filter {
 				} else {
 					httpRequest.setAttribute("loginErrors", "You are not user");
 					httpRequest.getRequestDispatcher("/login").forward(httpRequest, httpResponse);
-					
 				}
 			} else {
 				chain.doFilter(request, response);
