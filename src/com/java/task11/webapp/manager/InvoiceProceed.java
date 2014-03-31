@@ -36,8 +36,8 @@ public class InvoiceProceed extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// int projectId = Integer.parseInt(request.getParameter("projectId"));
-		int projectID = 1;
+		int projectID = Integer.parseInt(request.getParameter("projectID"));
+		//int projectID = 1;
 		Double sumCost = new Double(0);
 		Double planedSumCost = new Double(0);
 		Project project = null;
