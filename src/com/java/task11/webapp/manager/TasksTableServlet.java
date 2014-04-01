@@ -94,7 +94,7 @@ public class TasksTableServlet extends HttpServlet {
         }
         // todo fix redirect to doGet() => it should have project_id!
         if (!userId.isEmpty()) {
-            response.sendRedirect(new StringBuilder().append("/manager/taskstable?").append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
+            response.sendRedirect(new StringBuffer().append("/manager/taskstable?").append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
 //            return;
         }
 //        doGet(request, response);

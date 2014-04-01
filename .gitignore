@@ -32,7 +32,8 @@ Desktop.ini
 ######################
 # Eclipse
 ######################
- 
+.classpath
+.project
 *.pydevproject
 .metadata
 bin/**
