@@ -6,7 +6,7 @@
        value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
-<fmt:setBundle basename="com.java.task11.i18n.text_en_US"/>
+<fmt:setBundle basename="com.java.task11.i18n.text"/>
 
 <html lang="${language}">
 <head>
@@ -27,7 +27,7 @@
                 <div class="login-form col-md-4 col-sm-8 col-xs-12 col-md-offset-1 col-sm-offset-1">
                     <form action="registration" method="post">
                         <div class="form-group">
-                            <c:forEach items="${registrationErrors}" var="error">
+                            <c:forEach items="${requestScope.registrationErrors}" var="error">
                                 <p class="error">${error}</p>
                             </c:forEach>
                         </div>

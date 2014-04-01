@@ -6,14 +6,15 @@
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
 	scope="session" />
 <fmt:setLocale value="${language}" />
-<fmt:setBundle basename="com.java.task11.i18n.text_en_US" />
+<fmt:setBundle basename="com.java.task11.i18n.text" />
 
 <html lang="${language}">
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
     <title>add project</title>
-    <jsp:include page="../parts/header.jsp" />
+    <jsp:include page="header.jsp" />
 </head>
+
 <body>
 	<div class="container">
 		<form action="/TimeAssistant/pages/manager/addproject" method="post">

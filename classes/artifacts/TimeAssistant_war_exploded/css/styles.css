@@ -1,16 +1,12 @@
 /* GENERAL */
 body{
-    font-family: 'Lobster Cabin', sans-serif;
+    font-family: 'Varela Round', sans-serif;
 }
-h1 {
-    font-family: 'Lobster', Georgia, Times, serif;
-    font-size: 70px;
-    line-height: 100px;
-}
-p {
-    font-family: 'Cabin', Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 25px;
+h3 {
+    color: #555;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: .3em;
 }
 .error {
     font-size: 0.8em;
@@ -172,9 +168,6 @@ p {
 .tile {
     margin-bottom: 20px;
 }
-.tour-image {
-    height: 150px;
-}
 .tile-title {
     height: 30px;
     letter-spacing: normal;
@@ -183,13 +176,6 @@ p {
 .tile p {
     margin-top: 20px;
     line-height: normal;
-}
-.tour-type {
-    margin: -5px 0 5px;
-    font-size: 0.7em;
-    text-transform: uppercase;
-    color: #898989;
-    letter-spacing: normal;
 }
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;

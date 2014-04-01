@@ -10,7 +10,7 @@
     <link href="../../css/flat-ui.css" rel="stylesheet">
     <title>Manager welcome page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <jsp:include page="../parts/header.jsp" />
+    <jsp:include page="header.jsp" />
 </head>
 <body>
 
