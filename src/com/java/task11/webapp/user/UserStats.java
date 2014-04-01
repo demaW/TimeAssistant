@@ -1,7 +1,6 @@
 package com.java.task11.webapp.user;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.service.HourService;
 import com.java.task11.controller.service.TaskService;
+import com.java.task11.model.Hour;
 import com.java.task11.model.Task;
 import com.java.task11.model.User;
-import com.java.task11.utils.TimeUtils;
 
 @WebServlet("/user/stats")
 public class UserStats extends HttpServlet {
@@ -42,15 +42,18 @@ public class UserStats extends HttpServlet {
 				summaryRealTime += task.getRealTime();
 				summaryEstimateTime += task.getEstimateTime();
 			}
-			
+
 			request.setAttribute("estimate_time_summ", summaryEstimateTime);
 			request.setAttribute("real_time_summ", summaryRealTime);
-			
+
+			List<Hour> hours = new HourService().getByUserId(userId);
+
+			request.setAttribute("hours", hours);
+
 			request.getRequestDispatcher("/pages/user/userStats.jsp").forward(
 					request, response);
 
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
