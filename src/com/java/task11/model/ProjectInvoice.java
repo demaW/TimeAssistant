@@ -3,6 +3,7 @@ package com.java.task11.model;
 
 public class ProjectInvoice {
 private String taskName;
+private String taskState;
 private String firstName;
 private String lastName;
 private String position;
@@ -65,6 +66,12 @@ public double getPlanedCostPerEmployee() {
 }
 public void setPlanedCostPerEmployee() {
 	this.planedCostPerEmployee = getSalaryRate() * getPlanedTime();
+}
+public String getTaskState() {
+	return taskState;
+}
+public void setTaskState(String taskState) {
+	this.taskState = taskState;
 }
 
 

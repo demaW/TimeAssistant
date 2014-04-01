@@ -6,13 +6,16 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/flat-ui.css"/>
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/styles.css" />
 
-<script src="${pageContext.request.contextPath}/js/application.js"></script>
+
+<script src="${pageContext.request.contextPath}/js/jquery-2.0.3.min.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
+<script src="${pageContext.request.contextPath}/js/application.js"></script> --%>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-select.js"></script>
 <script src="${pageContext.request.contextPath}/js/classie.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery-2.0.3.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/modernizr.custom.js"></script>
-<script src="${pageContext.request.contextPath}/js/scripts.js"></script>
+
 
 <body>
 	<!-- NAVBAR -->
@@ -33,7 +36,7 @@
                     <a href="${pageContext.request.contextPath}/pages/manager/addTask.jsp">Tasks</a>
                 </li>
                 <%--todo implement this fakelink--%>
-				<li><a href="#fakelink">Employees</a></li>
+				<li><a href="${pageContext.request.contextPath}/manager/users">Employees</a></li>
 				<li><a href="#fakelink">other Features</a></li>
 			</ul>
 			<div class="navbar-form navbar-right lang">
