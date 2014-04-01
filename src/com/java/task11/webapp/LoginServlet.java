@@ -4,6 +4,7 @@ import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
 import com.java.task11.utils.MD5Utils;
+import com.java.task11.utils.ParameterUtils;
 import com.java.task11.utils.ValidationUtils;
 import org.apache.log4j.Logger;
 
@@ -31,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding(ParameterUtils.UTF_8);
         try {
             HttpSession session = request.getSession();
             String email = request.getParameter("email");

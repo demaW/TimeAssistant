@@ -34,9 +34,11 @@ public class TasksTableServlet extends HttpServlet {
     private List<Task> tasks;
     private List<User> users;
     private static final String DATE_FORMAT = "yy-mm-dd";
+    private String userId;
 
     public static final String ATTRIBUTE_TASKS_TO_MODEL = "tasksList";
     public static final String ATTRIBUTE_USERS_TO_MODEL = "usersList";
+    public static final String ATTRIBUTE_USERS_ASSIGNED_TO_PROJECT = "assignedUsers";
     public static final String ATTRIBUTE_PROJECT_ID = "project_id";
     public static final String PAGE_OK = "/pages/manager/tasksTable.jsp";
 
@@ -50,8 +52,12 @@ public class TasksTableServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             if (request.getParameter(ATTRIBUTE_PROJECT_ID) != null) {
-                String id = request.getParameter(ATTRIBUTE_PROJECT_ID);
-                request.setAttribute(ATTRIBUTE_PROJECT_ID, id);
+                userId = request.getParameter(ATTRIBUTE_PROJECT_ID);
+                List<User> userList = userService.getUsersByProjectId(Integer.valueOf(userId));
+
+                request.setAttribute(ATTRIBUTE_USERS_ASSIGNED_TO_PROJECT, userList);
+                request.setAttribute(ATTRIBUTE_PROJECT_ID, userId);
+
                 updateTable(request);
                 if (!tasks.isEmpty()) {
                     request.setAttribute(ATTRIBUTE_TASKS_TO_MODEL, tasks);
@@ -70,7 +76,7 @@ public class TasksTableServlet extends HttpServlet {
 
     private void updateTable(HttpServletRequest request) {
         try {
-            int id = Integer.parseInt(request.getParameter("project_id"));
+            int id = Integer.parseInt(request.getParameter(ATTRIBUTE_PROJECT_ID));
             tasks = taskService.getByProjectId(id);
             users = userService.getListOfObjects();
         } catch (DAOException e) {
@@ -86,7 +92,12 @@ public class TasksTableServlet extends HttpServlet {
         } else if (request.getParameter(ParameterUtils.PARAM_UPDATE) != null) {
             updateTask(request);
         }
-        doGet(request, response);
+        // todo fix redirect to doGet() => it should have project_id!
+        if (!userId.isEmpty()) {
+            response.sendRedirect(new StringBuilder().append("/manager/taskstable?").append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
+//            return;
+        }
+//        doGet(request, response);
     }
 
     private void updateTask(HttpServletRequest request) {
@@ -108,6 +119,8 @@ public class TasksTableServlet extends HttpServlet {
             Date endDate = (request.getParameter("end_date-" + id) != null)
                     ? new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("end_date-" + id))
                     : task.getStartDate();
+//            User assignedUser = userService.getByID(Integer.valueOf(request.getParameter("assigned-" + id)));
+//            int assignedId = Integer.valueOf(request.getParameter("user_id-"));
 
             task.setTitle(name);
             task.setDescription(description);
@@ -115,6 +128,7 @@ public class TasksTableServlet extends HttpServlet {
             task.setStartDate(startDate);
             task.setEndDate(endDate);
             task.setEstimateTime(estimateTime);
+//            task.setEmployeeId(assignedId);
 
             taskService.update(task);
         } catch (DAOException | ParseException e) {

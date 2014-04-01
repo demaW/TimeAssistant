@@ -176,6 +176,17 @@
                                                            name="end_date-${task.taskId}" id="endDate" type="date"
                                                            value="${task.endDate}"/>
                                                 </div>
+                                                <%--<div class="form-group">
+                                                    <span><fmt:message key="task.assignee"/></span>
+                                                    <select name="assigned-${task.taskId}" class="select-block"
+                                                            form="tasks-form">
+                                                        <c:forEach var="assignedUser" items="${requestScope.assignedUsers}">
+                                                            <option value="user_id-${assignedUser.id}">
+                                                                <c:out value="${assignedUser.firstName} ${assignedUser.lastName}"/>
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>--%>
                                                 <div class="form-group">
                                                     <button class="btn btn-primary btn-lg btn-block" name="update"
                                                             type="submit" value="${task.taskId}">
