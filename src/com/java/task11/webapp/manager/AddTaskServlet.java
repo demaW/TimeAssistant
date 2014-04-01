@@ -18,13 +18,14 @@ import java.util.List;
 @WebServlet("/manager/addTask")
 public class AddTaskServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(AddTaskServlet.class);
+    private Integer projectId;
 
     public static final String PAGE_ADD_TASK = "/pages/manager/addTask.jsp";
     public static final String PAGE_SEE_TASKS = "/pages/manager/tasksTable.jsp";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Integer projectId = Integer.parseInt(request.getParameter("project_id"));
+			projectId = Integer.parseInt(request.getParameter("project_id"));
             List<User> usersAssignedToProject = new UserService().getUsersByProjectId(projectId);
 
             request.setAttribute("project_id", projectId);
@@ -56,7 +57,8 @@ public class AddTaskServlet extends HttpServlet {
 		}
 		
 		//redirect to projects page
-        request.getRequestDispatcher("/pages/manager/tasksTable.jsp").forward(request, response);
+        response.sendRedirect("/manager/taskstable?project_id=" + projectId);
+//        request.getRequestDispatcher("/pages/manager/tasksTable.jsp").forward(request, response);
     }
 
 }

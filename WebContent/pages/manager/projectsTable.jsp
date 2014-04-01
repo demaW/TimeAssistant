@@ -17,10 +17,16 @@
 <body>
     <!-- CONTENT -->
     <div class="container-fluid users-table">
-        <div class="col-md-10 col-sm-12 col-xs-12 col-md-offset-1 tables-menu">
-            <div class="row">
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/manager/addproject">
-                    <fmt:message key="button.addProject"/></a>
+        <div class="row">
+            <div class="col-md-10 col-sm-12 col-xs-12 col-md-offset-1 tables-menu">
+                <div class="row">
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/manager/addproject">
+                        <fmt:message key="button.addProject"/>
+                    </a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/manager/addTask">
+                        <fmt:message key="button.addTask"/>
+                    </a>
+                </div>
             </div>
         </div>
     <br/><br/>
@@ -38,6 +44,7 @@
                     <th><fmt:message key="project.description" /></th>
                     <th><fmt:message key="project.notes"/></th>
                     <th><fmt:message key="project.tasks"/></th>
+                    <th><fmt:message key="project.invoice"/></th>
                 </tr>
                 </thead>
 
@@ -56,6 +63,9 @@
                         <td>${project.notes}</td>
                         <td><a href="${pageContext.request.contextPath}/manager/taskstable?project_id=${project.id}"
                             class="btn btn-info btn-xs"><fmt:message key="project.see.tasks"/></a>
+                        </td>
+                        <td><a href="${pageContext.request.contextPath}/manager/invoice?project_id=${project.id}"
+                               class="btn btn-info btn-xs"><fmt:message key="project.see.invoice"/></a>
                         </td>
                         <%--EDIT PROJECT INFO--%>
                         <td>

@@ -16,11 +16,24 @@
 </head>
 
 <body>
+    <%--todo add opportunity to choose project / fix task creation --%>
 	<!-- CONTENT -->
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/manager/addTask" method="post">
 			<input type="hidden">
 			<table class="table">
+                <tr>
+                    <td>Project:</td>
+                    <td>
+                        <select name="assigned_project">
+                            <c:forEach var="project" items="${sessionScope.projects}">
+                                <option value="${project.id}">
+                                    <c:out value="${project.projectName}"/>
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
 				<tr>
 					<td>Title:</td>
 					<td>
@@ -50,7 +63,7 @@
 						class="btn btn-danger">Cancel</a></td>
 					<td>
 						<button name="submit" type="submit" class="btn btn-primary"
-							value="Submit">Add</button>
+							value="Submit"><fmt:message key="button.addTask"/></button>
 					</td>
 				</tr>
 			</table>
