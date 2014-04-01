@@ -24,7 +24,7 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
-
+<!-- 
     <security-constraint>
         <display-name>Restrict direct access to certain folders</display-name>
         <web-resource-collection>
@@ -38,7 +38,7 @@
         <location>/pages/errorPage.jsp</location>
     </error-page>
 
-    <!-- 		 <error-page>
+    		 <error-page>
               <exception-type>java.lang.Throwable</exception-type>
               <location>/pages/errorPage.jsp</location>
               </error-page>

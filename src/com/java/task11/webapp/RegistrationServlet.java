@@ -59,7 +59,7 @@ public class RegistrationServlet extends HttpServlet {
             user.setEmail(email);
             user.setEncryptedPassword(password);
             user.setPosition(position);
-
+            user.setRoleId(1);
             try {
 				employeeService.save(user);
 			} catch (DAOException e) {
