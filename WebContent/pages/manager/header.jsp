@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/logo-url.png"/>
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/flat-ui.css"/>
@@ -25,7 +26,10 @@
 				data-target="#navbar-collapse-01">
 				<span class="sr-only">Toggle navigation</span>
 			</button>
-			<a class="navbar-brand" href="#">TimeAssistant</a>
+			<%--<a class="navbar-brand" href="#">TimeAssistant</a>--%>
+            <a class="navbar-brand logo-nav" href="<c:url value="/manager/projectstable"/>">
+                <img src="../img/logo.png">
+            </a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">

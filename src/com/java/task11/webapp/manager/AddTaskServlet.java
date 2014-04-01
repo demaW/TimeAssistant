@@ -88,7 +88,7 @@ public class AddTaskServlet extends HttpServlet {
             return;
         }
 //        request.getRequestDispatcher("/pages/manager/projectsTable.jsp").forward(request, response);
-        response.sendRedirect("/manager/projectstable");
+        response.sendRedirect(request.getContextPath() + "/manager/projectstable");
     }
 
 }
