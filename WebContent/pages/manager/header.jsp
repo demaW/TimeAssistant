@@ -36,7 +36,7 @@
                     <a href="${pageContext.request.contextPath}/pages/manager/addTask.jsp">Tasks</a>
                 </li>
                 <%--todo implement this fakelink--%>
-				<li><a href="#fakelink">Employees</a></li>
+				<li><a href="${pageContext.request.contextPath}/manager/users">Employees</a></li>
 				<li><a href="#fakelink">other Features</a></li>
 			</ul>
 			<div class="navbar-form navbar-right lang">
