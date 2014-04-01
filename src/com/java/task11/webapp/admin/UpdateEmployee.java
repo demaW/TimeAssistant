@@ -37,26 +37,25 @@ public class UpdateEmployee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("notification")==null) 
-			{
+		if (request.getParameter("notification") == null) {
 			String contextPath = request.getContextPath();
 			response.sendRedirect(contextPath + "/admin/users");
 			return;
-			}
+		}
 		int id = Integer.parseInt(request.getParameter("notification"));
 		try {
 			User userToEdit = new UserService().getByID(id);
 			UserRole role = new RoleService().getByID(userToEdit.getRoleId());
-			
+
 			request.setAttribute("role", role);
 			request.setAttribute("userToEdit", userToEdit);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher("/pages/admin/edituser.jsp")
-		.forward(request, response);
+
+		request.getRequestDispatcher("/pages/admin/edituser.jsp").forward(
+				request, response);
 	}
 
 	/**
@@ -78,21 +77,22 @@ public class UpdateEmployee extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		System.out.println(id);
 		UserService employeeService = new UserService();
-		
+
 		try {
 			User user = employeeService.getByID(id);
 			employeeService.delete(employeeService.getByID(id));
-			if(request.getParameter("mailNotification") != null && request.getParameter("mailNotification").equals("yes" ))
-			{
-			String email = request.getParameter("email");
-			String messageText = "Your account was updated" +"\n"+ user.toString(); 
-			EmailUtil emailUtil = new EmailUtil();
-			emailUtil.sendMail(email, messageText);
+			if (request.getParameter("mailNotification") != null
+					&& request.getParameter("mailNotification").equals("yes")) {
+				String email = request.getParameter("email");
+				String messageText = "Your account was updated" + "\n"
+						+ user.toString();
+				EmailUtil emailUtil = new EmailUtil();
+				emailUtil.sendMail(email, messageText);
 			}
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-		
+
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");
 	}
@@ -106,43 +106,53 @@ public class UpdateEmployee extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String position = request.getParameter("position");
-		Double salaryRate = Double.parseDouble(request.getParameter("salaryRate"));
-		String role = request.getParameter("role"); 
+		Double salaryRate = Double.parseDouble(request
+				.getParameter("salaryRate"));
+		String role = request.getParameter("role");
 		int roleId = 1;
-	        if (role.equals("user")) {
-				roleId = 1;
-			}else if (role.equals("manager")) {
-				roleId = 2;
-			} else if (role.equals("admin")) {
-				roleId = 3;
-			}
-		
+		if (role.equals("user")) {
+			roleId = 1;
+		} else if (role.equals("manager")) {
+			roleId = 2;
+		} else if (role.equals("admin")) {
+			roleId = 3;
+		}
+
 		UserService employeeService = new UserService();
-		User user = new User();
-	
+		User user = null;
+		try {
+			user = employeeService.getByID(id);
+		} catch (DAOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		user.setId(id);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
-		user.setEncryptedPassword(password);
+		if (password == null) {
+			user.setEncryptedPassword(password);
+		}
 		user.setPosition(position);
 		user.setRoleId(roleId);
 		user.setSalaryRate(salaryRate);
-		
+
 		try {
 			employeeService.update(user);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		if(request.getParameter("mailNotification") != null && request.getParameter("mailNotification").equals("yes" ))
-			{
-			String messageText = "Your account was updated" +"\n"+ user.toString(); 
+
+		if (request.getParameter("mailNotification") != null
+				&& request.getParameter("mailNotification").equals("yes")) {
+			String messageText = "Your account was updated" + "\n"
+					+ user.toString();
 			EmailUtil emailUtil = new EmailUtil();
 			emailUtil.sendMail(email, messageText);
-			}
-		
+		}
+
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");
 	}

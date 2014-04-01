@@ -43,7 +43,7 @@ function validate() {
 				<tr>
 					<td><fmt:message key="user.password" /></td>
 					<td><input type="text" name="password"
-						value="${userToEdit.password}" required id="password"></td>
+						 id="password"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.firstName" /></td>
