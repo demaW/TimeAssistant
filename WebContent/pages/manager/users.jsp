@@ -37,8 +37,8 @@
                     <tr>
                       
                         <td>${user.id}</td>
-                        <td>${user.position}</td>
                         <td>${user.firstName} ${user.lastName}</td>
+                        <td>${user.position}</td>
                         <td>${user.email}</td>
                         <td>${user.salaryRate}</td>
                                                 
