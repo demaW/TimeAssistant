@@ -19,7 +19,7 @@
 
 <body>
 <div class = "container">
-	<div class="center-block">
+	<div style="text-align: center;">
 	<img  src="${pageContext.request.contextPath}/img/time_logo.png" width="300">
 	</div>
 	<h1  style = "text-align: center"> Welcome to admin page</h1> <br>
