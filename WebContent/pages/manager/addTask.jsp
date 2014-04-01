@@ -23,10 +23,10 @@
 			<input type="hidden">
 			<table class="table">
                 <tr>
-                    <td>Project:</td>
+                    <td>Belongs to Project:</td>
                     <td>
-                        <select name="assigned_project">
-                            <c:forEach var="project" items="${sessionScope.projects}">
+                        <select name="project_id">
+                            <c:forEach var="project" items="${requestScope.projectList}">
                                 <option value="${project.id}">
                                     <c:out value="${project.projectName}"/>
                                 </option>

@@ -1,8 +1,10 @@
 package com.java.task11.webapp.manager;
 
 import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.service.ProjectService;
 import com.java.task11.controller.service.TaskService;
 import com.java.task11.controller.service.UserService;
+import com.java.task11.model.Project;
 import com.java.task11.model.Task;
 import com.java.task11.model.User;
 import org.apache.log4j.Logger;
@@ -18,21 +20,45 @@ import java.util.List;
 @WebServlet("/manager/addTask")
 public class AddTaskServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(AddTaskServlet.class);
+    private UserService userService;
+    private ProjectService projectService;
+    private List<User> usersList;
+    private List<Project> projectList;
     private Integer projectId;
 
     public static final String PAGE_ADD_TASK = "/pages/manager/addTask.jsp";
     public static final String PAGE_SEE_TASKS = "/pages/manager/tasksTable.jsp";
 
+    @Override
+    public void init() throws ServletException {
+        try {
+            userService = new UserService();
+            projectService = new ProjectService();
+            projectList = projectService.getListOfObjects();
+        } catch (DAOException e) {
+            log.error(e);
+        }
+    }
+
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			projectId = Integer.parseInt(request.getParameter("project_id"));
-            List<User> usersAssignedToProject = new UserService().getUsersByProjectId(projectId);
+            if (request.getParameter("project_id") != null) {
+                projectId = Integer.parseInt(request.getParameter("project_id"));
+                usersList = userService.getUsersByProjectId(projectId);
 
-            request.setAttribute("project_id", projectId);
-			request.setAttribute("users_in_project", usersAssignedToProject);
+                request.setAttribute("project_id", projectId);
+            } else {
+                usersList = userService.getListOfObjects();
+            }
 
-			request.getRequestDispatcher(PAGE_ADD_TASK).forward(request, response);
-		} catch (NumberFormatException | DAOException e) {
+            if (!projectList.isEmpty()) {
+                request.setAttribute("projectList", projectList);
+            }
+
+            request.setAttribute("users_in_project", usersList);
+            request.getRequestDispatcher(PAGE_ADD_TASK).forward(request, response);
+        } catch (NumberFormatException | DAOException e) {
 			log.error(e);
             request.getRequestDispatcher(PAGE_SEE_TASKS).forward(request, response);
         }
@@ -57,8 +83,12 @@ public class AddTaskServlet extends HttpServlet {
 		}
 		
 		//redirect to projects page
-        response.sendRedirect("/manager/taskstable?project_id=" + projectId);
-//        request.getRequestDispatcher("/pages/manager/tasksTable.jsp").forward(request, response);
+        if (projectId != null) {
+            response.sendRedirect("/manager/taskstable?project_id=" + projectId);
+            return;
+        }
+//        request.getRequestDispatcher("/pages/manager/projectsTable.jsp").forward(request, response);
+        response.sendRedirect("/manager/projectstable");
     }
 
 }
