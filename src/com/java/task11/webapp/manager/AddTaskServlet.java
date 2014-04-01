@@ -7,6 +7,7 @@ import com.java.task11.controller.service.UserService;
 import com.java.task11.model.Project;
 import com.java.task11.model.Task;
 import com.java.task11.model.User;
+
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -81,14 +83,15 @@ public class AddTaskServlet extends HttpServlet {
 		} catch (DAOException e) {
             log.error(e);
 		}
-		
+		String contextPath = request.getContextPath();
 		//redirect to projects page
         if (projectId != null) {
-            response.sendRedirect("/manager/taskstable?project_id=" + projectId);
+        	
+            response.sendRedirect(contextPath+"/manager/taskstable?project_id=" + projectId);
             return;
         }
 //        request.getRequestDispatcher("/pages/manager/projectsTable.jsp").forward(request, response);
-        response.sendRedirect(request.getContextPath() + "/manager/projectstable");
+        response.sendRedirect(contextPath+"/manager/projectstable");
     }
 
 }

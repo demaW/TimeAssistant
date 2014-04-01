@@ -11,39 +11,223 @@
 
 <html lang="${language}">
 <head>
-    <title>User Profile</title>
-    <jsp:include page="import.jsp" />
+<title>User Profile</title>
+<jsp:include page="import.jsp" />
 
-    <!-- GRAPH SCRIPT -->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        google.load("visualization", "1", {
-            packages : [ "corechart" ]
-        });
-        google.setOnLoadCallback(drawChart);
-        function drawChart() {
+<!-- GRAPH SCRIPT -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/amcharts/amcharts.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/amcharts/serial.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/amcharts/themes/light.js"></script>
+<script type="text/javascript">
+	var chart;
+	var chartCursor;
 
-            var values = [ [ 'Task', 'Tasks per Day' ] ];
+	var chartLineData = [];
+	//AmCharts.theme = AmCharts.themes.light;
+	AmCharts.ready(function() {
+		drawBarChart();
+		drawLineChart();
+	});
 
-            var table = document.getElementById('data');
-            for (var r = 0, n = table.rows.length; r < n; r++) {
-                values.push([ table.rows[r].cells[0].innerHTML,
-                        parseInt(table.rows[r].cells[1].innerHTML, 10) ]);
-            }
+	function drawBarChart() {
+		// SERIAL CHART
+		chart = new AmCharts.AmSerialChart();
+		chart.dataProvider = getBarChartData();
+		chart.categoryField = "category";
+		chart.marginRight = 20;
+		chart.marginTop = 20;
+		chart.marginLeft = 20;
+		chart.marginBottom = 20;
+		chart.autoMarginOffset = 0;
 
-            var data = google.visualization.arrayToDataTable(values);
+		// the following two lines makes chart 3D
+		chart.depth3D = 0;
+		chart.angle = 0;
 
-            var options = {
-                title : 'My tasks on today',
-                pieHole : 0.4,
-            };
+		// AXES
+		// category
+		var categoryAxis = chart.categoryAxis;
+		categoryAxis.dashLength = 5;
+		categoryAxis.gridPosition = "start";
 
-            var chart = new google.visualization.PieChart(document
-                    .getElementById('donutchart'));
-            chart.draw(data, options);
-            table.style.display = "none";
-        }
-    </script>
+		// value
+		var valueAxis = new AmCharts.ValueAxis();
+		valueAxis.title = "Hours";
+		valueAxis.dashLength = 5;
+		chart.addValueAxis(valueAxis);
+
+		// GRAPH            
+		var graph = new AmCharts.AmGraph();
+		graph.valueField = "value";
+		graph.colorField = "color";
+		graph.balloonText = "Finished tasks [[category]]: [[value]]";
+		graph.type = "column";
+		graph.lineAlpha = 0;
+		graph.fillAlphas = 0.6;
+		chart.addGraph(graph);
+
+		// WRITE
+		chart.write("barchart");
+	}
+
+	function getBarChartData() {
+		var chartData = [];
+
+		var table = document.getElementById('totalfinisheddata');
+
+		var category = 'Real time';
+		var value = parseInt(table.rows[0].cells[1].innerHTML, 10);
+		var color = "#ADD981";
+		chartData.push({
+			category : category,
+			value : value,
+			color : color
+		});
+
+		var category = 'Estimate time';
+		var value = parseInt(table.rows[1].cells[1].innerHTML, 10);
+		var color = "#81acd9";
+		chartData.push({
+			category : category,
+			value : value,
+			color : color
+		});
+
+		table.style.display = "none"; // hide table
+
+		return chartData;
+	}
+
+	// LINE CHART
+
+	function drawLineChart() {
+		// get some data first
+		getLineChartData();
+		// SERIAL CHART
+		chart = new AmCharts.AmSerialChart();
+		chart.pathToImages = location.protocol + '//' + location.host
+				+ "/TimeAssistant/js/amcharts/images/";
+		chart.dataProvider = chartLineData;
+		chart.categoryField = "date";
+		chart.balloon.bulletSize = 5;
+
+		// listen for "dataUpdated" event (fired when chart is rendered) and call zoomChart method when it happens
+		chart.addListener("dataUpdated", zoomChart);
+
+		// AXES
+		// category
+		var categoryAxis = chart.categoryAxis;
+		categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
+		categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
+		categoryAxis.dashLength = 1;
+		categoryAxis.minorGridEnabled = true;
+		categoryAxis.twoLineMode = true;
+		categoryAxis.dateFormats = [ {
+			period : 'fff',
+			format : 'JJ:NN:SS'
+		}, {
+			period : 'ss',
+			format : 'JJ:NN:SS'
+		}, {
+			period : 'mm',
+			format : 'JJ:NN'
+		}, {
+			period : 'hh',
+			format : 'JJ:NN'
+		}, {
+			period : 'DD',
+			format : 'DD'
+		}, {
+			period : 'WW',
+			format : 'DD'
+		}, {
+			period : 'MM',
+			format : 'MMM'
+		}, {
+			period : 'YYYY',
+			format : 'YYYY'
+		} ];
+
+		categoryAxis.axisColor = "#DADADA";
+
+		// value
+		var valueAxis = new AmCharts.ValueAxis();
+		valueAxis.axisAlpha = 0;
+		valueAxis.dashLength = 1;
+		valueAxis.title = "Hours";
+		chart.addValueAxis(valueAxis);
+
+		// GRAPH
+		var graph = new AmCharts.AmGraph();
+		graph.type = "smoothedLine";
+		graph.title = "red line";
+		graph.valueField = "visits";
+		graph.bullet = "round";
+		graph.bulletBorderColor = "#FFFFFF";
+		graph.bulletBorderThickness = 2;
+		graph.bulletBorderAlpha = 1;
+		graph.lineThickness = 2;
+		graph.lineColor = "#5fb503";
+		graph.negativeLineColor = "#efcc26";
+		graph.connect = false; // this makes the graph not to connect data points if data is missing
+		graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
+		chart.addGraph(graph);
+
+		// CURSOR
+		chartCursor = new AmCharts.ChartCursor();
+		chartCursor.cursorPosition = "mouse";
+		chartCursor.pan = true; // set it to fals if you want the cursor to work in "select" mode
+		chart.addChartCursor(chartCursor);
+
+		// SCROLLBAR
+		var chartScrollbar = new AmCharts.ChartScrollbar();
+		chart.addChartScrollbar(chartScrollbar);
+
+		chart.creditsPosition = "bottom-right";
+
+		// WRITE
+		chart.write("linechartdiv");
+	}
+
+	function getLineChartData() {
+
+		var table = document.getElementById('linedata');
+
+		for (var r = 0, n = table.rows.length; r < n; r++) {
+			var date = new Date(table.rows[r].cells[0].innerHTML);
+			var visits = parseInt(table.rows[r].cells[1].innerHTML, 10);
+
+			chartLineData.push({
+				date : date,
+				visits : visits
+			});
+		}
+
+		table.style.display = "none"; // hide table	
+	}
+
+	// this method is called when chart is first inited as we listen for "dataUpdated" event
+	function zoomChart() {
+		// different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+		chart
+				.zoomToIndexes(chartLineData.length - 40,
+						chartLineData.length - 1);
+	}
+
+	// changes cursor mode from pan to select
+	function setPanSelect() {
+		if (document.getElementById("rb1").checked) {
+			chartCursor.pan = false;
+			chartCursor.zoomable = true;
+		} else {
+			chartCursor.pan = true;
+		}
+		chart.validateNow();
+	}
+</script>
 </head>
 
 <body>
@@ -76,25 +260,43 @@
 
 	<!-- CONTENT -->
 	<div class="container">
-		<div id="donutchart"
-			style="width: 900px; height: 500px; margin: auto;"></div>
+		<!-- BAR CHART -->
+		<div id="barchart"
+			style="width: 400px; height: 500px; font-size: 12px;"></div>
+
+		<div id="linechartdiv" style="width: 100%; height: 400px;"></div>
+		<div style="margin-left: 35px;">
+			<input type="radio" name="group" id="rb1" onclick="setPanSelect()">Select
+			<input type="radio" checked="checked" name="group" id="rb2"
+				onclick="setPanSelect()">Pan
+		</div>
 	</div>
 
-	<!-- CHART DATA -->
-	<table id="data">
+
+
+	<!-- BAR CHART DATA -->
+	<table id="totalfinisheddata">
 		<tbody>
 			<tr>
-				<td>NEW</td>
-				<td>2</td>
+				<td>estimate</td>
+				<td><c:out value="${estimate_time_summ}" /></td>
 			</tr>
 			<tr>
-				<td>IN PROGRESS</td>
-				<td>1</td>
+				<td>real</td>
+				<td><c:out value="${real_time_summ}" /></td>
 			</tr>
-			<tr>
-				<td>FINISHED</td>
-				<td>1</td>
-			</tr>
+		</tbody>
+	</table>
+
+	<!-- LINE CHART DATA -->
+	<table id="linedata">
+		<tbody>
+			<c:forEach var="hour" items="${requestScope.hours}">
+				<tr>
+					<td><fmt:formatDate value="${hour.date}" pattern="yyyy,MM,dd" /></td>
+					<td><c:out value="${hour.hours}"></c:out></td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </body>

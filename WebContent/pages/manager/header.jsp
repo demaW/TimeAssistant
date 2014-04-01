@@ -37,11 +37,12 @@
                     <a href="${pageContext.request.contextPath}/manager/addproject">Add new project</a>
                 </li>
 				<li>
-                    <a href="${pageContext.request.contextPath}/pages/manager/addTask.jsp">Tasks</a>
+                    <a href="${pageContext.request.contextPath}/manager/addTask">Add task</a>
                 </li>
-                <%--todo implement this fakelink--%>
+               
 				<li><a href="${pageContext.request.contextPath}/manager/users">Employees</a></li>
 				<li><a href="#fakelink">other Features</a></li>
+				 <li><a href="${pageContext.request.contextPath}/manager/editProfile">Profile</a></li>
 			</ul>
 			<div class="navbar-form navbar-right lang">
                 ${sessionScope.user.firstName} ${sessionScope.user.lastName}
@@ -54,13 +55,7 @@
 		</div>
 	</nav>
 
-    <!-- PAGE NAV -->
-    <ul class="nav nav-tabs nav-justified">
-        <li class="active"><a href="${pageContext.request.contextPath}/manager/projectstable">Projects table</a></li>
-        <li><a href="${pageContext.request.contextPath}/manager/editProfile">Profile</a></li>
-        <%--todo implement statistic for manager--%>
-        <li><a href="${pageContext.request.contextPath}/manager/stats">Statistic</a></li>
-    </ul>
+    
     <br/>
 </body>
 
