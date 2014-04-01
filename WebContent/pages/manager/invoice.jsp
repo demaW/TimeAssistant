@@ -56,8 +56,9 @@
 		<option value ="all"  ${taskfilter == 'all' ? 'selected' :''}>All tasks</option>
 		<option value = "finished" ${taskfilter == 'finished' ? 'selected' :''}>Only finished tasks</option>
 		<option value = "inprogress" ${taskfilter == 'inprogress' ? 'selected' :''}>In progress</option>
-	
+		
 		</select>
+		<input type="hidden" id="projectID" name="projectID" value="${project.id }">
 		</form>
 		<div id="dvData">
 			<table id="testTable" class="table table-striped">
