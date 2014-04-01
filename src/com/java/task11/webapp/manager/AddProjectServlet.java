@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/manager/addproject")
-public class AddProject extends HttpServlet {
-    private static Logger log = Logger.getLogger(AddProject.class);
+public class AddProjectServlet extends HttpServlet {
+    private static Logger log = Logger.getLogger(AddProjectServlet.class);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/pages/manager/addproject.jsp").forward(request, response);
