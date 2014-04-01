@@ -1,22 +1,21 @@
 package com.java.task11.webapp;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.service.UserService;
+import com.java.task11.model.User;
+import com.java.task11.utils.ParameterUtils;
+import com.java.task11.utils.ValidationErrors;
+import com.java.task11.utils.ValidationUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
-
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.service.UserService;
-import com.java.task11.model.User;
-import com.java.task11.utils.ValidationErrors;
-import com.java.task11.utils.ValidationUtils;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author nlelyak
@@ -24,9 +23,6 @@ import com.java.task11.utils.ValidationUtils;
  */
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(RegistrationServlet.class);
     private UserService employeeService = new UserService();
@@ -38,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding(ParameterUtils.UTF_8);
         processRegistration(request, response);
     }
 
@@ -47,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
         String lastName = request.getParameter("last_name");
         
         String email = request.getParameter("email");
-        System.out.println(email);
+//        System.out.println(email);
         String password = request.getParameter("password");
         String position = request.getParameter("position");
 
@@ -67,9 +63,7 @@ public class RegistrationServlet extends HttpServlet {
             try {
 				employeeService.save(user);
 			} catch (DAOException e) {
-				// TODO Auto-generated catch block
 				log.error(e);
-				e.printStackTrace();
 			}
             
             String contextPath = request.getContextPath();
@@ -96,8 +90,7 @@ public class RegistrationServlet extends HttpServlet {
 			    registrationErrors.add(ValidationErrors.EMAIL_ALREADY_PRESENT);
 			}
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            log.error(e);
 		}
         if (ValidationUtils.isNullOrEmpty(password)) {
             registrationErrors.add(ValidationErrors.PASSWORD);

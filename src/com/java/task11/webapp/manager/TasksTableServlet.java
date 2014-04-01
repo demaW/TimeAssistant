@@ -2,7 +2,10 @@ package com.java.task11.webapp.manager;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.TaskService;
+import com.java.task11.controller.service.UserService;
 import com.java.task11.model.Task;
+import com.java.task11.model.User;
+import com.java.task11.utils.ParameterUtils;
 import com.java.task11.utils.ValidationUtils;
 import org.apache.log4j.Logger;
 
@@ -25,41 +28,51 @@ import java.util.List;
 @WebServlet("/manager/taskstable")
 @MultipartConfig
 public class TasksTableServlet extends HttpServlet {
-    private static Logger log = Logger.getLogger(AddTaskServlet.class);
+    private static Logger log = Logger.getLogger(TasksTableServlet.class);
     private TaskService taskService;
+    private UserService userService;
     private List<Task> tasks;
-    private static final String DATE_FORMAT = "MM/dd/yyyy";
+    private List<User> users;
+    private static final String DATE_FORMAT = "yy-mm-dd";
 
-    public static final String ATTRIBUTE_TO_MODEL = "tasksList";
+    public static final String ATTRIBUTE_TASKS_TO_MODEL = "tasksList";
+    public static final String ATTRIBUTE_USERS_TO_MODEL = "usersList";
+    public static final String ATTRIBUTE_PROJECT_ID = "project_id";
     public static final String PAGE_OK = "/pages/manager/tasksTable.jsp";
-    public static final String PAGE_ERROR_URL = "error";
 
     @Override
     public void init() throws ServletException {
         taskService = new TaskService();
+        userService = new UserService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if (request.getParameter("project_id") != null) {
+            if (request.getParameter(ATTRIBUTE_PROJECT_ID) != null) {
+                String id = request.getParameter(ATTRIBUTE_PROJECT_ID);
+                request.setAttribute(ATTRIBUTE_PROJECT_ID, id);
                 updateTable(request);
                 if (!tasks.isEmpty()) {
-                    request.setAttribute(ATTRIBUTE_TO_MODEL, tasks);
-                    request.getRequestDispatcher(PAGE_OK);
+                    request.setAttribute(ATTRIBUTE_TASKS_TO_MODEL, tasks);
+                    request.setAttribute(ATTRIBUTE_USERS_TO_MODEL, users);
+                    request.getRequestDispatcher(PAGE_OK).forward(request, response);
                     return;
                 }
+            } else {
+                response.sendRedirect("/manager/projectstable");
             }
         } catch (Exception e) {
             log.error(e);
         }
-        response.sendRedirect(PAGE_ERROR_URL);
+        response.sendRedirect(ParameterUtils.PAGE_MANAGER_ERROR);
     }
 
     private void updateTable(HttpServletRequest request) {
         try {
             int id = Integer.parseInt(request.getParameter("project_id"));
             tasks = taskService.getByProjectId(id);
+            users = userService.getListOfObjects();
         } catch (DAOException e) {
             log.error(e);
         }
@@ -67,10 +80,10 @@ public class TasksTableServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        if (request.getParameter("delete") != null) {
+        request.setCharacterEncoding(ParameterUtils.UTF_8);
+        if (request.getParameter(ParameterUtils.PARAM_DELETE) != null) {
             deleteTask(request);
-        } else if (request.getParameter("update") != null) {
+        } else if (request.getParameter(ParameterUtils.PARAM_UPDATE) != null) {
             updateTask(request);
         }
         doGet(request, response);
@@ -78,7 +91,7 @@ public class TasksTableServlet extends HttpServlet {
 
     private void updateTask(HttpServletRequest request) {
         try {
-            int id = Integer.parseInt(request.getParameter("update"));
+            int id = Integer.parseInt(request.getParameter(ParameterUtils.PARAM_UPDATE));
             Task task = taskService.getByID(id);
 
             String name = (!ValidationUtils.isNullOrEmpty(request.getParameter("name-" + id)))
@@ -86,7 +99,7 @@ public class TasksTableServlet extends HttpServlet {
             String description = (!ValidationUtils.isNullOrEmpty(request.getParameter("task_description-" + id)))
                     ? request.getParameter("task_description-" + id) : task.getDescription();
             String state = request.getParameter("state-" + id);
-            int estimateTime = (request.getParameter("estimate_time-" + id) != null)
+            int estimateTime = (ValidationUtils.isNumber(request.getParameter("estimate_time-" + id)))
                     ? Integer.parseInt(request.getParameter("estimate_time-" + id))
                     : task.getEstimateTime();
             Date startDate = (request.getParameter("start_date-" + id) != null)
@@ -110,7 +123,7 @@ public class TasksTableServlet extends HttpServlet {
     }
 
     private void deleteTask(HttpServletRequest request) {
-        String[] tasks = request.getParameterValues("checkedTasks");
+        String[] tasks = request.getParameterValues(ParameterUtils.PARAM_TASKS_CHECKED);
         for (String taskId : tasks) {
             taskService.delete(Integer.parseInt(taskId), this);
         }

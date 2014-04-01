@@ -3,50 +3,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="language"
-	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+	value="${not empty param.language ? param.language : not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}"
 	scope="session" />
 <fmt:setLocale value="${language}" />
-<fmt:setBundle basename="com.java.task11.i18n.text_en_US" />
+<fmt:setBundle basename="com.java.task11.i18n.text" />
 
 <html lang="${language}">
 <head>
     <title>Add task</title>
     <jsp:include page="/pages/user/import.jsp" />
+    <jsp:include page="header.jsp" />
 </head>
 
 <body>
-	<!-- NAVBAR -->
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#navbar-collapse-01">
-				<span class="sr-only">Toggle navigation</span>
-			</button>
-			<a class="navbar-brand" href="#">TimeAssistant</a>
-		</div>
-		<div class="collapse navbar-collapse" id="navbar-collapse-01">
-			<ul class="nav navbar-nav">
-				<li><a href="#">Home</a></li>
-				<li class="active"><a href="#">Personal page</a></li>
-			</ul>
-			<div class="navbar-form navbar-right">
-                ${sessionScope.user.firstName} ${sessionScope.user.lastName}
-                <a href="${pageContext.request.contextPath}/logout">Log out</a>
-			</div>
-		</div>
-	</nav>
-
-	<!-- PAGE NAV -->
-	<ul class="nav nav-tabs nav-justified">
-		<li><a href="#">Projects</a></li>
-	</ul>
-	<br />
-
 	<!-- CONTENT -->
 	<div class="container">
-		<form action="${pageContext.request.contextPath}/manager/addTask"
-			method="post">
-			<input type="hidden" name="project_id" value="${requestScope.project_id}">
+		<form action="${pageContext.request.contextPath}/manager/addTask" method="post">
+			<input type="hidden">
 			<table class="table">
 				<tr>
 					<td>Title:</td>
@@ -60,24 +33,23 @@
 				</tr>
 				<tr>
 					<td>Estimate time:</td>
-					<td><input type="text" name="estimate_time"
-						pattern="[0-5][0-9]:[0-5][0-9]:[0-5][0-9]" required
-						value="00:00:00"></td>
+					<td><input type="number" name="estimate_time" required></td>
 				</tr>
 				<tr>
-					<td>Assign user:</td>
+					<td>Assign to user:</td>
 					<td><select name="user_id">
 							<c:forEach var="user" items="${requestScope.users_in_project}">
-								<option value="${user.id}">${user.firstName}
-									${user.lastName}</option>
+								<option value="${user.id}">
+								    <c:out value="${user.firstName} ${user.lastName}"/>
+                                </option>
 							</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
-					<td align="right"><a href="#projectListLink"
-						class="btn btn-default">Cancel</a></td>
+					<td align="right"><a href="${pageContext.request.contextPath}/manager/projectstable"
+						class="btn btn-danger">Cancel</a></td>
 					<td>
-						<button name="submit" type="submit" class="btn btn-primary btn-hg"
+						<button name="submit" type="submit" class="btn btn-primary"
 							value="Submit">Add</button>
 					</td>
 				</tr>

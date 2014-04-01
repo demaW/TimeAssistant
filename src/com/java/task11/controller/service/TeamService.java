@@ -1,10 +1,10 @@
 package com.java.task11.controller.service;
 
-import java.util.List;
-
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.Team;
+
+import java.util.List;
 
 public class TeamService implements IBaseService<Team> {
 
@@ -34,8 +34,7 @@ public class TeamService implements IBaseService<Team> {
 	}
 
 	public List<Team> getByEmployeeId(Integer employeeId) throws DAOException {
-		return DAOFactory.getInstance().getTeamDAO()
-				.getByEmployeeId(employeeId);
+		return DAOFactory.getInstance().getTeamDAO().getByEmployeeId(employeeId);
 	}
 
 	public List<Team> getByProjectId(Integer projectId) throws DAOException {

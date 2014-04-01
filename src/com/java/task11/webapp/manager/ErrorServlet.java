@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author nlelyak
  * @version 1.00 2014-03-30
  */
-@WebServlet("/error")
+@WebServlet("/manager/error")
 public class ErrorServlet extends HttpServlet {
     public static final String ERROR_PAGE_LOCATION = "/pages/errorPage.jsp";
 

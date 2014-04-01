@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="language"
-       value="${not empty param.language ? param.language : not empty requestScope.language ? requestScope.language : pageContext.request.locale}"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.java.task11.i18n.text"/>
@@ -17,9 +17,10 @@
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script>
-        $(function() {
-            $("#startDate").datepicker();
-            $("#endDate").datepicker();
+        $(function () {
+            $("#startDate, #endDate").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
         });
     </script>
 </head>
@@ -30,8 +31,10 @@
     <%--add new task--%>
     <div class="col-md-10 col-sm-12 col-xs-12 col-md-offset-1 tables-menu">
         <div class="row">
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/manager/addTask">
-                <fmt:message key="button.addTask"/></a>
+            <a class="btn btn-primary"
+               href="${pageContext.request.contextPath}/manager/addTask?project_id=${requestScope.project_id}">
+                <fmt:message key="button.addTask"/>
+            </a>
         </div>
     </div>
     <br/><br/>
@@ -63,11 +66,12 @@
                     <c:forEach items="${requestScope.tasksList}" var="task">
                         <tr>
                             <td>
-                                <label class="checkbox" for="checkbox${task.id}">
-                                    <input type="checkbox" name="checkedTasks" value="${task.id}"
-                                           id="checkbox${task.id}" data-toggle="checkbox">
+                                <label class="checkbox" for="checkbox${task.taskId}">
+                                    <input type="checkbox" name="checkedTasks" value="${task.taskId}"
+                                           id="checkbox${task.taskId}" data-toggle="checkbox">
                                 </label>
                             </td>
+                            <td>${task.taskId}</td>
                             <td>${task.title}</td>
                             <td>${task.description}</td>
                             <td>${task.state}</td>
@@ -76,44 +80,49 @@
                             <td>${task.startDate}</td>
                             <td>${task.endDate}</td>
                             <td>${task.finished}</td>
-                                <%--extract assignee to--%>
+                            <td>
+                                <c:forEach var="user" items="${requestScope.usersList}">
+                                    <c:if test="${task.employeeId == user.id}">
+                                        <c:out value="${user.firstName} ${user.lastName}"/>
+                                    </c:if>
+                                </c:forEach>
+                            </td>
                             <td></td>
 
                                 <%--edit task icon => edit user info pop up window--%>
                             <td>
                                 <span class="fui-new modal-icon" data-toggle="modal"
-                                      data-target="#modalEdit${task.id}"></span>
+                                      data-target="#modalEdit${task.taskId}"></span>
 
-                                <div class="modal fade" id="modalEdit${task.id}" tabindex="-1" role="dialog"
-                                     aria-labelledby="modalEditLabel${task.id}" aria-hidden="true">
+                                <div class="modal fade" id="modalEdit${task.taskId}" tabindex="-1" role="dialog"
+                                     aria-labelledby="modalEditLabel${task.taskId}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">ID: ${task.id}</h4>
+                                                <h4 class="modal-title">ID: ${task.taskId}</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.name"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.name"/>"
-                                                           name="task_name-${task.id}"
+                                                           name="task_name-${task.taskId}"
                                                            value="${task.title}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.description"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.description"/>"
-                                                           name="task_description-${task.id}"
+                                                           name="task_description-${task.taskId}"
                                                            value="${task.description}"/>
                                                 </div>
                                                 <div class="form-group">
                                                         <%--@declare id="tasks-form"--%>
                                                     <span><fmt:message key="task.state"/></span>
-                                                    <select name="state-${task.id}" class="select-block"
+                                                    <select name="state-${task.taskId}" class="select-block"
                                                             form="tasks-form">
                                                         <c:choose>
                                                             <c:when test="${task.state == 'NEW'}">
-
                                                                 <option value="NEW" selected="selected">
                                                                     <fmt:message key="state.new"/>
                                                                 </option>
@@ -152,24 +161,24 @@
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.estimate"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.estimate"/>"
-                                                           name="estimate_time-${task.id}" id="estimateTime" type="time"
+                                                           name="estimate_time-${task.taskId}" id="estimateTime" type="number"
                                                            value="${task.estimateTime}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.start"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.start"/>"
-                                                           name="start_date-${task.id}" id="startDate"
+                                                           name="start_date-${task.taskId}" id="startDate" type="date"
                                                            value="${task.startDate}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.end"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.end"/>"
-                                                           name="end_date-${task.id}" id="endDate"
+                                                           name="end_date-${task.taskId}" id="endDate" type="date"
                                                            value="${task.endDate}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <button class="btn btn-primary btn-lg btn-block" name="update"
-                                                            type="submit" value="${task.id}">
+                                                            type="submit" value="${task.taskId}">
                                                         <fmt:message key="button.submit"/>
                                                     </button>
                                                 </div>

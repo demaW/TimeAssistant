@@ -32,41 +32,38 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        try {
+            HttpSession session = request.getSession();
+            String email = request.getParameter("email");
+            String password = MD5Utils.getMD5String(request.getParameter("password"));
+            User user = new UserService().getByEmail(email);
 
-        HttpSession session = request.getSession();
-        String email = request.getParameter("email");
-        String password = MD5Utils.getMD5String(request.getParameter("password"));
-        User user = null;
-		try {
-			user = new UserService().getByEmail(email);
-		} catch (DAOException e) {
-			log.error(e);
-		}
+            if (user != null) {
+                if (!ValidationUtils.isNullOrEmpty(user.getEmail()) && user.getPassword().equals(password)) {
+                    session.setAttribute("user", user);
+                    log.info("Logged in: " + user.getFirstName() + " " + user.getLastName());
+                    if (session.getAttribute("waitUrl") != null) {
+                        String url = session.getAttribute("waitUrl").toString();
+                        response.sendRedirect(url);
+                    } else {
+                        String contextPath = request.getContextPath();
 
-        if (user != null) {
-            if (!ValidationUtils.isNullOrEmpty(user.getEmail()) && user.getPassword().equals(password)) {
-                session.setAttribute("user", user);
-                log.info("Logged in: " + user.getFirstName() + " " + user.getLastName());
-                if (session.getAttribute("waitUrl") != null) {
-                    String url = session.getAttribute("waitUrl").toString();
-                    response.sendRedirect(url);
-                } else {
-                    String contextPath = request.getContextPath();
-
-                    if (user.getRoleId().equals(1)) { // 1=user role
-                        response.sendRedirect(contextPath + "/user/tasks");
-                    } if (user.getRoleId().equals(2)) { // 2 manager role
-                        response.sendRedirect(contextPath + "/manager/projectstable");
-                    } if (user.getRoleId().equals(3)) { // 3 admin role
-                        response.sendRedirect(contextPath + "/admin/users");
+                        if (user.getRoleId().equals(1)) { // 1=user role
+                            response.sendRedirect(contextPath + "/user/tasks");
+                        } if (user.getRoleId().equals(2)) { // 2 manager role
+                            response.sendRedirect(contextPath + "/manager/projectstable");
+                        } if (user.getRoleId().equals(3)) { // 3 admin role
+                            response.sendRedirect(contextPath + "/admin/users");
+                        }
                     }
-
+                } else {
+                    request.setAttribute("loginErrors", "Wrong email or password");
+                    request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
                 }
-            } else {
-                request.setAttribute("loginErrors", "Wrong email or password");
-                request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
             }
+        } catch (DAOException e) {
+            log.error(e);
+            response.sendRedirect("/login");
         }
-
     }
 }

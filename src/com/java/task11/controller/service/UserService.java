@@ -47,17 +47,13 @@ public class UserService implements IBaseService<User> {
 		return DAOFactory.getInstance().getUserDAO().getByPosition(position);
 	}
 
-	public List<User> getUsersByProjectId(Integer project_id)
-			throws DAOException {
-		List<Team> team = DAOFactory.getInstance().getTeamDAO()
-				.getByProjectId(project_id);
-
+	public List<User> getUsersByProjectId(Integer project_id) throws DAOException {
+		List<Team> team = DAOFactory.getInstance().getTeamDAO().getByProjectId(project_id);
 		List<User> usersInProject = new ArrayList<>();
 
 		for (Team singleTeam : team) {
 			Integer userId = singleTeam.getEmployeeId();
-			User user = DAOFactory.getInstance().getUserDAO()
-					.getByPrimaryKey(userId);
+			User user = DAOFactory.getInstance().getUserDAO().getByPrimaryKey(userId);
 			usersInProject.add(user);
 		}
 
