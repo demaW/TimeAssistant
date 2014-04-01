@@ -51,6 +51,14 @@
 		<br>
 		<p>Project id: ${project.id }</p>
 		<br>
+		<form action="${pageContext.request.contextPath}/manager/invoice" method="get">
+		<select name="taskfilter" id="taskfilter"onchange="this.form.submit();"> 
+		<option value ="all"  ${taskfilter == 'all' ? 'selected' :''}>All tasks</option>
+		<option value = "finished" ${taskfilter == 'finished' ? 'selected' :''}>Only finished tasks</option>
+		<option value = "inprogress" ${taskfilter == 'inprogress' ? 'selected' :''}>In progress</option>
+	
+		</select>
+		</form>
 		<div id="dvData">
 			<table id="testTable" class="table table-striped">
 				<thead>
@@ -58,6 +66,7 @@
 						<th>Employee</th>
 						<th>Position</th>
 						<th>Task</th>
+						<th>State</th>
 						<th>Worked hours</th>
 						<th>Booked hours</th>
 						<th>Salary rate <br> $/hour
@@ -73,6 +82,7 @@
 						<td>${invoice.firstName}${invoice.lastName}</td>
 						<td>${invoice.position}</td>
 						<td>${invoice.taskName }</td>
+						<td>${invoice.taskState}</td>
 						<td>${invoice.workedTime}</td>
 						<td><c:out value=" ${invoice.planedTime}"></c:out></td>
 						<td>${invoice.salaryRate}</td>

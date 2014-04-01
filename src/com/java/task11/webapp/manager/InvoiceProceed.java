@@ -36,19 +36,32 @@ public class InvoiceProceed extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		int projectID = Integer.parseInt(request.getParameter("projectID"));
-		//int projectID = 1;
+		//int projectID = Integer.parseInt(request.getParameter("projectID"));
+		int projectID = 1;
 		Double sumCost = new Double(0);
 		Double planedSumCost = new Double(0);
+		List<ProjectInvoice> invoices = null;
+		
 		Project project = null;
+		
+		String taskFilter = request.getParameter("taskfilter");
+		if(taskFilter==null){
+			taskFilter = "all";
+		}
+		if (taskFilter.equalsIgnoreCase("all")) {
+			invoices = new ProjectInvoiceService().getInvoiceAll(projectID);
+		}else if (taskFilter.equalsIgnoreCase("finished")) {
+			invoices = new ProjectInvoiceService().getInvoiceFinished(projectID);
+		}else if (taskFilter.equalsIgnoreCase("inprogress")) {
+			invoices = new ProjectInvoiceService().getInvoiceInProgress(projectID);
+			}
 		try {
 			project = new ProjectService().getByID(projectID);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 
-		List<ProjectInvoice> invoices = new ProjectInvoiceService()
-				.getInvoice(projectID);
+		
 		for (ProjectInvoice projectInvoice : invoices) {
 			
 			sumCost+= projectInvoice.getCosPerEmployee();
@@ -58,6 +71,7 @@ public class InvoiceProceed extends HttpServlet {
 		request.setAttribute("sumCost", sumCost);
 		request.setAttribute("project", project);
 		request.setAttribute("invoices", invoices);
+		request.setAttribute("taskfilter", taskFilter);
 
 		request.getRequestDispatcher("/pages/manager/invoice.jsp").forward(
 				request, response);
