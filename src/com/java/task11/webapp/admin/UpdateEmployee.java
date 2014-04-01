@@ -131,7 +131,7 @@ public class UpdateEmployee extends HttpServlet {
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
-		if (password != null) {
+		if (password == null) {
 			user.setEncryptedPassword(password);
 		}
 		user.setPosition(position);
