@@ -9,8 +9,6 @@
 
 
 <script src="${pageContext.request.contextPath}/js/jquery-2.0.3.min.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
-<script src="${pageContext.request.contextPath}/js/application.js"></script> --%>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-select.js"></script>
 <script src="${pageContext.request.contextPath}/js/classie.js"></script>

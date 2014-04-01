@@ -20,7 +20,7 @@
 <body>
 <div class = "container">
 	<div style="text-align: center;">
-	<img  src="${pageContext.request.contextPath}/img/time_logo.png" width="300">
+	<img  src="${pageContext.request.contextPath}/img/logo.png" width="300">
 	</div>
 	<h1  style = "text-align: center"> Welcome to admin page</h1> <br>
 	<h2	 style = "text-align: center"> This is Time Assistant admin page.</h2><br>
