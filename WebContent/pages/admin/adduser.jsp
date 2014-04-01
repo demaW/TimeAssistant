@@ -54,7 +54,7 @@ function validateForm()
 					<td><input type="text" name="position" required id="position"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="user.salary" /></td>
+					<td><fmt:message key="user.salaryRate" /></td>
 					<td><input type="text" name="salary" required id="salary"></td>
 				</tr>
 				<tr>

@@ -30,7 +30,7 @@
 					<th><fmt:message key="user.email"/></th>
 					<th><fmt:message key="user.role"/></th>
 					<th><fmt:message key="user.position"/></th>
-					<th><fmt:message key="user.salary"/></th>
+					<th><fmt:message key="user.salaryRate"/></th>
 					
 					<th></th>
 					<th></th>

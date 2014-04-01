@@ -61,7 +61,7 @@ function validate() {
 						value="${userToEdit.position}" required id="position"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="user.salary" /></td>
+					<td><fmt:message key="user.salaryRate" /></td>
 					<td><input type="text" name="salaryRate"
 						value="${userToEdit.salaryRate}"required id="salaryRate"></td>
 				</tr>
