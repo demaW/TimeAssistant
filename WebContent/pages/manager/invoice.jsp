@@ -58,7 +58,7 @@
 		<option value = "inprogress" ${taskfilter == 'inprogress' ? 'selected' :''}>In progress</option>
 		
 		</select>
-		<input type="hidden" id="projectID" name="projectID" value="${project.id }">
+		<input type="hidden" id="project_id" name="project_id" value="${project.id }">
 		</form>
 		<div id="dvData">
 			<table id="testTable" class="table table-striped">
