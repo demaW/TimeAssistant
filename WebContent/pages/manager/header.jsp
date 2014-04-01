@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/logo-url.png"/>
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
@@ -41,7 +42,7 @@
                 </li>
                
 				<li><a href="${pageContext.request.contextPath}/manager/users">Employees</a></li>
-				<li><a href="#fakelink">other Features</a></li>
+				<li><a href="${pageContext.request.contextPath}/manager/projectstable"><fmt:message key="project.title"/></a></li>
 				 <li><a href="${pageContext.request.contextPath}/manager/editProfile">Profile</a></li>
 			</ul>
 			<div class="navbar-form navbar-right lang">
