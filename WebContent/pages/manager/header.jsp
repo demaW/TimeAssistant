@@ -28,7 +28,7 @@
 			</button>
 			<%--<a class="navbar-brand" href="#">TimeAssistant</a>--%>
             <a class="navbar-brand logo-nav" href="<c:url value="/manager/projectstable"/>">
-                <img src="../img/logo.png">
+                <img src="${pageContext.request.contextPath}/img/logo.png">
             </a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
@@ -48,8 +48,8 @@
                 ${sessionScope.user.firstName} ${sessionScope.user.lastName}
                 <a href="${pageContext.request.contextPath}/logout">Log out</a>
                     <%-- i18n --%>
-                <a href="<%= request.getContextPath()%>?language=${requestScope.language == 'uk' ? 'en' : 'uk'}">
-                    ${requestScope.language == 'uk' ? 'EN' : 'UKR'}
+                <a href="<%= request.getContextPath()%>?language=${language == 'uk' ? 'en' : 'uk'}">
+                    ${language == 'uk' ? 'EN' : 'UKR'}
                 </a>
 			</div>
 		</div>

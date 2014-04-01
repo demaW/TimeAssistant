@@ -17,16 +17,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @WebServlet("/manager/addTask")
 public class AddTaskServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(AddTaskServlet.class);
     private UserService userService;
-    private ProjectService projectService;
     private List<User> usersList;
     private List<Project> projectList;
     private Integer projectId;
+    private static final String DATE_FORMAT = "MM/dd/yy";
 
     public static final String PAGE_ADD_TASK = "/pages/manager/addTask.jsp";
     public static final String PAGE_SEE_TASKS = "/pages/manager/tasksTable.jsp";
@@ -35,7 +36,7 @@ public class AddTaskServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             userService = new UserService();
-            projectService = new ProjectService();
+            ProjectService projectService = new ProjectService();
             projectList = projectService.getListOfObjects();
         } catch (DAOException e) {
             log.error(e);
@@ -70,17 +71,19 @@ public class AddTaskServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Task createTask = new Task();
-		
-		createTask.setTitle(request.getParameter("title"));
-		createTask.setDescription(request.getParameter("description"));
-		createTask.setEmployeeId(Integer.parseInt(request.getParameter("user_id")));
-		createTask.setEstimateTime(Integer.parseInt(request.getParameter("estimate_time")));
-		createTask.setProjectId(Integer.parseInt(request.getParameter("project_id")));
-		createTask.setState("NEW");
-		
-		try {
+        try {
+            createTask.setTitle(request.getParameter("title"));
+            createTask.setDescription(request.getParameter("description"));
+            createTask.setEmployeeId(Integer.parseInt(request.getParameter("user_id")));
+            createTask.setEstimateTime(Integer.parseInt(request.getParameter("estimate_time")));
+            createTask.setProjectId(Integer.parseInt(request.getParameter("project_id")));
+            createTask.setStartDate(new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("startDate")));
+            createTask.setStartDate(new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("endDate")));
+            createTask.setState("NEW");
+            createTask.setRealTime(0);
+
 			new TaskService().save(createTask);
-		} catch (DAOException e) {
+		} catch (Exception e) {
             log.error(e);
 		}
 		String contextPath = request.getContextPath();

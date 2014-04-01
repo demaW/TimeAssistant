@@ -1,13 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="language"
        value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
-<fmt:setBundle basename="com.java.task11.i18n.text_en_US"/>
+<fmt:setBundle basename="com.java.task11.i18n.text"/>
 
 <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
     <div class="collapse navbar-collapse" id="navbar-collapse-01">

@@ -12,15 +12,13 @@
 <head>
     <title>Project info</title>
     <jsp:include page="header.jsp" />
-
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script>
         $(function () {
-            $("#startDate, #endDate").datepicker({
-                dateFormat: "yy-mm-dd"
-            });
+            ("#start-Date").datepicker();
+            ("#end-Date").datepicker();
         });
     </script>
 </head>
@@ -56,7 +54,6 @@
                         <th><fmt:message key="task.real" /></th>
                         <th><fmt:message key="task.start" /></th>
                         <th><fmt:message key="task.end" /></th>
-                        <th><fmt:message key="task.finished" /></th>
                         <th><fmt:message key="task.assignee"/></th>
                         <th></th>
                     </tr>
@@ -79,7 +76,6 @@
                             <td>${task.realTime}</td>
                             <td>${task.startDate}</td>
                             <td>${task.endDate}</td>
-                            <td>${task.finished}</td>
                             <td>
                                 <c:forEach var="user" items="${requestScope.usersList}">
                                     <c:if test="${task.employeeId == user.id}">
@@ -167,13 +163,13 @@
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.start"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.start"/>"
-                                                           name="start_date-${task.taskId}" id="startDate" type="date"
+                                                           name="start_date-${task.taskId}" id="start-Date"
                                                            value="${task.startDate}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.end"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.end"/>"
-                                                           name="end_date-${task.taskId}" id="endDate" type="date"
+                                                           name="end_date-${task.taskId}" id="end-Date"
                                                            value="${task.endDate}"/>
                                                 </div>
                                                 <%--<div class="form-group">
