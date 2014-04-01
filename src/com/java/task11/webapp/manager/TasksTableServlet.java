@@ -132,6 +132,7 @@ public class TasksTableServlet extends HttpServlet {
 
             taskService.update(task);
         } catch (DAOException | ParseException e) {
+        	e.printStackTrace();
             log.error(e);
         }
     }
