@@ -147,6 +147,37 @@ public class DBUtil {
 		return buf.toString();
 	}
 
+	public static String selectSort(String tableName, List<String> selectColumns,
+			List<String> whereColumns, String orderByColumn) {
+		StringBuffer buf = new StringBuffer("SELECT ");
+
+		for (int i = 0; i < selectColumns.size(); i++) {
+			if (i > 0) {
+				buf.append(", ");
+			}
+
+			buf.append(selectColumns.get(i));
+		}
+
+		buf.append(" FROM ").append(tableName);
+
+		if (whereColumns.size() > 0) {
+			buf.append(" WHERE ");
+
+			for (int i = 0; i < whereColumns.size(); i++) {
+				if (i > 0) {
+					buf.append(" AND ");
+				}
+
+				buf.append(whereColumns.get(i)).append(" = ?");
+			}
+		}
+
+		buf.append(" ORDER BY ").append(orderByColumn);
+		
+		return buf.toString();
+	}
+	
 	public static String update(String tableName, List<String> stdColumns,
 			List<String> pkColumns) {
 		StringBuffer buf = new StringBuffer("UPDATE ").append(tableName)

@@ -1,5 +1,6 @@
 package com.java.task11.controller.dao.factory;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.java.task11.model.Hour;
@@ -14,5 +15,7 @@ public interface HourDAO {
 	public int delete(Hour obj) throws DAOException;
 
 	public List<Hour> getByUserId(Integer userId) throws DAOException;
+	
+	public List<Hour> getByDate(Date hours) throws DAOException;
 
 }
