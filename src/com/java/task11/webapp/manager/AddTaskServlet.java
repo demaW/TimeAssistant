@@ -76,6 +76,7 @@ public class AddTaskServlet extends HttpServlet {
 		createTask.setEmployeeId(Integer.parseInt(request.getParameter("user_id")));
 		createTask.setEstimateTime(Integer.parseInt(request.getParameter("estimate_time")));
 		createTask.setProjectId(Integer.parseInt(request.getParameter("project_id")));
+		createTask.setRealTime(new Integer(0));
 		createTask.setState("NEW");
 		
 		try {
