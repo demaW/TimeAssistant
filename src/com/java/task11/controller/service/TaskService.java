@@ -2,6 +2,7 @@ package com.java.task11.controller.service;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
+import com.java.task11.model.Project;
 import com.java.task11.model.Task;
 
 import org.apache.log4j.Logger;
@@ -40,7 +41,15 @@ public class TaskService implements IBaseService<Task> {
 	}
 
 	public List<Task> getByEmployeeId(Integer id) throws DAOException {
-		return DAOFactory.getInstance().getTaskDAO().getByEmployeeId(id);
+		List<Task> tasks = DAOFactory.getInstance().getTaskDAO().getByEmployeeId(id);
+		
+		for (Task task : tasks) {
+			Integer projectId = task.getProjectId();
+			Project project = DAOFactory.getInstance().getProjectDAO().getByPrimaryKey(projectId);
+			task.setProject(project);
+		}
+		
+		return tasks;
 	}
 	
 	public List<Task> getByProjectId(Integer projectId) throws DAOException {

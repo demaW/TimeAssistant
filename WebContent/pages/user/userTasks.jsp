@@ -91,7 +91,7 @@
 
 	<!-- CONTENT -->
 	<div class="container">
-		<div class="panel panel-primary" style="width: 1000px; margin: auto;">
+		<div class="panel panel-primary" style="width: 100%; margin: auto;">
 			<!-- Default panel contents -->
 			<div class="panel-heading">Tasks</div>
 
@@ -135,7 +135,7 @@
 										value="${task.state}"></c:out></span></td>
 							<td><c:out value="${task.estimateTime}"></c:out></td>
 							<td><c:out value="${task.realTime}"></c:out></td>
-							<td><c:out value="${task.projectId}"></c:out></td>
+							<td><c:out value="${task.project.projectName}"></c:out></td>
 							<td><a
 								href="${pageContext.request.contextPath}/user/task?task_id=${task.taskId}"
 								class="btn btn-primary btn-xs">Start work</a></td>
@@ -147,7 +147,7 @@
 		</div>
 
 		<br />
-		<div id="timeline" style="width: 1000px; margin: auto;"></div>
+		<div id="timeline" style="width: 100%; margin: auto;"></div>
 
 	</div>
 
