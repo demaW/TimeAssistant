@@ -1,5 +1,6 @@
 package com.java.task11.controller.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.java.task11.controller.dao.factory.DAOException;
@@ -35,5 +36,9 @@ public class HourService implements IBaseService<Hour> {
 	@Override
 	public Hour getByID(Integer id) throws DAOException {
 		return null;
+	}
+	
+	public List<Hour> getByDate(Date hours) throws DAOException {
+		return DAOFactory.getInstance().getHourDAO().getByDate(hours);
 	}
 }

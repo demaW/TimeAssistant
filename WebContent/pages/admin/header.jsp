@@ -22,7 +22,7 @@
 				data-target="#navbar-collapse-01">
 				<span class="sr-only">Toggle navigation</span>
 			</button>
-			<a class="navbar-brand" href="#">TimeAssistant</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/pages/admin/welcome.jsp">TimeAssistant</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">

@@ -38,10 +38,14 @@ public class UserEditProfile extends HttpServlet {
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			String email = request.getParameter("email");
+			String password = request.getParameter("password");
 
 			user.setEmail(email);
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
+			if (!password.isEmpty()) {
+				user.setEncryptedPassword(password);
+			}
 
 			userService.update(user);
 

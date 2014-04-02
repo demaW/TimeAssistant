@@ -66,7 +66,7 @@ public class TasksTableServlet extends HttpServlet {
                     return;
                 }
             } else {
-                response.sendRedirect("/manager/projectstable");
+                response.sendRedirect(request.getContextPath()+"/manager/projectstable");
             }
         } catch (Exception e) {
             log.error(e);
@@ -94,7 +94,7 @@ public class TasksTableServlet extends HttpServlet {
         }
         // todo fix redirect to doGet() => it should have project_id!
         if (!userId.isEmpty()) {
-            response.sendRedirect(new StringBuffer().append("/manager/taskstable?").append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
+            response.sendRedirect(request.getContextPath()+new StringBuffer().append("/manager/taskstable?").append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
 //            return;
         }
 //        doGet(request, response);
@@ -132,6 +132,7 @@ public class TasksTableServlet extends HttpServlet {
 
             taskService.update(task);
         } catch (DAOException | ParseException e) {
+        	e.printStackTrace();
             log.error(e);
         }
     }

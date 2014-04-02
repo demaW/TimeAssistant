@@ -1,17 +1,23 @@
 package com.java.task11.controller.dao.implement;
 
-import org.apache.log4j.Logger;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.apache.log4j.Logger;
+
 public class DBUtil {
-	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String url = "jdbc:mysql://localhost:3306/time_assistant?characterEncoding=utf8";
-	private final static String userName = "root";
-	private final static String password = "secret"; //pass
 	private static Connection conn = null;
 	private static Logger log = Logger.getLogger(DBUtil.class);
 
@@ -25,26 +31,29 @@ public class DBUtil {
 				res.close();
 			}
 		} catch (SQLException ignored) {
-            log.error(ignored);
+			log.error(ignored);
 		} finally {
 			try {
 				if (stmt != null) {
 					stmt.close();
 				}
 			} catch (SQLException ignored) {
-                log.error(ignored);
+				log.error(ignored);
 			}
 		}
 	}
 
 	protected static Connection getConnection() {
-		 try {
-             Class.forName(driver);
-             conn = DriverManager.getConnection(url, userName, password);
-		 } catch (ClassNotFoundException | SQLException e) {
-		    log.error("problem with driver", e);
-		 }
-		 return conn;
+		InitialContext initContext;
+		DataSource ds;
+		try {
+			initContext = new InitialContext();
+			ds = (DataSource) initContext.lookup("java:comp/env/jdbc/db");
+			conn = ds.getConnection();
+		} catch (NamingException | SQLException e) {
+			e.printStackTrace();
+		}
+		return conn;
 	}
 
 	protected static String getQuestionMarks(int size) {
@@ -62,7 +71,8 @@ public class DBUtil {
 	}
 
 	public static String delete(String tableName, List<String> pkColumns) {
-		StringBuffer buf = new StringBuffer("DELETE FROM ").append(tableName).append(" WHERE ");
+		StringBuffer buf = new StringBuffer("DELETE FROM ").append(tableName)
+				.append(" WHERE ");
 
 		for (int i = 0; i < pkColumns.size(); i++) {
 			if (i > 0) {
@@ -79,7 +89,8 @@ public class DBUtil {
 		return select(tableName, selectColumns, new ArrayList<String>());
 	}
 
-	public static String select(String tableName, List<String> selectColumns, List<String> whereColumns) {
+	public static String select(String tableName, List<String> selectColumns,
+			List<String> whereColumns) {
 		StringBuffer buf = new StringBuffer("SELECT ");
 
 		for (int i = 0; i < selectColumns.size(); i++) {
@@ -136,6 +147,37 @@ public class DBUtil {
 		return buf.toString();
 	}
 
+	public static String selectSort(String tableName, List<String> selectColumns,
+			List<String> whereColumns, String orderByColumn) {
+		StringBuffer buf = new StringBuffer("SELECT ");
+
+		for (int i = 0; i < selectColumns.size(); i++) {
+			if (i > 0) {
+				buf.append(", ");
+			}
+
+			buf.append(selectColumns.get(i));
+		}
+
+		buf.append(" FROM ").append(tableName);
+
+		if (whereColumns.size() > 0) {
+			buf.append(" WHERE ");
+
+			for (int i = 0; i < whereColumns.size(); i++) {
+				if (i > 0) {
+					buf.append(" AND ");
+				}
+
+				buf.append(whereColumns.get(i)).append(" = ?");
+			}
+		}
+
+		buf.append(" ORDER BY ").append(orderByColumn);
+		
+		return buf.toString();
+	}
+	
 	public static String update(String tableName, List<String> stdColumns,
 			List<String> pkColumns) {
 		StringBuffer buf = new StringBuffer("UPDATE ").append(tableName)
@@ -165,7 +207,8 @@ public class DBUtil {
 	public static String insert(String tableName, List<String> pkColumns,
 			List<String> stdColumns) {
 		List<String> allColumns = new ArrayList<String>(pkColumns);
-		StringBuffer buf = new StringBuffer("INSERT INTO ").append(tableName).append(" ( ");
+		StringBuffer buf = new StringBuffer("INSERT INTO ").append(tableName)
+				.append(" ( ");
 
 		allColumns.addAll(stdColumns);
 

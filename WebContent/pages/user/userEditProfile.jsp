@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -10,8 +11,8 @@
 
 <html lang="${language}">
 <head>
-    <title>User Profile</title>
-    <jsp:include page="import.jsp" />
+<title>User Profile</title>
+<jsp:include page="import.jsp" />
 </head>
 
 <body>
@@ -58,14 +59,19 @@
 				<tr>
 					<td>email:</td>
 					<td><input type="text" name="email"
-						pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${sessionScope.user.email}"></td>
+						pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required
+						value="${sessionScope.user.email}"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" value = ""></td>
 				</tr>
 				<tr>
 					<td align="right"><a
 						href="${pageContext.request.contextPath}/user/tasks"
 						class="btn btn-default">Cancel</a></td>
 					<td>
-						<button name="submit" type="submit" class="btn btn-primary btn-hg"
+						<button name="submit" type="submit" class="btn btn-primary"
 							value="Submit">Save</button>
 					</td>
 				</tr>

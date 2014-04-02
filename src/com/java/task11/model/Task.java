@@ -14,6 +14,7 @@ public class Task {
 	private Date startDate;
 	private Date endDate;
 	private Date finished;
+	private Project project;
 
 	public int getTaskId() {
 		return this.taskId;
@@ -102,4 +103,13 @@ public class Task {
 	public void setFinished(Date finished) {
 		this.finished = finished;
 	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+	
 }

@@ -20,11 +20,11 @@
 		<form action="${pageContext.request.contextPath}/user/userEditProfile" method="post">
 			<table  class="table">
 				<tr>
-					<td>First Name:</td>
+					<td><fmt:message key="user.firstName" /></td>
 					<td><input type="text" name="firstName" required value="${user.firstName}"></td>
 				</tr>
 				<tr>
-					<td>Last Name</td>
+					<td><fmt:message key="user.lastName" /></td>
 					<td><input type="text" name="lastName" required value="${user.lastName}"></td>
 				</tr>
 							<tr>

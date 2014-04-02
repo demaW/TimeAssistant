@@ -5,6 +5,7 @@ import com.java.task11.controller.dao.factory.HourDAO;
 import com.java.task11.model.Hour;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -139,8 +140,8 @@ public class HourDAOImpl implements HourDAO {
 								Arrays.asList("userId")));
 			} else {
 				ps = getConn().prepareStatement(
-						DBUtil.select(tableName, allColumns,
-								Arrays.asList("userId")));
+						DBUtil.selectSort(tableName, allColumns,
+								Arrays.asList("userId"), "date"));
 				DBUtil.bind(ps, 1, userId);
 			}
 
@@ -157,6 +158,36 @@ public class HourDAOImpl implements HourDAO {
 		return ret;
 	}
 
+	public List<Hour> getByDate(Date hours) throws DAOException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Hour> ret = new ArrayList<Hour>();
+
+		try {
+			if (null == hours) {
+				ps = getConn().prepareStatement(
+						DBUtil.selectNull(tableName, allColumns,
+								Arrays.asList(new String[] { "date" })));
+			} else {
+				ps = getConn().prepareStatement(
+						DBUtil.select(tableName, allColumns,
+								Arrays.asList(new String[] { "date" })));
+				DBUtil.bind(ps, 1, hours);
+			}
+
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				ret.add(fromResultSet(rs));
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			DBUtil.close(ps, rs);
+		}
+
+		return ret;
+	}
+	
 	protected int bindPrimaryKey(PreparedStatement ps, Hour obj, int pos)
 			throws SQLException {
 		DBUtil.bind(ps, pos++, obj.getHoursId());
