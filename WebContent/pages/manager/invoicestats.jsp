@@ -107,14 +107,21 @@
 <!-- BAR CHART DATA -->
 	<table id="totalfinisheddata">
 		<tbody>
+			
 			<tr>
 				<td>estimate</td>
-				<td><c:out value="${estimate_time_summ}" /></td>
-			</tr>
+				<td><c:out value="${esttime}" /></td>
+				
+			
 			<tr>
 				<td>real</td>
-				<td><c:out value="${real_time_summ}" /></td>
+				<td><c:out value="${realtime}" /></td>
 			</tr>
+			<tr>
+				<td>names </td>
+				<td><c:out value="${uniqueusers}" /></td>
+			</tr>
+			
 		</tbody>
 	</table>
 

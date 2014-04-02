@@ -66,7 +66,7 @@ public class InvoiceStats extends HttpServlet {
 		//	index++;
 		}
 		request.setAttribute("uniqueusers", uniqueUsers);
-		request.setAttribute("estTime", esTime);
+		request.setAttribute("esttime", estTime);
 		request.setAttribute("realtime", realTime);
 //		System.out.println(estTime);
 //		System.out.println(realTime);
