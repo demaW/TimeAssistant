@@ -1,21 +1,14 @@
 package com.java.task11.controller.dao.implement;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Time;
-import java.sql.Types;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.apache.log4j.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import org.apache.log4j.Logger;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class DBUtil {
 	private static Connection conn = null;
@@ -71,8 +64,7 @@ public class DBUtil {
 	}
 
 	public static String delete(String tableName, List<String> pkColumns) {
-		StringBuffer buf = new StringBuffer("DELETE FROM ").append(tableName)
-				.append(" WHERE ");
+		StringBuffer buf = new StringBuffer("DELETE FROM ").append(tableName).append(" WHERE ");
 
 		for (int i = 0; i < pkColumns.size(); i++) {
 			if (i > 0) {
@@ -89,8 +81,7 @@ public class DBUtil {
 		return select(tableName, selectColumns, new ArrayList<String>());
 	}
 
-	public static String select(String tableName, List<String> selectColumns,
-			List<String> whereColumns) {
+	public static String select(String tableName, List<String> selectColumns, List<String> whereColumns) {
 		StringBuffer buf = new StringBuffer("SELECT ");
 
 		for (int i = 0; i < selectColumns.size(); i++) {

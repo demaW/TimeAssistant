@@ -92,7 +92,6 @@ public class TasksTableServlet extends HttpServlet {
         } else if (request.getParameter(ParameterUtils.PARAM_UPDATE) != null) {
             updateTask(request);
         }
-        // todo fix redirect to doGet() => it should have project_id!
         if (!userId.isEmpty()) {
             response.sendRedirect(request.getContextPath()+new StringBuffer().append("/manager/taskstable?").append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
 //            return;
@@ -121,6 +120,7 @@ public class TasksTableServlet extends HttpServlet {
                     : task.getStartDate();
 //            User assignedUser = userService.getByID(Integer.valueOf(request.getParameter("assigned-" + id)));
 //            int assignedId = Integer.valueOf(request.getParameter("user_id-"));
+            System.out.println("NEW STATE: " + state);
 
             task.setTitle(name);
             task.setDescription(description);

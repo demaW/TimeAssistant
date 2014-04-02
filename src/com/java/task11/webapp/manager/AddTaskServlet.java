@@ -7,7 +7,6 @@ import com.java.task11.controller.service.UserService;
 import com.java.task11.model.Project;
 import com.java.task11.model.Task;
 import com.java.task11.model.User;
-
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -78,7 +76,7 @@ public class AddTaskServlet extends HttpServlet {
             createTask.setEstimateTime(Integer.parseInt(request.getParameter("estimate_time")));
             createTask.setProjectId(Integer.parseInt(request.getParameter("project_id")));
             createTask.setStartDate(new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("startDate")));
-            createTask.setStartDate(new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("endDate")));
+            createTask.setEndDate(new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("endDate")));
             createTask.setState("NEW");
             createTask.setRealTime(0);
 
@@ -89,7 +87,6 @@ public class AddTaskServlet extends HttpServlet {
 		String contextPath = request.getContextPath();
 		//redirect to projects page
         if (projectId != null) {
-        	
             response.sendRedirect(contextPath+"/manager/taskstable?project_id=" + projectId);
             return;
         }

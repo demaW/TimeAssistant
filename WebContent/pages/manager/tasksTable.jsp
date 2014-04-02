@@ -17,8 +17,8 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script>
         $(function () {
-            ("#start-Date").datepicker();
-            ("#end-Date").datepicker();
+            $("#firstDate").datepicker();
+            $("#secondDate").datepicker();
         });
     </script>
 </head>
@@ -162,14 +162,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.start"/></span>
-                                                    <input class="form-control" placeholder="<fmt:message key="task.start"/>"
-                                                           name="start_date-${task.taskId}" id="start-Date"
+                                                    <input class="form-control" id="firstDate" placeholder="<fmt:message key="task.start"/>"
+                                                           name="start_date-${task.taskId}" type="date"
                                                            value="${task.startDate}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.end"/></span>
-                                                    <input class="form-control" placeholder="<fmt:message key="task.end"/>"
-                                                           name="end_date-${task.taskId}" id="end-Date"
+                                                    <input class="form-control" id="secondDate" placeholder="<fmt:message key="task.end"/>"
+                                                           name="end_date-${task.taskId}" type="date"
                                                            value="${task.endDate}"/>
                                                 </div>
                                                 <%--<div class="form-group">

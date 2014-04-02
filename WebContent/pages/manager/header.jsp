@@ -40,7 +40,9 @@
                 </li>
                
 				<li><a href="${pageContext.request.contextPath}/manager/users">Employees</a></li>
-				<li><a href="${pageContext.request.contextPath}/manager/projectstable"><fmt:message key="project.title"/></a></li>
+				<li><a href="${pageContext.request.contextPath}/manager/projectstable">
+                    <%--<fmt:message key="project.title"/>--%>Projects
+                </a></li>
 				 <li><a href="${pageContext.request.contextPath}/manager/editProfile">Profile</a></li>
 			</ul>
 			<div class="navbar-form navbar-right lang">

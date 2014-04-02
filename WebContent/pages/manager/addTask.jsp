@@ -19,13 +19,9 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script>
         $(function() {
-            $("#startDate").datepicker();
-            $("#endDate").datepicker();
+            $("#startDate").datepicker().val();
+            $("#endDate").datepicker().val();
         });
-/*        $(function() {
-//            $("#startDate").datepicker({ dateFormat: "yy-mm-dd" });
-            $("#endDate").datepicker({ dateFormat: "yy-mm-dd" });
-        });*/
     </script>
 </head>
 
