@@ -33,7 +33,7 @@
 				<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${sessionScope.userName} <a href="#logout">Log out</a>
+				Looged in as ${sessionScope.userName} <a href="${pageContext.request.contextPath}/logout">Log out</a>
 			</div>
 		</div>
 	</nav>
