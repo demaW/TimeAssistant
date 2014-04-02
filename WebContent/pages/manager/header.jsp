@@ -25,10 +25,10 @@
 				data-target="#navbar-collapse-01">
 				<span class="sr-only">Toggle navigation</span>
 			</button>
-			<%--<a class="navbar-brand" href="#">TimeAssistant</a>--%>
-            <a class="navbar-brand logo-nav" href="<c:url value="/manager/projectstable"/>">
+			<a class="navbar-brand" href="<c:url value="/manager/projectstable"/>">TimeAssistant</a>
+            <%--<a class="navbar-brand logo-nav" href="<c:url value="/manager/projectstable"/>">
                 <img src="${pageContext.request.contextPath}/img/logo.png">
-            </a>
+            </a>--%>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
