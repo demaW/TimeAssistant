@@ -34,6 +34,7 @@
 				Looged in as ${sessionScope.user.firstName} ${sessionScope.user.lastName} | <a
 					href="${pageContext.request.contextPath}/logout">Log out</a>
 					 <%-- i18n --%>
+				
                 <a href="?language=${language == 'uk' ? 'en' : 'uk'}">
                     ${language == 'uk' ? 'EN' : 'UKR'}
                 </a>

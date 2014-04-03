@@ -1,11 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Resource name="jdbc/db"
-              type="javax.sql.DataSource"
-              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-              maxActive="20" maxIdle="10"
-              maxWait="-1"
-              username="root"
-              password="secret"
-              driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost/time_assistant?characterEncoding=utf8"/>
+
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Resource name="jdbc/db" auth="Container" type="javax.sql.DataSource"
+		maxActive="100" maxIdle="30" maxWait="10000" username="root" password="pass"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/time_assistant?characterEncoding=utf8" />
+
 </Context>

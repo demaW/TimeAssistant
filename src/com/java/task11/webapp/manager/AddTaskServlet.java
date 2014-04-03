@@ -1,5 +1,17 @@
 package com.java.task11.webapp.manager;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.ProjectService;
 import com.java.task11.controller.service.TaskService;
@@ -7,16 +19,7 @@ import com.java.task11.controller.service.UserService;
 import com.java.task11.model.Project;
 import com.java.task11.model.Task;
 import com.java.task11.model.User;
-import org.apache.log4j.Logger;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
+import com.java.task11.utils.EmailUtil;
 
 @WebServlet("/manager/addTask")
 public class AddTaskServlet extends HttpServlet {
@@ -84,6 +87,13 @@ public class AddTaskServlet extends HttpServlet {
 		} catch (Exception e) {
             log.error(e);
 		}
+        if (request.getParameter("mailNotification") != null
+				&& request.getParameter("mailNotification").equals("yes")){
+        	int userId = Integer.parseInt(request.getParameter("user_id"));
+        	sendTastkMailNotification(userId,createTask);
+       
+        }
+	
 		String contextPath = request.getContextPath();
 		//redirect to projects page
         if (projectId != null) {
@@ -93,5 +103,23 @@ public class AddTaskServlet extends HttpServlet {
 //        request.getRequestDispatcher("/pages/manager/projectsTable.jsp").forward(request, response);
         response.sendRedirect(contextPath+"/manager/projectstable");
     }
+	
+	private void sendTastkMailNotification(int userId,Task task){
+		 {
+			User user=null;
+			try {
+				user = new  UserService().getByID(userId);
+			} catch (DAOException e) {
+				e.printStackTrace();
+			}
+			String subject = "New task assigned";
+			String messageText = "Your have new task" + "\n"
+					+"Project name"+ task.getProject()+ "\n"
+					+ "Task name:" + task.getTitle()+"\n"
+					+"Description:" +task.getDescription();
+			EmailUtil emailUtil = new EmailUtil();
+			emailUtil.sendMail(user.getEmail(),subject, messageText);
+		}
+	}
 
 }

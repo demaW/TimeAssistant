@@ -72,6 +72,12 @@
                         <input type="date" id="endDate" name="endDate"/> <br/>
                     </td>
                 </tr>
+                <tr><td><fmt:message key="task.sendNotification"/>:</td>
+                    <td>
+                       <input type="radio" name="mailNotification" value="yes">  yes 
+						<input type="radio" name ="mailNotification" value = "no" checked> no
+                    </td>
+                </tr>
 				<tr>
 					<td align="right"><a href="${pageContext.request.contextPath}/manager/projectstable"
 						class="btn btn-danger"><fmt:message key="button.cancel"/></a></td>

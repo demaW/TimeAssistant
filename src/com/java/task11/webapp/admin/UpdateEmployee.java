@@ -7,14 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.RoleService;
 import com.java.task11.controller.service.UserService;
+import com.java.task11.model.Task;
 import com.java.task11.model.User;
 import com.java.task11.model.UserRole;
-import com.java.task11.webapp.EmailUtil;
+import com.java.task11.utils.EmailUtil;
 
 /**
  * Servlet implementation class UpdateEmployee
@@ -83,11 +83,10 @@ public class UpdateEmployee extends HttpServlet {
 			employeeService.delete(employeeService.getByID(id));
 			if (request.getParameter("mailNotification") != null
 					&& request.getParameter("mailNotification").equals("yes")) {
-				String email = request.getParameter("email");
-				String messageText = "Your account was updated" + "\n"
+				String subject = "Your accuont was deleted";;
+				String messageText = "Your account was deleted. for more information contact administrator or manager" + "\n"
 						+ user.toString();
-				EmailUtil emailUtil = new EmailUtil();
-				emailUtil.sendMail(email, messageText);
+				sendUpdateMailNotification(user.getEmail(), subject, messageText );
 			}
 		} catch (DAOException e) {
 			e.printStackTrace();
@@ -123,7 +122,6 @@ public class UpdateEmployee extends HttpServlet {
 		try {
 			user = employeeService.getByID(id);
 		} catch (DAOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -149,12 +147,19 @@ public class UpdateEmployee extends HttpServlet {
 				&& request.getParameter("mailNotification").equals("yes")) {
 			String messageText = "Your account was updated" + "\n"
 					+ user.toString();
-			EmailUtil emailUtil = new EmailUtil();
-			emailUtil.sendMail(email, messageText);
+			String subject = "Udate account information";
+			sendUpdateMailNotification(user.getEmail(), subject, messageText);
 		}
 
 		String contextPath = request.getContextPath();
 		response.sendRedirect(contextPath + "/admin/users");
+	}
+	private void sendUpdateMailNotification(String email, String subject, String messageText){
+		 {
+			
+			EmailUtil emailUtil = new EmailUtil();
+			emailUtil.sendMail(email,subject, messageText);
+		}
 	}
 
 }

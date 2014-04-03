@@ -23,7 +23,13 @@
 	<img  src="${pageContext.request.contextPath}/img/logo.png" width="300">
 	</div>
 	<h1  style = "text-align: center"> Welcome to admin page</h1> <br>
-	<h2	 style = "text-align: center"> This is Time Assistant admin page.</h2><br>
+	<h2	 style = "text-align: center"> As administrator u can:</h2><br>
+	<ul>
+			<li><h3>Add user</h3></li>
+			<li><h3>Edit user information and send email notitfication</h3></li>
+			
+		</ul>
+	
 	<p> </p>
 </div>
 </body>
