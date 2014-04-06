@@ -17,7 +17,7 @@
 <body>
 	<!-- CONTENT -->
 	<div class="container">
-		<form action="${pageContext.request.contextPath}/user/userEditProfile" method="post">
+		<form action="${pageContext.request.contextPath}/admin/userEditProfile" method="post">
 			<table  class="table">
 				<tr>
 					<td><fmt:message key="user.firstName" /></td>
@@ -28,14 +28,15 @@
 					<td><input type="text" name="lastName" required value="${user.lastName}"></td>
 				</tr>
 							<tr>
-					<td>email:</td>
+					<td><fmt:message key="user.email" /></td>
 					<td><input type="text" name="email" pattern="[^ @]*@[^ @]*\.[^ @]{2,}" required value="${user.email}"></td>
 				</tr>
 				<tr>
-					<td align="right"><a href="${pageContext.request.contextPath}/admin/users" class="btn btn-default">Cancel</a></td>
+					<td align="right"><a href="${pageContext.request.contextPath}/admin/users"
+					 class="btn btn-default">	<fmt:message key="button.cancel" /></a></td>
 					<td>
 						<button name="submit" type="submit" class="btn btn-primary btn-hg" value="Submit">
-							Save
+						<fmt:message key="button.save" />
 						</button>
 					</td>
 				</tr>

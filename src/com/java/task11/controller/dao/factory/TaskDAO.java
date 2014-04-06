@@ -20,4 +20,9 @@ public interface TaskDAO {
 	public List<Task> getByEmployeeId(Integer employeeId) throws DAOException;
 
 	public List<Task> getByProjectId(Integer projectId) throws DAOException;
+
+	public List<Task> searchByWord(String searchWord) throws DAOException;
+
+	public List<Task> searchByWordAndID(String searchWord, Integer employeeId)
+			throws DAOException;
 }

@@ -17,11 +17,11 @@
 
 <body>
 	<div class="container">
-		<form action="/TimeAssistant/pages/manager/addproject" method="post">
+		<form action="${pageContext.request.contextPath}/manager/addproject" method="post">
 			<table  class="table">
 				<tr>
 					<td><fmt:message key="project.name" /></td>
-					<td><input type="text" name="name"></td>
+					<td><input type="text" name="name"  required></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="project.description" /></td>
@@ -34,7 +34,7 @@
 				<tr>
 					<td></td>
 					<td>
-						<button name="submit" type="submit" value="Submit">
+						<button name="submit" type="submit" class="btn btn-primary" value="Submit" >
 							<fmt:message key="button.addProject" />
 						</button>
 					</td>

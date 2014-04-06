@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.RoleService;
 import com.java.task11.controller.service.UserService;
@@ -22,13 +24,12 @@ import com.java.task11.model.UserRole;
 @WebServlet("/admin/users")
 public class OutEmployees extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static Logger log = Logger.getLogger(OutEmployees.class);      
     /**
      * @see HttpServlet#HttpServlet()
      */
     public OutEmployees() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -41,7 +42,7 @@ public class OutEmployees extends HttpServlet {
 		users = new UserService().getListOfObjects();
 		roles = new RoleService().getListOfObjects();
 	} catch (DAOException e) {
-		// TODO Auto-generated catch block
+		log.error(e);
 		e.printStackTrace();
 	}
 	request.setAttribute("roles", roles);

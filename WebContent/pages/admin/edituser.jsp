@@ -13,7 +13,7 @@
 <script type="text/javascript">
 function validate() {
     if (isNaN(document.edituser.salaryRate.value)) {
-        alert("Enter nubmer please");
+        alert("Enter number, please");
         document.edituser.salaryRate.focus();
         return false;
     }
@@ -38,11 +38,11 @@ function validate() {
 
 				<tr>
 					<td><fmt:message key="user.email" /></td>
-					<td><input type="text" name="email" value="${userToEdit.email}" required id="email"></td>
+					<td><input type="text" name="email"  pattern="[^ @]*@[^ @]*\.[^ @]{2,}" value="${userToEdit.email}" required id="email"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.password" /></td>
-					<td><input type="text" name="password"
+					<td><input type="password" name="password"
 						 id="password"></td>
 				</tr>
 				<tr>

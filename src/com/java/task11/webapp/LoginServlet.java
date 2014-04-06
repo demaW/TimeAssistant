@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
                         } if (user.getRoleId().equals(2)) { // 2 manager role
                             response.sendRedirect(contextPath + "/manager/projectstable");
                         } if (user.getRoleId().equals(3)) { // 3 admin role
-                            response.sendRedirect(contextPath + "/admin/users");
+                            response.sendRedirect(contextPath + "/pages/admin/welcome.jsp");
                         }
                     }
                 } else {

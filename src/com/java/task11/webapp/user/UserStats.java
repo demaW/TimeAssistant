@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.HourService;
 import com.java.task11.controller.service.TaskService;
@@ -20,6 +22,7 @@ import com.java.task11.model.User;
 @WebServlet("/user/stats")
 public class UserStats extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getLogger(UserStats.class);
 
 	public UserStats() {
 		super();
@@ -54,7 +57,7 @@ public class UserStats extends HttpServlet {
 					request, response);
 
 		} catch (DAOException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 

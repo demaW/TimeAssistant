@@ -67,9 +67,7 @@ public class InvoiceStats extends HttpServlet {
 		request.setAttribute("uniqueusers", uniqueUsers);
 		request.setAttribute("esttime", estTime);
 		request.setAttribute("realtime", realTime);
-//		System.out.println(estTime);
-//		System.out.println(realTime);
-//		System.out.println(users);
+
 		request.getRequestDispatcher("/pages/manager/invoicestats.jsp")
 				.forward(request, response);
 	}

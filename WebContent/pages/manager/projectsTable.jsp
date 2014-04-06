@@ -16,9 +16,11 @@
 
 <body>
     <!-- CONTENT -->
-    <div class="container-fluid users-table">
+    <div class="container-fluid projects-table">
         <div class="row">
-            <div class="col-md-10 col-sm-12 col-xs-12 col-md-offset-1 tables-menu">
+            <div class="col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
+                <h3><fmt:message key="projectsTable.title"/></h3>
+                <br/>
                 <div class="row">
                     <a class="btn btn-primary" href="${pageContext.request.contextPath}/manager/addproject">
                         <fmt:message key="button.addProject"/>
@@ -29,7 +31,7 @@
                 </div>
             </div>
         </div>
-    <br/><br/>
+        <br/>
 
     <form action="${pageContext.request.contextPath}/manager/projectstable" method="post" id="projectstable-form">
         <div class="row">
@@ -58,7 +60,11 @@
                             </label>
                         </td>
                         <td>${project.id}</td>
-                        <td>${project.projectName}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/manager/teamsTable?project_id=${project.id}">
+                                <c:out value="${project.projectName}" />
+                            </a>
+                        </td>
                         <td>${project.description}</td>
                         <td>${project.notes}</td>
                         <td><a href="${pageContext.request.contextPath}/manager/taskstable?project_id=${project.id}"

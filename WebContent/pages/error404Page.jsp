@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page isErrorPage="true"%>
 <c:set var="language"
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
 	scope="session" />
@@ -10,7 +10,7 @@
 
 <html lang="${language}">
 <head>
-    <title>User Profile</title>
+    <title>404 opps</title>
     <jsp:include page="user/import.jsp" />
 </head>
 
@@ -22,11 +22,11 @@
 				data-target="#navbar-collapse-01">
 				<span class="sr-only">Toggle navigation</span>
 			</button>
-			<a class="navbar-brand" href="#">TimeAssistant</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/home">TimeAssistant</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
-				<li><a href="#">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/home"">Home</a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
 				Looged in as ${sessionScope.user.firstName} | <a

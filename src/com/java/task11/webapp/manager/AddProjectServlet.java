@@ -38,7 +38,7 @@ public class AddProjectServlet extends HttpServlet {
             log.error(e);
 		}
 		
-		response.sendRedirect("/manager/projects");
+		response.sendRedirect(request.getContextPath()+"/manager/projectstable");
 	}
 		
 }

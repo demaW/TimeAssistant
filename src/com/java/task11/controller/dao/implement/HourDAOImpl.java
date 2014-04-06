@@ -140,8 +140,10 @@ public class HourDAOImpl implements HourDAO {
 								Arrays.asList("userId")));
 			} else {
 				ps = getConn().prepareStatement(
-						DBUtil.selectSort(tableName, allColumns,
-								Arrays.asList("userId"), "date"));
+						DBUtil.selectGroupBy(tableName, Arrays.asList(
+								"hoursId", "sum(hours) as hours", "date",
+								"userId"), Arrays.asList("userId"), "date",
+								"date"));
 				DBUtil.bind(ps, 1, userId);
 			}
 

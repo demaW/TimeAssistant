@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -11,8 +10,8 @@
 
 <html lang="${language}">
 <head>
-<title>User Tasks</title>
-<jsp:include page="import.jsp" />
+    <title>User Tasks</title>
+    <jsp:include page="import.jsp" />
 
 <!-- Timeline Script -->
 <script type="text/javascript"
@@ -64,50 +63,33 @@
 </head>
 
 <body>
-	<!-- NAVBAR -->
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#navbar-collapse-01">
-				<span class="sr-only">Toggle navigation</span>
-			</button>
-			<a class="navbar-brand" href="#">TimeAssistant</a>
-		</div>
-		<div class="collapse navbar-collapse" id="navbar-collapse-01">
-			<ul class="nav navbar-nav">
-				<li class="active"><a
-					href="${pageContext.request.contextPath}/user/tasks">User tasks</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
-			</ul>
-			<div class="navbar-form navbar-right">
-				Looged in as ${sessionScope.user.firstName} | <a
-					href="${pageContext.request.contextPath}/logout">Log out</a>
-			</div>
-		</div>
-	</nav>
+	
+	<jsp:include page="mainMenu.jsp" />
+	
 	<br />
 
 	<!-- CONTENT -->
 	<div class="container">
 		<div class="panel panel-primary" style="width: 100%; margin: auto;">
 			<!-- Default panel contents -->
-			<div class="panel-heading">Tasks</div>
+			<div class="panel-heading"><fmt:message key="tasks.title" /></div>
 
 			<div class="panel-body">
 				<ul class="pagination pagination-sm">
-					<li <c:if test="${param.status == null}">class="active"</c:if>><a
-						href="${pageContext.request.contextPath}/user/tasks">ALL</a></li>
-					<li <c:if test="${param.status == 'NEW'}">class="active"</c:if>><a
-						href="${pageContext.request.contextPath}/user/tasks?status=NEW">NEW</a></li>
+					<li <c:if test="${param.status == null}">class="active"
+                        </c:if>><a href="${pageContext.request.contextPath}/user/tasks"><fmt:message key="task.all" /></a>
+                    </li>
+					<li <c:if test="${param.status == 'NEW'}">class="active"
+                    </c:if>><a href="${pageContext.request.contextPath}/user/tasks?status=NEW"><fmt:message key="state.new" /></a>
+                    </li>
 					<li
 						<c:if test="${param.status == 'IN PROGRESS'}">class="active"</c:if>><a
-						href="${pageContext.request.contextPath}/user/tasks?status=IN PROGRESS">IN
-							PROGRESS</a></li>
+						href="${pageContext.request.contextPath}/user/tasks?status=IN PROGRESS"><fmt:message key="state.progres" /></a>
+                    </li>
 					<li
 						<c:if test="${param.status == 'FINISHED'}">class="active"</c:if>><a
-						href="${pageContext.request.contextPath}/user/tasks?status=FINISHED">FINISHED</a></li>
+						href="${pageContext.request.contextPath}/user/tasks?status=FINISHED"><fmt:message key="state.done" /></a>
+                    </li>
 				</ul>
 			</div>
 
@@ -116,13 +98,13 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Title</th>
-						<th>Description</th>
-						<th>State</th>
-						<th>Time</th>
-						<th>RTime</th>
-						<th>Project</th>
-						<th>Action</th>
+						<th><fmt:message key="task.name" /></th>
+						<th><fmt:message key="task.description" /></th>
+						<th><fmt:message key="task.state" /></th>
+						<th><fmt:message key="task.estimate" /></th>
+						<th><fmt:message key="task.real" /></th>
+						<th><fmt:message key="project.title" /></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -138,7 +120,7 @@
 							<td><c:out value="${task.project.projectName}"></c:out></td>
 							<td><a
 								href="${pageContext.request.contextPath}/user/task?task_id=${task.taskId}"
-								class="btn btn-primary btn-xs">Start work</a></td>
+								class="btn btn-primary btn-xs"><fmt:message key="task.work" /></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

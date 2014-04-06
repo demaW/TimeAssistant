@@ -74,8 +74,8 @@
                             <td>${task.state}</td>
                             <td>${task.estimateTime}</td>
                             <td>${task.realTime}</td>
-                            <td>${task.startDate}</td>
-                            <td>${task.endDate}</td>
+                            <td><fmt:formatDate value="${task.startDate}" type="date" pattern="yyyy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${task.endDate}" type="date" pattern="yyyy-MM-dd"/></td>
                             <td>
                                 <c:forEach var="user" items="${requestScope.usersList}">
                                     <c:if test="${task.employeeId == user.id}">
@@ -113,76 +113,25 @@
                                                            value="${task.description}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                        <%--@declare id="tasks-form"--%>
-                                                    <span><fmt:message key="task.state"/></span>
-                                                    <select name="state-${task.taskId}" class="select-block"
-                                                            form="tasks-form">
-                                                        <c:choose>
-                                                            <c:when test="${task.state == 'NEW'}">
-                                                                <option value="NEW" selected="selected">
-                                                                    <fmt:message key="state.new"/>
-                                                                </option>
-                                                                <option value="IN PROGRESS">
-                                                                    <fmt:message key="state.progres"/>
-                                                                </option>
-                                                                <option value="FINISHED">
-                                                                    <fmt:message key="state.done"/>
-                                                                </option>
-                                                            </c:when>
-                                                            <c:when test="${task.state == 'IN PROGRESS'}">
-                                                                <option value="NEW">
-                                                                    <fmt:message key="state.new"/>
-                                                                </option>
-                                                                <option value="IN PROGRESS" selected="selected">
-                                                                    <fmt:message key="state.progres"/>
-                                                                </option>
-                                                                <option value="FINISHED">
-                                                                    <fmt:message key="state.done"/>
-                                                                </option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="NEW">
-                                                                    <fmt:message key="state.new"/>
-                                                                </option>
-                                                                <option value="IN PROGRESS">
-                                                                    <fmt:message key="state.progres"/>
-                                                                </option>
-                                                                <option value="FINISHED" selected="selected">
-                                                                    <fmt:message key="state.done"/>
-                                                                </option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
                                                     <span><fmt:message key="task.estimate"/></span>
                                                     <input class="form-control" placeholder="<fmt:message key="task.estimate"/>"
                                                            name="estimate_time-${task.taskId}" id="estimateTime" type="number"
                                                            value="${task.estimateTime}"/>
                                                 </div>
                                                 <div class="form-group">
+                                                </div>
+                                                <div class="form-group">
                                                     <span><fmt:message key="task.start"/></span>
-                                                    <input class="form-control" id="firstDate" placeholder="<fmt:message key="task.start"/>"
-                                                           name="start_date-${task.taskId}" type="date"
-                                                           value="${task.startDate}"/>
+                                                    <input class="form-control" id="firstDate" placeholder="<fmt:message key='task.start'/>"
+                                                           name="start_date-${task.taskId}" value="<fmt:formatDate value='${task.startDate}'
+                                                           type='date' pattern='yyyy-MM-dd'/>"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <span><fmt:message key="task.end"/></span>
-                                                    <input class="form-control" id="secondDate" placeholder="<fmt:message key="task.end"/>"
-                                                           name="end_date-${task.taskId}" type="date"
-                                                           value="${task.endDate}"/>
+                                                    <input class="form-control" id="secondDate" placeholder="<fmt:message key='task.end'/>"
+                                                           name="end_date-${task.taskId}" value="<fmt:formatDate value='${task.endDate}'
+                                                           type='date' pattern='yyyy-MM-dd'/>"/>
                                                 </div>
-                                                <%--<div class="form-group">
-                                                    <span><fmt:message key="task.assignee"/></span>
-                                                    <select name="assigned-${task.taskId}" class="select-block"
-                                                            form="tasks-form">
-                                                        <c:forEach var="assignedUser" items="${requestScope.assignedUsers}">
-                                                            <option value="user_id-${assignedUser.id}">
-                                                                <c:out value="${assignedUser.firstName} ${assignedUser.lastName}"/>
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>--%>
                                                 <div class="form-group">
                                                     <button class="btn btn-primary btn-lg btn-block" name="update"
                                                             type="submit" value="${task.taskId}">

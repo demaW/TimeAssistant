@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="language"
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
@@ -232,45 +233,55 @@
 
 <body>
 
-	<!-- NAVBAR -->
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#navbar-collapse-01">
-				<span class="sr-only">Toggle navigation</span>
-			</button>
-			<a class="navbar-brand" href="#">TimeAssistant</a>
-		</div>
-		<div class="collapse navbar-collapse" id="navbar-collapse-01">
-			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/user/tasks">User
-						tasks</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/user/userEditProfile">Profile</a></li>
-				<li class="active"><a
-					href="${pageContext.request.contextPath}/user/stats">Statistic</a></li>
-			</ul>
-			<div class="navbar-form navbar-right">
-				Looged in as ${sessionScope.user.firstName} | <a
-					href="${pageContext.request.contextPath}/logout">Log out</a>
-			</div>
-		</div>
-	</nav>
+	<jsp:include page="mainMenu.jsp" />
 	<br />
 
-	<!-- CONTENT -->
-	<div class="container">
-		<!-- BAR CHART -->
-		<div id="barchart"
-			style="width: 400px; height: 500px; font-size: 12px;"></div>
+    <!-- CONTENT -->
+    <div class="container">
+        <!-- BAR CHART -->
+        <div id="barchart" class="col-md-4"
+             style="width: 400px; height: 500px; font-size: 12px;"></div>
+        <div class="col-md-6">
+            <table class="table" style="margin-top: 70px;">
+                <tr>
+                    <td>Estimate time total:</td>
+                    <td><c:out value="${estimate_time_summ}" /></td>
+                </tr>
+                <tr>
+                    <td>Real time total:</td>
+                    <td><c:out value="${real_time_summ}" /></td>
+                </tr>
+                <tr>
+                    <td>Ratio:</td>
+                    <td><c:out value="${estimate_time_summ * 100/real_time_summ}" /> %</td>
+                </tr>
+                <tr>
+                    <td>Worked days total:</td>
+                    <td>${fn:length(hours)}</td>
+                </tr>
+                <tr>
+                    <td>Saved hours:</td>
+                    <td>${estimate_time_summ - real_time_summ}</td>
+                </tr>
+                <tr>
+                    <td>Profit:</td>
+                    <td>${(estimate_time_summ - real_time_summ) * user.salaryRate}
+                        $</td>
+                </tr>
+            </table>
+        </div>
 
-		<div id="linechartdiv" style="width: 100%; height: 400px;"></div>
-		<div style="margin-left: 35px;">
-			<input type="radio" name="group" id="rb1" onclick="setPanSelect()">Select
-			<input type="radio" checked="checked" name="group" id="rb2"
-				onclick="setPanSelect()">Pan
-		</div>
-	</div>
+        <div id="linechartdiv" style="width: 100%; height: 400px;"></div>
+        <div style="margin-left: 35px;">
+            <input type="radio" name="group" id="rb1" onclick="setPanSelect()">Select
+            <input type="radio" checked="checked" name="group" id="rb2"
+                   onclick="setPanSelect()">Pan
+        </div>
+    </div>
+
+
+
+    <!-- BAR CHART DATA -->
 
 
 

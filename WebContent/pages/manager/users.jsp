@@ -11,22 +11,22 @@
 <html lang="${language}">
 <head>
     <title>Users table</title>
-    <jsp:include page="header.jsp" />
+    <jsp:include page="header.jsp"/>
 </head>
 
 <body>
-    <!-- CONTENT -->
-      <div class = "container">
-       <div class="row">
-            <div class="table-responsive tile col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
-                <table class="table table-striped table-hover">
+<!-- CONTENT -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="table-responsive tile col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
+            <table class="table table-striped table-hover">
                 <!-- Table -->
                 <thead>
                 <tr>
-                    
+
                     <th>#</th>
-                    <th><fmt:message key="user.firstName" /> <fmt:message key="user.lastName" /></th>
-                    <th><fmt:message key="user.position" /></th>
+                    <th><fmt:message key="user.firstName"/> <fmt:message key="user.lastName"/></th>
+                    <th><fmt:message key="user.position"/></th>
                     <th><fmt:message key="user.email"/></th>
                     <th><fmt:message key="user.salaryRate"/></th>
                 </tr>
@@ -34,21 +34,21 @@
 
                 <tbody>
                 <c:forEach var="user" items="${requestScope.usersonly}">
-                    <tr>
-                      
-                        <td>${user.id}</td>
-                        <td>${user.firstName} ${user.lastName}</td>
-                        <td>${user.position}</td>
-                        <td>${user.email}</td>
-                        <td>${user.salaryRate}</td>
-                                                
+                <tr>
+
+                    <td>${user.id}</td>
+                    <td>${user.firstName} ${user.lastName}</td>
+                    <td>${user.position}</td>
+                    <td>${user.email}</td>
+                    <td>${user.salaryRate}</td>
+
                     </c:forEach>
                 </tbody>
             </table>
-            </div>
         </div>
-        
-   
+    </div>
+
+
 </div>
 
 <jsp:include page="../parts/scripts.jsp"/>

@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.RoleService;
 import com.java.task11.controller.service.UserService;
-import com.java.task11.model.Task;
 import com.java.task11.model.User;
 import com.java.task11.model.UserRole;
 import com.java.task11.utils.EmailUtil;
@@ -22,7 +23,7 @@ import com.java.task11.utils.EmailUtil;
 @WebServlet("/admin/updateemployee")
 public class UpdateEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static Logger log = Logger.getLogger(UpdateEmployee.class);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -50,7 +51,7 @@ public class UpdateEmployee extends HttpServlet {
 			request.setAttribute("role", role);
 			request.setAttribute("userToEdit", userToEdit);
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
+			log.error(e);
 			e.printStackTrace();
 		}
 
@@ -89,6 +90,7 @@ public class UpdateEmployee extends HttpServlet {
 				sendUpdateMailNotification(user.getEmail(), subject, messageText );
 			}
 		} catch (DAOException e) {
+			log.error(e);
 			e.printStackTrace();
 		}
 
@@ -139,7 +141,7 @@ public class UpdateEmployee extends HttpServlet {
 		try {
 			employeeService.update(user);
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
+			log.error(e);
 			e.printStackTrace();
 		}
 

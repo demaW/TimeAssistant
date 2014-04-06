@@ -19,8 +19,8 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script>
         $(function() {
-            $("#startDate").datepicker().val();
-            $("#endDate").datepicker().val();
+            $("#startDate").datepicker();
+            $("#endDate").datepicker();
         });
     </script>
 </head>
@@ -29,6 +29,11 @@
 	<!-- CONTENT -->
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/manager/addTask" method="post">
+            <div class="form-group">
+                <c:forEach items="${requestScope.addTaskErrors}" var="error">
+                    <p class="error">${error}</p>
+                </c:forEach>
+            </div>
 			<input type="hidden">
 			<table class="table">
                 <tr><td><fmt:message key="project.title"/>:</td>
@@ -57,19 +62,19 @@
 					<td><select name="user_id">
 							<c:forEach var="user" items="${requestScope.users_in_project}">
 								<option value="${user.id}">
-								    <c:out value="${user.firstName} ${user.lastName}"/>
+								    <c:out value="${user.firstName} ${user.lastName} - ${user.position} - ${user.salaryRate}"/>
                                 </option>
 							</c:forEach>
 					</select></td>
 				</tr>
                 <tr><td><fmt:message key="task.start"/>:</td>
                     <td>
-                        <input type="date" id="startDate" name="startDate"/> <br/>
+                        <input id="startDate" name="startDate" placeholder="MM/dd/yy"/> <br/>
                     </td>
                 </tr>
                 <tr><td><fmt:message key="task.end"/>:</td>
                     <td>
-                        <input type="date" id="endDate" name="endDate"/> <br/>
+                        <input id="endDate" name="endDate" placeholder="MM/dd/yy"/> <br/>
                     </td>
                 </tr>
                 <tr><td><fmt:message key="task.sendNotification"/>:</td>

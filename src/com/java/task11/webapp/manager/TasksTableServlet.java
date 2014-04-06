@@ -2,6 +2,7 @@ package com.java.task11.webapp.manager;
 
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.TaskService;
+import com.java.task11.controller.service.TeamService;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.Task;
 import com.java.task11.model.User;
@@ -30,10 +31,11 @@ import java.util.List;
 public class TasksTableServlet extends HttpServlet {
     private static Logger log = Logger.getLogger(TasksTableServlet.class);
     private TaskService taskService;
+    private TeamService teamService;
     private UserService userService;
     private List<Task> tasks;
     private List<User> users;
-    private static final String DATE_FORMAT = "yy-mm-dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private String userId;
 
     public static final String ATTRIBUTE_TASKS_TO_MODEL = "tasksList";
@@ -46,6 +48,7 @@ public class TasksTableServlet extends HttpServlet {
     public void init() throws ServletException {
         taskService = new TaskService();
         userService = new UserService();
+        teamService = new TeamService();
     }
 
     @Override
@@ -66,12 +69,12 @@ public class TasksTableServlet extends HttpServlet {
                     return;
                 }
             } else {
-                response.sendRedirect(request.getContextPath()+"/manager/projectstable");
+                response.sendRedirect(request.getContextPath() + "/manager/projectstable");
             }
         } catch (Exception e) {
             log.error(e);
         }
-        response.sendRedirect(ParameterUtils.PAGE_MANAGER_ERROR);
+        response.sendRedirect("/manager/projectstable");
     }
 
     private void updateTable(HttpServletRequest request) {
@@ -93,10 +96,9 @@ public class TasksTableServlet extends HttpServlet {
             updateTask(request);
         }
         if (!userId.isEmpty()) {
-            response.sendRedirect(request.getContextPath()+new StringBuffer().append("/manager/taskstable?").append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
-//            return;
+            response.sendRedirect(request.getContextPath()+new StringBuffer().append("/manager/taskstable?")
+                    .append(ATTRIBUTE_PROJECT_ID).append("=").append(userId).toString());
         }
-//        doGet(request, response);
     }
 
     private void updateTask(HttpServletRequest request) {
@@ -108,7 +110,6 @@ public class TasksTableServlet extends HttpServlet {
                     ? request.getParameter("task_name-" + id) : task.getTitle();
             String description = (!ValidationUtils.isNullOrEmpty(request.getParameter("task_description-" + id)))
                     ? request.getParameter("task_description-" + id) : task.getDescription();
-            String state = request.getParameter("state-" + id);
             int estimateTime = (ValidationUtils.isNumber(request.getParameter("estimate_time-" + id)))
                     ? Integer.parseInt(request.getParameter("estimate_time-" + id))
                     : task.getEstimateTime();
@@ -118,17 +119,12 @@ public class TasksTableServlet extends HttpServlet {
             Date endDate = (request.getParameter("end_date-" + id) != null)
                     ? new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("end_date-" + id))
                     : task.getStartDate();
-//            User assignedUser = userService.getByID(Integer.valueOf(request.getParameter("assigned-" + id)));
-//            int assignedId = Integer.valueOf(request.getParameter("user_id-"));
-            System.out.println("NEW STATE: " + state);
 
             task.setTitle(name);
             task.setDescription(description);
-            task.setState(state);
             task.setStartDate(startDate);
             task.setEndDate(endDate);
             task.setEstimateTime(estimateTime);
-//            task.setEmployeeId(assignedId);
 
             taskService.update(task);
         } catch (DAOException | ParseException e) {
@@ -138,9 +134,14 @@ public class TasksTableServlet extends HttpServlet {
     }
 
     private void deleteTask(HttpServletRequest request) {
-        String[] tasks = request.getParameterValues(ParameterUtils.PARAM_TASKS_CHECKED);
-        for (String taskId : tasks) {
-            taskService.delete(Integer.parseInt(taskId), this);
+        try {
+            String[] tasks = request.getParameterValues(ParameterUtils.PARAM_TASKS_CHECKED);
+            for (String taskId : tasks) {
+                taskService.delete(Integer.parseInt(taskId), this);
+                teamService.delete(Integer.parseInt(taskId), this);
+            }
+        } catch (DAOException e) {
+            log.error(e);
         }
     }
 

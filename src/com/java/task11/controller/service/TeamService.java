@@ -4,6 +4,7 @@ import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.Team;
 
+import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 public class TeamService implements IBaseService<Team> {
@@ -40,4 +41,12 @@ public class TeamService implements IBaseService<Team> {
 	public List<Team> getByProjectId(Integer projectId) throws DAOException {
 		return DAOFactory.getInstance().getTeamDAO().getByProjectId(projectId);
 	}
+
+    public void delete(int userId, HttpServlet servlet) throws DAOException {
+        List<Team> team = getByEmployeeId(userId);
+        for (Team team1 : team) {
+            delete(team1);
+        }
+    }
+
 }

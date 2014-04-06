@@ -68,6 +68,15 @@ public class TaskService implements IBaseService<Task> {
 		
 		return resultList;
 	}
+	
+	public List<Task> searchByWord(String searchWord) throws DAOException{
+		return DAOFactory.getInstance().getTaskDAO().searchByWord(searchWord);
+	}
+	
+	public List<Task> searchByWordAndID(String searchWord, Integer employeeId)
+			throws DAOException {
+		return DAOFactory.getInstance().getTaskDAO().searchByWordAndID(searchWord, employeeId);
+	}
 
     public void delete(int taskId, HttpServlet servlet) {
         try {

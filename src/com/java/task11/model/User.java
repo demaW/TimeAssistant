@@ -13,7 +13,7 @@ public class User implements Serializable {
 	private String lastName;
 	private String password;
 	private String position;
-	private Integer roleId;
+	private int roleId;
 	private Double salaryRate;
 
 	public int getId() {

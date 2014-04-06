@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/flat-ui.css"/>
@@ -14,6 +14,14 @@
 <script src="${pageContext.request.contextPath}/js/modernizr.custom.js"></script>
 <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
 
+<script src="${pageContext.request.contextPath}/js/modernizr.custom.js"></script>
+<c:set var="language"
+	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+	scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="com.java.task11.i18n.text" />
+
+<html lang="${language}">
 <body>
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-default" role="navigation">
@@ -26,15 +34,16 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/admin/users">Display users</a></li>
-				<li><a href="${pageContext.request.contextPath}/admin/adduser">Add new user</a></li>
-				<li><a href="${pageContext.request.contextPath}/admin/userEditProfile">Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/users"><fmt:message key="admin.display.users" /></a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/adduser"><fmt:message key="admin.addUser" /></a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/userEditProfile"><fmt:message key="edit.profile.title" /></a></li>
 			</ul>
 			<div class="navbar-form navbar-right">
-				Looged in as ${sessionScope.user.firstName} ${sessionScope.user.lastName} | <a
-					href="${pageContext.request.contextPath}/logout">Log out</a>
+				${sessionScope.user.firstName} ${sessionScope.user.lastName}
+                <a href="${pageContext.request.contextPath}/logout">
+                    <fmt:message key="nav.dropdown.logout"/>
+                </a>
 					 <%-- i18n --%>
-				
                 <a href="?language=${language == 'uk' ? 'en' : 'uk'}">
                     ${language == 'uk' ? 'EN' : 'UKR'}
                 </a>
@@ -43,3 +52,4 @@
 		</div>
 	</nav>
 </body>
+</html>

@@ -46,7 +46,7 @@ public class ProjectsTableServlet extends HttpServlet {
         } catch (Exception e) {
             log.error(e);
         }
-        response.sendRedirect(ParameterUtils.PAGE_MANAGER_ERROR);
+        response.sendRedirect("/manager/projectstable");
     }
 
     private void updateTable() {

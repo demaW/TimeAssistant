@@ -27,7 +27,8 @@
       <li class="active"><a href="${pageContext.request.contextPath}/pages/admin/addemp.jsp">Add new user</a></li>
       <li><a href="#fakelink">other Features</a></li>
     </ul>           
-    <div class="navbar-form navbar-right"> Looged in as ${sessionScope.user.firstName} ${sessionScope.user.lastName}
+    <div class="navbar-form navbar-right">
+        ${sessionScope.user.firstName} ${sessionScope.user.lastName}
     </div>
   </div>
 </nav>

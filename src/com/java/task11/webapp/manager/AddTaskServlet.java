@@ -1,25 +1,29 @@
 package com.java.task11.webapp.manager;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
+import com.java.task11.controller.dao.factory.DAOException;
+import com.java.task11.controller.service.ProjectService;
+import com.java.task11.controller.service.TaskService;
+import com.java.task11.controller.service.TeamService;
+import com.java.task11.controller.service.UserService;
+import com.java.task11.model.Project;
+import com.java.task11.model.Task;
+import com.java.task11.model.Team;
+import com.java.task11.model.User;
+import com.java.task11.utils.EmailUtil;
+import com.java.task11.utils.ValidationErrors;
+import com.java.task11.utils.ValidationUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
-
-import com.java.task11.controller.dao.factory.DAOException;
-import com.java.task11.controller.service.ProjectService;
-import com.java.task11.controller.service.TaskService;
-import com.java.task11.controller.service.UserService;
-import com.java.task11.model.Project;
-import com.java.task11.model.Task;
-import com.java.task11.model.User;
-import com.java.task11.utils.EmailUtil;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @WebServlet("/manager/addTask")
 public class AddTaskServlet extends HttpServlet {
@@ -72,25 +76,46 @@ public class AddTaskServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Task createTask = new Task();
+        Team createTeam = new Team();
         try {
-            createTask.setTitle(request.getParameter("title"));
-            createTask.setDescription(request.getParameter("description"));
-            createTask.setEmployeeId(Integer.parseInt(request.getParameter("user_id")));
-            createTask.setEstimateTime(Integer.parseInt(request.getParameter("estimate_time")));
-            createTask.setProjectId(Integer.parseInt(request.getParameter("project_id")));
-            createTask.setStartDate(new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("startDate")));
-            createTask.setEndDate(new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("endDate")));
-            createTask.setState("NEW");
-            createTask.setRealTime(0);
+            int projectId = Integer.parseInt(request.getParameter("project_id"));
+            int userId = Integer.parseInt(request.getParameter("user_id"));
+            String name = request.getParameter("title");
+            String description = request.getParameter("description");
+            Integer estimateTime = Integer.parseInt(request.getParameter("estimate_time"));
+            Date startDate = new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("startDate"));
+            Date endDate = new SimpleDateFormat(DATE_FORMAT).parse(request.getParameter("endDate"));
 
-			new TaskService().save(createTask);
-		} catch (Exception e) {
+
+            List<String> addTaskErrors = validateInputs(name, description, estimateTime, startDate, endDate);
+
+            if (addTaskErrors.size() > 0) {
+                request.setAttribute("addTaskErrors", addTaskErrors);
+                request.getRequestDispatcher("/pages/manager/addTask.jsp").forward(request, response);
+            } else {
+                createTask.setTitle(name);
+                createTask.setDescription(description);
+                createTask.setEmployeeId(userId);
+                createTask.setEstimateTime(estimateTime);
+                createTask.setProjectId(projectId);
+                createTask.setStartDate(startDate);
+                createTask.setEndDate(endDate);
+                createTask.setState("NEW");
+                createTask.setRealTime(0);
+
+                createTeam.setProjectId(projectId);
+                createTeam.setEmployeeId(userId);
+
+                new TaskService().save(createTask);
+                new TeamService().save(createTeam);
+            }
+        } catch (Exception e) {
             log.error(e);
 		}
         if (request.getParameter("mailNotification") != null
 				&& request.getParameter("mailNotification").equals("yes")){
         	int userId = Integer.parseInt(request.getParameter("user_id"));
-        	sendTastkMailNotification(userId,createTask);
+        	sendTaskMailNotification(userId, createTask);
        
         }
 	
@@ -103,8 +128,23 @@ public class AddTaskServlet extends HttpServlet {
 //        request.getRequestDispatcher("/pages/manager/projectsTable.jsp").forward(request, response);
         response.sendRedirect(contextPath+"/manager/projectstable");
     }
-	
-	private void sendTastkMailNotification(int userId,Task task){
+
+    private List<String> validateInputs(String name, String description, Integer estimateTime, Date startDate, Date endDate) {
+        List<String> addTaskErrors = new ArrayList<>();
+        if (ValidationUtils.isNullOrEmpty(name)) {
+            addTaskErrors.add(ValidationErrors.TASK_NAME);
+        }
+        if (ValidationUtils.isNullOrEmpty(description)) {
+            addTaskErrors.add(ValidationErrors.TASK_DESCRIPTION);
+        }
+        if (!ValidationUtils.isNumber(estimateTime + "")) {
+            addTaskErrors.add(ValidationErrors.ESTIMATE_TIME);
+        }
+
+        return addTaskErrors;
+    }
+
+    private void sendTaskMailNotification(int userId, Task task){
 		 {
 			User user=null;
 			try {

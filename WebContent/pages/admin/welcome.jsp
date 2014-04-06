@@ -12,7 +12,7 @@
 <html lang="${language}">
 <head>
 
-    <title>admin page</title>
+    <title>Admin Welcome page</title>
     <jsp:include page="header.jsp" />
 
 </head>
@@ -22,11 +22,11 @@
 	<div style="text-align: center;">
 	<img  src="${pageContext.request.contextPath}/img/logo.png" width="300">
 	</div>
-	<h1  style = "text-align: center"> Welcome to admin page</h1> <br>
-	<h2	 style = "text-align: center"> As administrator u can:</h2><br>
+	<h1  style = "text-align: center"><fmt:message key = "admin.welcomeHeader"/></h1> <br>
+	<h2	 style = "text-align: center"><fmt:message key = "admin.listHead"/></h2><br>
 	<ul>
-			<li><h3>Add user</h3></li>
-			<li><h3>Edit user information and send email notitfication</h3></li>
+			<li><h3><fmt:message key = "admin.lestEl1"/></h3></li>
+			<li><h3><fmt:message key = "admin.lestEl2"/></h3></li>
 			
 		</ul>
 	

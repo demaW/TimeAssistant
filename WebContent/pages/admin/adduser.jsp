@@ -10,52 +10,52 @@
 
 <html lang="${language}">
 <head>
+
 <script type="text/javascript">
-function validateForm()
-{
-    if(isNaN(document.adduser.salary.value))
-    {	
-    	
-    	document.adduser.salary.value=0;	
-      alert("Salary input invalid 0.0 setted as dafault value");
-      document.adduser.username.salary.focus();
-      return false;
+function validate() {
+    if (isNaN(document.adduser.salaryRate.value)) {
+        alert("Enter number, please");
+        document.adduser.salaryRate.focus();
+        return false;
     }
-    
+   
+   
+    return true;
 }</script>
 
-    <title>admin page</title>
+
+    <title>Add user</title>
     <jsp:include page="header.jsp"/>
 </head>
 <body>
 	<div class="container">
 	
-		<form name="adduser" action="${pageContext.request.contextPath}/admin/adduser" method="post"  onsubmit=" validateForm()">
-			<table border=1>
+		<form name="adduser" action="${pageContext.request.contextPath}/admin/adduser" method="post"  onsubmit="return validate(this);">
+			<table class="table-striped">
 			
 				<tr>
 					<td><fmt:message key="user.email" /></td>
-					<td><input type="text" name="email"  required id="email"/></td>
+					<td><input type="text" name="email"  class="form-control "  required id="email"/></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.password" /></td>
-					<td><input type="text" name="password" required id="password"></td>
+					<td><input type="password" name="password"  class="form-control " required id="password"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.firstName" /></td>
-					<td><input type="text" name="firstName" required id="firstName"></td>
+					<td><input type="text" name="firstName"  class="form-control " required id="firstName"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.lastName" /></td>
-					<td><input type="text" name="lastName" required id="lastName"></td>
+					<td><input type="text" name="lastName"   class="form-control " required id="lastName"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.position" /></td>
-					<td><input type="text" name="position" required id="position"></td>
+					<td><input type="text" name="position"  class="form-control " required id="position"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.salaryRate" /></td>
-					<td><input type="text" name="salary" required id="salary"></td>
+					<td><input type="text" name="salaryRate"  class="form-control " required id="salaryRate"></td>
 				</tr>
 				<tr>
 					<td><fmt:message key="user.role" /></td>

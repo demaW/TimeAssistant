@@ -5,6 +5,7 @@ import com.java.task11.controller.dao.factory.DAOFactory;
 import com.java.task11.model.Team;
 import com.java.task11.model.User;
 
+import javax.servlet.http.HttpServlet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,4 +60,13 @@ public class UserService implements IBaseService<User> {
 
 		return usersInProject;
 	}
+
+    public void delete(int userId, HttpServlet servlet) throws DAOException {
+        User user = getByID(userId);
+        delete(user, servlet);
+    }
+
+    public void delete(User user, HttpServlet servlet) throws DAOException {
+        delete(user);
+    }
 }

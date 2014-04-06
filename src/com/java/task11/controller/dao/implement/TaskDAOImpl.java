@@ -244,6 +244,69 @@ public class TaskDAOImpl implements TaskDAO {
 
 		return ret;
 	}
+	
+	public List<Task> searchByWordAndID(String searchWord, Integer employeeId)
+			throws DAOException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Task> ret = new ArrayList<Task>();
+
+		try {
+			if (null == employeeId) {
+				ps = getConn().prepareStatement(
+						DBUtil.selectNull(tableName, allColumns,
+								Arrays.asList("employee_id")));
+			} else {
+				StringBuffer buf = new StringBuffer();
+				buf.append("((title like '%").append(searchWord)
+						.append("%') OR (description LIKE '%")
+						.append(searchWord).append("%')) AND ");
+				ps = getConn().prepareStatement(
+						DBUtil.selectSearch(tableName, allColumns,
+								Arrays.asList("employee_id"), buf.toString()));
+				DBUtil.setStatementParameter(ps, 1, employeeId);
+			}
+
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				ret.add(fromResultSet(rs));
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			DBUtil.close(ps, rs);
+		}
+
+		return ret;
+	}
+	
+	public List<Task> searchByWord(String searchWord)
+			throws DAOException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Task> ret = new ArrayList<Task>();
+
+		try {
+				StringBuffer buf = new StringBuffer();
+				buf.append("((title like '%").append(searchWord)
+						.append("%') OR (description LIKE '%")
+						.append(searchWord).append("%'))");
+				ps = getConn().prepareStatement(
+						DBUtil.selectSearch(tableName, allColumns,
+								new ArrayList<String>(), buf.toString()));
+
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				ret.add(fromResultSet(rs));
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			DBUtil.close(ps, rs);
+		}
+
+		return ret;
+	}
 
 	protected int bindPrimaryKey(PreparedStatement ps, Task obj, int pos)
 			throws SQLException {

@@ -22,6 +22,7 @@ public class DBUtil {
 		try {
 			if (res != null) {
 				res.close();
+				conn.close();
 			}
 		} catch (SQLException ignored) {
 			log.error(ignored);
@@ -29,6 +30,7 @@ public class DBUtil {
 			try {
 				if (stmt != null) {
 					stmt.close();
+					conn.close();
 				}
 			} catch (SQLException ignored) {
 				log.error(ignored);
@@ -167,6 +169,79 @@ public class DBUtil {
 		buf.append(" ORDER BY ").append(orderByColumn);
 		
 		return buf.toString();
+	}
+	
+	public static String selectGroupBy(String tableName,
+			List<String> selectColumns, List<String> whereColumns,
+			String groupByColumn, String orderByColumn) {
+		StringBuffer buf = new StringBuffer("SELECT ");
+
+		for (int i = 0; i < selectColumns.size(); i++) {
+			if (i > 0) {
+				buf.append(", ");
+			}
+
+			buf.append(selectColumns.get(i));
+		}
+
+		buf.append(" FROM ").append(tableName);
+
+		if (whereColumns.size() > 0) {
+			buf.append(" WHERE ");
+
+			for (int i = 0; i < whereColumns.size(); i++) {
+				if (i > 0) {
+					buf.append(" AND ");
+				}
+
+				buf.append(whereColumns.get(i)).append(" = ?");
+			}
+		}
+
+		buf.append(" GROUP BY ").append(groupByColumn);
+
+		buf.append(" ORDER BY ").append(orderByColumn);
+
+		return buf.toString();
+	}
+	
+	public static String selectSearch(String tableName,
+			List<String> selectColumns, List<String> whereColumns,
+			String searchWord) {
+		StringBuffer buf = new StringBuffer("SELECT ");
+
+		for (int i = 0; i < selectColumns.size(); i++) {
+			if (i > 0) {
+				buf.append(", ");
+			}
+
+			buf.append(selectColumns.get(i));
+		}
+
+		buf.append(" FROM ").append(tableName);
+
+		buf.append(" WHERE ").append(searchWord);
+		if (whereColumns.size() > 0) {
+
+			for (int i = 0; i < whereColumns.size(); i++) {
+				if (i > 0) {
+					buf.append(" AND ");
+				}
+
+				buf.append(whereColumns.get(i)).append(" = ?");
+			}
+		}
+
+		return buf.toString();
+	}
+	
+	public static void setStatementParameter(PreparedStatement ps, int pos,
+			Integer val) throws SQLException {
+		if (null == val) {
+			ps.setNull(pos, Types.INTEGER);
+		} else {
+			ps.setInt(pos, val);
+		}
 	}
 	
 	public static String update(String tableName, List<String> stdColumns,

@@ -35,8 +35,7 @@
                     <span class="dropdown-arrow"></span>
                     <ul class="dropdown-menu">
                         <li>
-                            <%--todo pages for current project + curr. tasks for user--%>
-                            <a href="${pageContext.request.contextPath}/projects"><fmt:message key="projects.title"/></a>
+                            <a href="${pageContext.request.contextPath}/projects"><fmt:message key="project.title"/></a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/tasks"><fmt:message key="tasks.title"/></a>

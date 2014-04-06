@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.ListIterator;
@@ -18,6 +21,7 @@ import java.util.ListIterator;
 @WebServlet("/user/tasks")
 public class UserTask extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getLogger(UserTask.class);
 
 	public UserTask() {
 		super();
@@ -40,7 +44,7 @@ public class UserTask extends HttpServlet {
 			request.getRequestDispatcher("/pages/user/userTasks.jsp").forward(
 					request, response);
 		} catch (DAOException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 

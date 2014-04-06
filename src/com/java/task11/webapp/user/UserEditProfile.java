@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.java.task11.controller.dao.factory.DAOException;
 import com.java.task11.controller.service.UserService;
 import com.java.task11.model.User;
@@ -16,6 +18,7 @@ import com.java.task11.model.User;
 @WebServlet("/user/userEditProfile")
 public class UserEditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getLogger(UserEditProfile.class);
 
 	public UserEditProfile() {
 		super();
@@ -53,8 +56,7 @@ public class UserEditProfile extends HttpServlet {
 			response.sendRedirect(contextPath + "/user/userEditProfile");
 
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 
